@@ -1,0 +1,79 @@
+ .globalWrapper{
+   height:100%;
+   display:table;
+   width:100%;
+ }
+
+  .buttonWrapper{
+    display:table;
+    width:100%;
+    height:5%;
+  }
+
+  .chatsWrapper{
+    display:table;
+    width:100%;
+    height:95%;
+    position: fixed;
+  }
+
+  .column{
+    float:left;
+  }
+
+  .left{
+    width:calc(100%/3);
+  }
+
+  .center{
+    width:calc(100%/3);
+  }
+
+  .right{
+    width:calc(100%/3);
+  }
+
+
+  .btn{
+    width:100%;
+    border-radius: 0px;
+    position: relative;
+    display: block;
+    color: black;
+    font-size: 14px;
+    font-family: "montserrat";
+    text-decoration: none;
+    border-top: 0px;
+    border-bottom: 2px solid #000000;
+    border-left:0px;
+    border-right:2px solid #000000;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    overflow: hidden;
+    transition: 1s all ease;
+  }
+  .btn::before {
+    background: #beffff;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+  }
+
+
+  .btn4::before{
+    width: 100%;
+    height: 0%;
+    transform: translate(-50%,-50%) rotate(-45deg);
+  }
+  .btn4:hover::before{
+    height: 380%;
+  }
+
+  .chats{
+    height:95%;
+  }
+

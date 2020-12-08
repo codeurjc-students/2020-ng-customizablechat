@@ -1,0 +1,30 @@
+
+.wrapper{
+  height:100%;
+}
+.wrapper:after{
+  display:table;
+  content:"";
+  clear:both;
+}
+.column{
+  float:left;
+}
+
+.left{
+  width:5%;
+}
+.middle{
+  width:33%;
+}
+.right{
+  width:58%;
+}
+
+#boxSidebar{
+  border-right-color: #000000;
+  border-right-width: 5px;
+  border-right-style:solid;
+  height:100%;
+  float:left;
+}

@@ -1,0 +1,58 @@
+
+#imageProfile{
+  width:  30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+ .imagesButtons{
+   width:  30px;
+   height: 30px;
+   /*border-radius: 50%;*/
+ }
+
+ .listButtons{
+   align-content: center;
+   height:100%;
+   margin-top:30%;
+ }
+
+ .rowButtons {
+   height:10%!important;
+ }
+
+
+ button{
+   border:none;
+   background: none;
+   margin:auto;
+ }
+
+ .buttonsSidebar:hover{
+   background: white;
+   border-radius: 50%;
+   height: 35px;
+   width: 35px;
+
+   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+   transform: scale(1);
+   animation: pulse 2s infinite;
+ }
+
+ @keyframes pulse {
+   0% {
+     transform: scale(0.95);
+     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+   }
+
+   60% {
+     transform: scale(1);
+     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+   }
+
+   100% {
+     transform: scale(0.95);
+     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+   }
+ }
+
