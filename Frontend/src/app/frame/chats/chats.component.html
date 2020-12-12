@@ -15,18 +15,38 @@
         ElPepe
       </button>
     </div>
+
+
   </div>
   <mat-nav-list class="chatsWrapper">
-    <mat-list-item>
-      <div>
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
+
+    <mat-list-item class="manualCard">
+      <div class="leftChat">
+        <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
       </div>
+      <div class="midChat">
+        <h3 style="margin-bottom: 0px;">Diego</h3>
+        <p style="margin-top: 0px;">Esto es una prueba pruebita</p>
+      </div>
+      <div class="rightChat">
+        <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
+      </div>
+      <mat-divider></mat-divider>
     </mat-list-item>
+
+    <mat-list-item class="manualCard">
+      <div class="leftChat">
+        <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+      </div>
+      <div class="midChat">
+        <h3 style="margin-bottom: 0px;">Diego</h3>
+        <p style="margin-top: 0px;">Esto es una prueba pruebita</p>
+      </div>
+      <div class="rightChat">
+        <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
+      </div>
+      <mat-divider id="dividerChat"></mat-divider>
+    </mat-list-item>
+
   </mat-nav-list>
 </div>
