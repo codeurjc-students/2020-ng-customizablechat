@@ -1,52 +1,47 @@
 <div class="globalWrapper">
-  <div class="buttonWrapper">
-    <div class="column left">
-      <button mat-button class="btn btn4" aria-label="">
-        ElPepe
-      </button>
-    </div>
-    <div class="column center">
-      <button mat-button class="btn btn4" aria-label="">
-        ElPepe
-      </button>
-    </div>
-    <div class="column right">
-      <button mat-button class="btn btn4" aria-label="">
-        ElPepe
-      </button>
-    </div>
+  <mat-tab-group mat-align-tabs="center" dynamicHeight>
+    <mat-tab label="All Chats">
 
+      <mat-nav-list class="chatsWrapper">
 
-  </div>
-  <mat-nav-list class="chatsWrapper">
+        <mat-list-item class="manualCard">
+          <div class="leftChat">
+            <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+          </div>
+          <div class="midChat">
+            <h3 style="margin-bottom: 0px;">Diego</h3>
+            <p style="margin-top: 0px;">Esto es una prueba pruebita</p>
+          </div>
+          <div class="rightChat">
+            <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
 
-    <mat-list-item class="manualCard">
-      <div class="leftChat">
-        <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
-      </div>
-      <div class="midChat">
-        <h3 style="margin-bottom: 0px;">Diego</h3>
-        <p style="margin-top: 0px;">Esto es una prueba pruebita</p>
-      </div>
-      <div class="rightChat">
-        <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
-      </div>
-      <mat-divider></mat-divider>
-    </mat-list-item>
+        <mat-list-item class="manualCard">
+          <div class="leftChat">
+            <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+          </div>
+          <div class="midChat">
+            <h3 style="margin-bottom: 0px;">Diego</h3>
+            <p style="margin-top: 0px;">Esto es una prueba pruebita</p>
+          </div>
+          <div class="rightChat">
+            <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
+          </div>
+          <mat-divider id="dividerChat"></mat-divider>
+        </mat-list-item>
 
-    <mat-list-item class="manualCard">
-      <div class="leftChat">
-        <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
-      </div>
-      <div class="midChat">
-        <h3 style="margin-bottom: 0px;">Diego</h3>
-        <p style="margin-top: 0px;">Esto es una prueba pruebita</p>
-      </div>
-      <div class="rightChat">
-        <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
-      </div>
-      <mat-divider id="dividerChat"></mat-divider>
-    </mat-list-item>
+      </mat-nav-list>
 
-  </mat-nav-list>
+    </mat-tab>
+    <mat-tab label="Group Chats">
+
+    </mat-tab>
+    <mat-tab label="Private Chats">
+
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
+
