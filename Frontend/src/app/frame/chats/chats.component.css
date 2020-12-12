@@ -18,20 +18,24 @@
 
 
 /deep/ .mat-tab-label{
-  width:33%!important;
+  width: 33%!important;
 }
 
 /deep/ .mat-divider{
-  float:right!important;
-  border-top-width:0.125em!important;
+  float: right!important;
+  border-top-width: 0.125em!important;
 }
 
 /deep/.mat-list-base{
-  padding-top:0px!important;
+  padding-top: 0px!important;
 }
 
 /deep/ .mat-ink-bar{
   background-color: black!important;
+}
+
+/deep/ .mat-badge-content{
+  background: black!important;
 }
 
 .manualCard {
