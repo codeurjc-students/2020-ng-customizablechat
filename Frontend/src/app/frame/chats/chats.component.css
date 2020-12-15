@@ -18,12 +18,13 @@
 
 
 /deep/ .mat-tab-label{
-  width: 33%!important;
+  width: calc(100%/3) !important;
 }
 
 /deep/ .mat-divider{
   float: right!important;
   border-top-width: 0.125em!important;
+  border-top-color: #00acee!important;
 }
 
 /deep/.mat-list-base{
@@ -31,11 +32,13 @@
 }
 
 /deep/ .mat-ink-bar{
-  background-color: black!important;
+  background-color: #00acee!important;
 }
 
 /deep/ .mat-badge-content{
-  background: black!important;
+  background: #00acee!important;
+  float:right!important;
+  margin-top:50%!important;
 }
 
 .manualCard {
@@ -45,11 +48,11 @@
 }
 
 .leftChat {
-  width: 5%;
+  width: 10%;
 }
 
 .midChat {
-  width: 70%;
+  width: 65%;
 }
 
 .rightChat{
@@ -65,4 +68,5 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  border: 1px solid #00acee;
 }

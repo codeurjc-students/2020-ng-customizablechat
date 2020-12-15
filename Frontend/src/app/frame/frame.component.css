@@ -1,11 +1,13 @@
 
 .wrapper{
   height:100%;
+  position:fixed;
 }
 .wrapper:after{
   display:table;
   content:"";
   clear:both;
+
 }
 .column{
   float:left;
@@ -13,18 +15,33 @@
 
 .left{
   width:5%;
+  position:fixed;
 }
 .middle{
   width:27%;
+  position:fixed;
+  left:5%;
 }
 .right{
-  width:64%;
+  left:32%;
+  width:67%;
+  position:fixed;
 }
 
 #boxSidebar{
-  border-right-color: #000000;
+  border-right-color: #00acee!important;
   border-right-width: 5px;
   border-right-style:solid;
   height:100%;
   float:left;
 }
+
+#boxChatsContent{
+  border-right-color: #00acee!important;
+  border-right-width: 5px;
+  border-right-style:solid;
+  height:100%;
+  float:left;
+}
+
+
