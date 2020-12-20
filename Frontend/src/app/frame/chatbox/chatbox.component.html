@@ -8,16 +8,129 @@
     </mat-toolbar>
   </div>
   <div class="medium">
-    <div >
-
-    </div>
+    <mat-list class="chatFrame messageWrapper">
+      <mat-list-item class="leftCard">
+        <mat-card>
+          <mat-card-title>ChatPrueba</mat-card-title>
+          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+            redimensiones.
+            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+            Esto debería estar ocupando el ancho de la pantalla para testear
+            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="messageBox rightItem">
+        <mat-card class="rightCard">
+          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="leftCard">
+        <mat-card>
+          <mat-card-title>ChatPrueba</mat-card-title>
+          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="messageBox rightItem">
+        <mat-card class="rightCard">
+          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+            redimensiones.
+            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+            Esto debería estar ocupando el ancho de la pantalla para testear
+            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="leftCard">
+        <mat-card>
+          <mat-card-title>ChatPrueba</mat-card-title>
+          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+            redimensiones.
+            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+            Esto debería estar ocupando el ancho de la pantalla para testear
+            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="messageBox rightItem">
+        <mat-card class="rightCard">
+          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="leftCard">
+        <mat-card>
+          <mat-card-title>ChatPrueba</mat-card-title>
+          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="messageBox rightItem">
+        <mat-card class="rightCard">
+          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+            redimensiones.
+            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+            Esto debería estar ocupando el ancho de la pantalla para testear
+            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="leftCard">
+        <mat-card>
+          <mat-card-title>ChatPrueba</mat-card-title>
+          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+            redimensiones.
+            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+            Esto debería estar ocupando el ancho de la pantalla para testear
+            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="messageBox rightItem">
+        <mat-card class="rightCard">
+          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="leftCard">
+        <mat-card>
+          <mat-card-title>ChatPrueba</mat-card-title>
+          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+      <mat-list-item class="messageBox rightItem">
+        <mat-card class="rightCard">
+          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+            redimensiones.
+            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+            Esto debería estar ocupando el ancho de la pantalla para testear
+            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+    </mat-list>
   </div>
   <div class="lower">
     <mat-toolbar id="lowerChat" color="warn">
       <!--<span>Selecciona un chat para mostrar los mensajes</span>-->
-      <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
-      <span class="spacerImageText"></span>
-      <span>ChatPrueba</span>
+      <div class="leftButtonClip">
+        <button mat-icon-button class="clipButton" (click)="openDialog()" aria-label="Drop files">
+          <i class="fas fa-paperclip fa-3x"></i>
+        </button>
+      </div>
+      <div class="midGifButton">
+        <button mat-icon-button class="clipButton" aria-label="">
+          <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/gifUnfilled.png" alt="">
+        </button>
+      </div>
+      <div class="rightTextArea">
+        <form [formGroup]="" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <textarea id="textAreaForm" #message formControlName="message"></textarea>
+
+          <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
+            <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="">
+          </button>
+
+        </form>
+      </div>
+
     </mat-toolbar>
   </div>
 </div>

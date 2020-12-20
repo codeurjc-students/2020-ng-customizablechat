@@ -9,13 +9,18 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { OptionsSideBarComponent } from './frame/options-side-bar/options-side-bar.component';
 import { ChatsComponent } from './frame/chats/chats.component';
-import { ChatboxComponent } from './frame/chatbox/chatbox.component';
+import {ChatboxComponent, DialogContent} from './frame/chatbox/chatbox.component';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from "@angular/material/menu";
+import {NgxDropzoneModule} from "ngx-dropzone";
+import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -23,21 +28,27 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FrameComponent,
     OptionsSideBarComponent,
     ChatsComponent,
-    ChatboxComponent
+    ChatboxComponent,
+    DialogContent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatGridListModule,
-        MatListModule,
-        MatIconModule,
-        MatButtonModule,
-        MatBadgeModule,
-        MatTabsModule,
-        MatToolbarModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatMenuModule,
+    NgxDropzoneModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

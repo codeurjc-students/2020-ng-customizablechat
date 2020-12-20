@@ -52,9 +52,114 @@
     position:fixed;
   }
 
+  .chatFrame{
+    width:62.5%;
+    height:95%;
+    top:2.5%;
+    bottom:2.5%;
+    left:2.5%;
+    right:2.5%;
+    position: relative;
+    overflow-y:scroll;
+  }
+
+  .mat-card-title{
+    font-size: medium;
+  }
+
+  .messageWrapper{
+  }
+
+  .leftCard{
+    width: 90%!important;
+    height: auto!important;
+    float: left!important;
+    margin-bottom: 1%;
+
+  }
+
+  .rightItem{
+    width: 90%!important;
+    height: auto!important;
+    float: right!important;
+    margin-bottom: 1%;
+    right:0;
+  }
+
+  /deep/ .mat-list-item.rightItem .mat-list-item-content{
+    float:right!important;
+  }
+
+  .rightCard{
+    float:right;
+    background:#ace7ff;
+    border:2px solid #00acee;
+  }
+
+  #textAreaForm {
+    resize: none;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 41px;
+    max-height: 97px;
+    width: 93%;
+    border: 1px solid #00acee;
+    border-radius: 20px;
+    background-color: white;
+    outline: none;
+    padding: 0 1% 0 1%;
+    overflow: hidden;
+    margin-top:1%;
+  }
+
+  .clipButton{
+    width:auto;
+  }
+
+  .clipButton:hover{
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    animation: pulse 2s infinite;
+  }
+
+  form {
+    width:60%;
+    float:left;
+  }
 
 
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
 
+    60% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
 
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
 
+  .mat-icon-button#submitButton{
+    display:flex;
+    float:right;
+    margin-top:1%;
+  }
 
+  .leftButtonClip{
+    width:4%;
+  }
+
+  .rightTextArea{
+    width:86%;
+    float:left;
+  }
+
+  .midGifButton{
+    width:4%;
+  }
