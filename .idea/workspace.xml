@@ -2,8 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfd49f96-3b46-454f-b950-05c91542d518" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/nest-cli.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/chat/chat.gateway.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/chat/chat.gateway.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/chat/chat.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/login/login.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/login/login.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/test/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/test/jest-e2e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/tsconfig.build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +41,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kIQ3O4nKp6QwMvLObyh19287TJ" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -36,7 +56,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/Frontend/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/backend/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -76,7 +96,17 @@
       <workItem from="1608423145631" duration="2142000" />
       <workItem from="1608465499319" duration="2095000" />
       <workItem from="1608483553632" duration="4789000" />
-      <workItem from="1608653430041" duration="1582000" />
+      <workItem from="1608653430041" duration="2147000" />
+      <workItem from="1608658683351" duration="1229000" />
+      <workItem from="1608750636377" duration="371000" />
+      <workItem from="1608818855516" duration="248000" />
+      <workItem from="1608988896186" duration="597000" />
+      <workItem from="1609263837377" duration="505000" />
+      <workItem from="1611928091581" duration="648000" />
+      <workItem from="1612026410059" duration="519000" />
+      <workItem from="1612199833616" duration="845000" />
+      <workItem from="1612294543222" duration="1197000" />
+      <workItem from="1612371038252" duration="4884000" />
     </task>
     <servers />
   </component>
