@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dfd49f96-3b46-454f-b950-05c91542d518" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/backend/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/.prettierrc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/nest-cli.json" afterDir="false" />
@@ -20,6 +19,7 @@
       <change afterPath="$PROJECT_DIR$/backend/test/jest-e2e.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/tsconfig.build.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +102,7 @@
       <workItem from="1612026410059" duration="519000" />
       <workItem from="1612199833616" duration="845000" />
       <workItem from="1612294543222" duration="1197000" />
-      <workItem from="1612371038252" duration="5348000" />
+      <workItem from="1612371038252" duration="6038000" />
     </task>
     <servers />
   </component>
