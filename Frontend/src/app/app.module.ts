@@ -20,7 +20,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SocketIoModule, SocketIoConfig} from "ngx-socket-io";
 
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NgxDropzoneModule,
     MatDialogModule,
     FormsModule,
+    SocketIoModule.forRoot(config),
     ReactiveFormsModule
   ],
   providers: [],

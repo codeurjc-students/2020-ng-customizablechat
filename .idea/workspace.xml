@@ -6,20 +6,43 @@
       <change afterPath="$PROJECT_DIR$/backend/.prettierrc" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/nest-cli.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Chats/chats.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Chats/chats.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Chats/chats.gateway.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Chats/chats.gateway.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Chats/chats.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/DTOs/create-chat-dto.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/DTOs/create-chat-dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/DTOs/create-message-dto.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/DTOs/create-message-dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/DTOs/create-user-dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Interfaces/chat.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Interfaces/message.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Interfaces/user.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Login/login.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Login/login.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Providers/messages/messages.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Providers/messages/messages.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Providers/users/users.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Providers/users/users.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Schemas/chat.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Schemas/message.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/Schemas/user.schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/app.controller.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/app.controller.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/src/app.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/chat/chat.gateway.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/chat/chat.gateway.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/chat/chat.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/login/login.controller.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/login/login.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/app.service.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/src/main.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/test/app.e2e-spec.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/test/jest-e2e.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/tsconfig.build.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/app.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +53,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -52,8 +76,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/backend/node_modules/typescript/lib" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/Frontend/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/Chats" />
+      <recent name="$PROJECT_DIR$/backend/src/Providers/chats" />
+      <recent name="$PROJECT_DIR$/backend/src/Providers" />
+      <recent name="$PROJECT_DIR$/backend/src/login/" />
+      <recent name="$PROJECT_DIR$/backend/src/" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -102,7 +137,31 @@
       <workItem from="1612026410059" duration="519000" />
       <workItem from="1612199833616" duration="845000" />
       <workItem from="1612294543222" duration="1197000" />
-      <workItem from="1612371038252" duration="6038000" />
+      <workItem from="1612371038252" duration="6778000" />
+      <workItem from="1612467266663" duration="3105000" />
+      <workItem from="1612545832616" duration="812000" />
+      <workItem from="1612567923675" duration="3461000" />
+      <workItem from="1612576020593" duration="640000" />
+      <workItem from="1612618375344" duration="3949000" />
+      <workItem from="1612699666864" duration="6086000" />
+      <workItem from="1612780924388" duration="1800000" />
+      <workItem from="1612811594077" duration="4536000" />
+      <workItem from="1612895581083" duration="5007000" />
+      <workItem from="1612982434337" duration="3360000" />
+      <workItem from="1613063439887" duration="779000" />
+      <workItem from="1613156994619" duration="3389000" />
+      <workItem from="1613222105250" duration="8687000" />
+      <workItem from="1613317250991" duration="6790000" />
+      <workItem from="1613508442046" duration="8188000" />
+      <workItem from="1613594884582" duration="7259000" />
+      <workItem from="1613669445572" duration="4452000" />
+      <workItem from="1613824680948" duration="4013000" />
+      <workItem from="1613912867728" duration="6400000" />
+      <workItem from="1613988613185" duration="5264000" />
+      <workItem from="1614020648627" duration="1411000" />
+      <workItem from="1614193464951" duration="1136000" />
+      <workItem from="1614517401853" duration="5083000" />
+      <workItem from="1614631893781" duration="446000" />
     </task>
     <servers />
   </component>
@@ -123,5 +182,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/backend" />
+    </ignored-roots>
   </component>
 </project>
