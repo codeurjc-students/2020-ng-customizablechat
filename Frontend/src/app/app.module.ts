@@ -21,6 +21,11 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SocketIoModule, SocketIoConfig} from "ngx-socket-io";
+import { LoginComponent } from './login/login.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {LoginService} from "./services/login.service";
+import {HttpClientModule} from "@angular/common/http";
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -31,7 +36,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     OptionsSideBarComponent,
     ChatsComponent,
     ChatboxComponent,
-    DialogContent
+    DialogContent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +56,12 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatDialogModule,
     FormsModule,
     SocketIoModule.forRoot(config),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
