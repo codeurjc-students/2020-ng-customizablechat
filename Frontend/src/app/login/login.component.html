@@ -1,35 +1,70 @@
 <div id="login">
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <h2>Log In</h2>
-        <mat-error *ngIf="loginInvalid">
-          The username and/or password are not valid credentials
-        </mat-error>
+<!--  <mat-card>-->
+<!--    <mat-card-content>-->
+<!--      <form [formGroup]="form">-->
+<!--        <h2>Log In</h2>-->
+<!--        <mat-error *ngIf="loginInvalid">-->
+<!--          The username and/or password are not valid credentials-->
+<!--        </mat-error>-->
+<!--        <mat-form-field class="full-width-input" appearance="outline" hintLabel="Max 15 characters">-->
+<!--          <mat-label>Enter your username</mat-label>-->
+<!--          <input matInput type="text" formControlName="username" #username maxlength="15" placeholder="Placeholder"-->
+<!--                 required>-->
+<!--          <mat-hint align="end">{{username.value?.length || 0}}/15</mat-hint>-->
+<!--          <mat-error>-->
+<!--            Please enter a valid email address-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
 
-        <mat-form-field class="full-width-input" appearance="outline" hintLabel="Max 15 characters">
-          <mat-label>Enter your username</mat-label>
-          <input matInput type="text" formControlName="username" #username maxlength="15" placeholder="Placeholder"
-                 required>
-          <mat-hint align="end">{{username.value?.length || 0}}/15</mat-hint>
-          <mat-error>
-            Please enter a valid email address
-          </mat-error>
-        </mat-form-field>
+<!--        <mat-form-field class="full-width-input" appearance="outline">-->
+<!--          <mat-label>Enter your password</mat-label>-->
+<!--          <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" required>-->
+<!--          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"-->
+<!--                  [attr.aria-pressed]="hidePass">-->
+<!--            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+<!--          </button>-->
+<!--          <mat-error>-->
+<!--            Please enter a valid password-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+<!--        <div class="flex-buttons">-->
+<!--          <button mat-raised-button color="primary" class="light-button-color" type="submit" id="login-button" (click)="onSubmit();">Sign In</button>-->
+<!--          <button mat-raised-button color="primary" class="light-button-color" id="register-button">Sign Up</button>-->
+<!--        </div>-->
 
-        <mat-form-field class="full-width-input" appearance="outline">
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" required>
-          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hidePass">
-            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error>
-            Please enter a valid password
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary">Login</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+<!--      </form>-->
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
+  <div class="container">
+    <form class="signUp" [formGroup]="formSignUp" [ngClass]="{'inactive-sx': login, 'active-sx': !login}">
+      <h3>Create Your Account</h3>
+      <p>Just enter your user name, name<br>
+        and your password to join.
+      </p>
+      <input matInput class="w100" type="text" formControlName="username" placeholder="Insert user name" autocomplete='off'required/>
+      <input matInput class="w100" type="text" formControlName="name" placeholder="Insert your name" autocomplete='off'required/>
+      <input matInput type="password" formControlName="password" placeholder="Insert password" autocomplete='off' required/>
+      <input matInput type="password" formControlName="verifyPassword" placeholder="Verify password" autocomplete='off' required/>
+      <br>
+      <mat-error *ngIf="signUpError">That username already exists</mat-error>
+      <mat-error *ngIf="missingCreateData">There are fields missing</mat-error>
+      <button class="form-btn sx log-in" type="button" (click)="changeForms();">Log In</button>
+      <button class="form-btn dx" type="submit" (click)="onSignUp();">Sign Up</button>
+    </form>
+    <form class="signIn" [formGroup]="formLogin" [ngClass]="{'active-dx': login, 'inactive-dx': !login}">
+      <h3>Welcome<br>Back !</h3>
+      <p>Type your user and password to have fun<br>
+        <strong>We have been waiting for you!</strong>
+      </p>
+      <input matInput type="text" formControlName="username" placeholder="Insert user name" required />
+      <mat-error *ngIf="passwordError">Password seems to be incorrect</mat-error>
+      <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" placeholder="Insert password" required />
+                <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hidePass"><mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+      <button class="form-btn sx back" type="button" (click)="changeForms();">Back</button>
+      <button class="form-btn dx" type="submit" (click)="onLogin()">Log In</button>
+    </form>
+  </div>
 </div>
+

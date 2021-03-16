@@ -9,7 +9,7 @@ export class LoginController {
 
     @Post('in')
     async loginUser(@Body() user: LoginUserDTO): Promise<Boolean>{
-        let userPromise = await this.usersService.findOneByUsername(user.userName)
+        let userPromise = await this.usersService.findOneByUsername(user.userName);
         if(userPromise.active == true) {
             return false;
         }
@@ -17,8 +17,11 @@ export class LoginController {
     }
 
     @Post('up')
-    async signUp(@Body() userData: CreateUserDto): Promise<User>{
-        return  await this.usersService.createUser(userData)
+    async signUp(@Body() userData: CreateUserDto){
+        let user = await this.usersService.findOneByUsername(userData.userName);
+        if(user === null) return await this.usersService.createUser(userData);
+        else return null;
+
     }
 
 }
@@ -30,8 +33,7 @@ export class LogoutController{
     @Post(':userName')
     async logout(@Param('userName') userName){
         if( this.usersService.findOneByUsername(userName)!= undefined){
-            this.usersService.logout(userName);
-            return true;
+            return await this.usersService.logout(userName);
         }
         return false;
     }
