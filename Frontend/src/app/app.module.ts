@@ -27,7 +27,7 @@ import {MatInputModule} from '@angular/material/input';
 import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {cors:true}};
 
 @NgModule({
   declarations: [

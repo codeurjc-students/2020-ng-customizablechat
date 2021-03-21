@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
           data=>{
             this.value = data;
             console.log(this.value);
-            if(this.value == true){
+            if(this.value !== null){
+              this.loginService.setUser(this.value);
               this.router.navigate(['home']);
             }else{
               this.passwordError = !this.passwordError;

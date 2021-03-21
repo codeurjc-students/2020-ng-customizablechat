@@ -6,18 +6,19 @@ import {
   WebSocketGateway,
   WebSocketServer
 } from '@nestjs/websockets';
-import {HttpException, InternalServerErrorException, Logger, NotFoundException} from '@nestjs/common';
+import { InternalServerErrorException, Logger} from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 import {UsersService} from "../Providers/users/users.service";
 import {ChatsService} from "../Providers/chats/chats.service";
-import {CreateMessageDto} from "../DTOs/create-message-dto";
 import {MessagesService} from "../Providers/messages/messages.service";
+import {CreateMessageDto} from "../DTOs/create-message-dto";
+
 
 @WebSocketGateway()
 export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
   constructor(
-      private readonly usersService: UsersService,
+      private usersService: UsersService,
       private chatsService: ChatsService,
       private messagesService: MessagesService
   ) {}
@@ -30,6 +31,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
   }
 
   handleDisconnect(client: Socket) {
+    this.logger.log(`Client disconnected: ${client.id}`);
     this.usersService.findOneBySocketIdAndEraseActivity(client.id);
   }
 
@@ -39,18 +41,18 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
 
   @SubscribeMessage('saveSocket')
   socketSave(client: Socket, username: string): void {
+    this.logger.log(`Funcionaaaaaa!!! ${client.id}, ${username}`);
     this.usersService.findOneBySocketIdAndAddActivity(client.id, username);
   }
 
   @SubscribeMessage('sendMessage')
   sendMessage(client:Socket, message: CreateMessageDto){
     try{
+      this.logger.log(`Llegueeeeeeeee`);
       this.messagesService.saveMessage(message);
     }catch (e : any){
       throw new InternalServerErrorException();
     }
   }
-
-
 
 }

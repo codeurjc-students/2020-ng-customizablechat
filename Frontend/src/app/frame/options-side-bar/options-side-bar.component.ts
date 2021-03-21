@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from "../../models/login";
 
 @Component({
   selector: 'app-options-side-bar',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./options-side-bar.component.css']
 })
 export class OptionsSideBarComponent implements OnInit {
+
+  @Input() user: User;
 
   constructor() { }
 

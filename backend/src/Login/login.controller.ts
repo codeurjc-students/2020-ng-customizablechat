@@ -8,12 +8,12 @@ export class LoginController {
     constructor(private readonly usersService: UsersService) {}
 
     @Post('in')
-    async loginUser(@Body() user: LoginUserDTO): Promise<Boolean>{
+    async loginUser(@Body() user: LoginUserDTO){
         let userPromise = await this.usersService.findOneByUsername(user.userName);
-        if(userPromise.active == true) {
-            return false;
+        if(userPromise.password == user.password) {
+            return userPromise;
         }
-        return userPromise.password === user.password;
+        return null;
     }
 
     @Post('up')
