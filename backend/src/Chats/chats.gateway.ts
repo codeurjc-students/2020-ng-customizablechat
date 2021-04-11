@@ -1,11 +1,6 @@
 import {
-  ConnectedSocket,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
-  OnGatewayInit,
-  SubscribeMessage,
-  WebSocketGateway,
-  WebSocketServer
+  ConnectedSocket, OnGatewayConnection, OnGatewayDisconnect,
+  OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer
 } from '@nestjs/websockets';
 import { InternalServerErrorException, Logger} from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
@@ -46,14 +41,14 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
 
   @SubscribeMessage('saveSocket')
   socketSave(@ConnectedSocket() client: Socket, username: string): void {
-    this.logger.log(`Funcionaaaaaa!!! ${client.id}, ${username}`);
+    this.logger.log(`Working correctly!!! ${client.id}, ${username}`);
     this.usersService.findOneBySocketIdAndAddActivity(client.id, username);
   }
 
   @SubscribeMessage('sendMessage')
   sendMessage(@ConnectedSocket() client: Socket, message: CreateMessageDto){
     try{
-      this.logger.log(`Llegueeeeeeeee`);
+      this.logger.log(`Send message is working`);
       this.messagesService.saveMessage(message);
     }catch (e : any){
       throw new InternalServerErrorException();

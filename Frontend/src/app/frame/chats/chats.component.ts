@@ -18,12 +18,12 @@ export class ChatsComponent implements OnInit {
   groupChats:Chat[] = [];
   dataLoaded:boolean = false;
 
-  constructor(public readonly chatService:ChatService) { }
+  constructor(public chatService:ChatService) { }
 
   ngOnInit(): void {
     this.returnPrivateChats();
     this.returnGroupChats();
-    this.chatService.sendMessage(new Message("Patata", this.user.userName, this.user.privateChats[0]))
+    this.chatService.sendMessage(new Message("This is a test", this.user.userName, this.user.privateChats[0]))
   }
 
   returnGroupChats(){
