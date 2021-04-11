@@ -10,7 +10,7 @@ export class LoginController {
     @Post('in')
     async loginUser(@Body() user: LoginUserDTO){
         let userPromise = await this.usersService.findOneByUsername(user.userName);
-        if(userPromise.password == user.password) {
+        if(userPromise?.password === user.password){
             return userPromise;
         }
         return null;
@@ -21,7 +21,6 @@ export class LoginController {
         let user = await this.usersService.findOneByUsername(userData.userName);
         if(user === null) return await this.usersService.createUser(userData);
         else return null;
-
     }
 
 }

@@ -7,5 +7,6 @@ export const UserSchema = new mongoose.Schema({
     active: Boolean,
     idSettings: Number,
     password: String,
-    chats: [mongoose.Types.ObjectId],
+    privateChats: [mongoose.Types.ObjectId],
+    groupChats: [mongoose.Types.ObjectId]
 });

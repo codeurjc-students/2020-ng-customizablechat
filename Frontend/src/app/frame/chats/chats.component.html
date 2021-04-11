@@ -1,46 +1,46 @@
 <div class="globalWrapper">
   <mat-tab-group mat-align-tabs="center" dynamicHeight>
-    <mat-tab label="All Chats">
-
-      <mat-nav-list class="chatsWrapper">
-
-        <mat-list-item class="manualCard">
-          <div class="leftChat">
-            <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
-          </div>
-          <div class="midChat">
-            <h3 style="margin-bottom: 0px;">Diego</h3>
-            <p style="margin-top: 0px;">Esto es una prueba muy larga a ver como se muestra de tamaño el texto
-            </p>
-          </div>
-          <div class="rightChat">
-            <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon>
-          </div>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-
-        <mat-list-item class="manualCard">
-          <div class="leftChat">
-            <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
-          </div>
-          <div class="midChat">
-            <h3 style="margin-bottom: 0px;">Diego</h3>
-            <p style="margin-top: 0px;">Esto es una prueba</p>
-          </div>
-          <div class="rightChat">
-            <mat-icon matBadge="15"matBadgeColor="primary"></mat-icon>
-          </div>
-          <mat-divider id="dividerChat"></mat-divider>
-        </mat-list-item>
-
-      </mat-nav-list>
-
-    </mat-tab>
     <mat-tab label="Group Chats">
+      <ng-template matTabContent>
+        <mat-nav-list class="chatsWrapper">
+          <mat-list-item *ngFor="let chat of getPrivateChats()" class="manualCard">
+            <div class="leftChat">
+              <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+            </div>
+            <div class="midChat">
+              <h3 *ngIf="user.userName == chat?.name" style="margin-bottom: 0px;">{{chat.participants}}</h3>
+              <h3 *ngIf="user.userName != chat?.name" style="margin-bottom: 0px;">{{chat.name}}</h3>
+              <p style="margin-top: 0px;">Esto es una prueba</p>
+            </div>
+            <div class="rightChat">
+              <mat-icon matBadge="15" matBadgeColor="primary"></mat-icon>
+            </div>
+            <mat-divider class="dividerChat"></mat-divider>
+          </mat-list-item>
 
+        </mat-nav-list>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Private Chats">
+      <ng-template matTabContent>
+        <mat-nav-list class="chatsWrapper">
+          <mat-list-item *ngFor="let chat of getPrivateChats()" class="manualCard">
+            <div class="leftChat">
+              <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+            </div>
+            <div class="midChat">
+              <h3 *ngIf="user.userName == chat?.name" style="margin-bottom: 0px;">{{chat.participants}}</h3>
+              <h3 *ngIf="user.userName != chat?.name" style="margin-bottom: 0px;">{{chat.name}}</h3>
+              <p style="margin-top: 0px;">Esto es una prueba</p>
+            </div>
+            <div class="rightChat">
+              <mat-icon matBadge="15" matBadgeColor="primary"></mat-icon>
+            </div>
+            <mat-divider class="dividerChat"></mat-divider>
+          </mat-list-item>
 
+        </mat-nav-list>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>

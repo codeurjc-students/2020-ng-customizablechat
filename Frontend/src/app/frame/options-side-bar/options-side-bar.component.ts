@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {User} from "../../models/login";
 
 @Component({
@@ -10,9 +10,14 @@ export class OptionsSideBarComponent implements OnInit {
 
   @Input() user: User;
 
+  @Output() modalActive  = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  changeModal(value:boolean){
+    this.modalActive.emit(value);
+  }
 }

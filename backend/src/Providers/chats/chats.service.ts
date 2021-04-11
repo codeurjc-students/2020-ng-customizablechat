@@ -3,7 +3,6 @@ import {InjectModel} from "@nestjs/mongoose";
 import {User} from "../../Interfaces/user.interface";
 import {Model, ObjectId} from "mongoose";
 import {Chat} from "../../Interfaces/chat.interface";
-import { AddContactGroup} from "../../DTOs/create-chat-dto";
 import {Server} from 'socket.io'
 
 @Injectable()

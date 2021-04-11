@@ -27,6 +27,14 @@ form {
   box-sizing: border-box;
 }
 
+h3 {
+  font-family: 'Dosis';
+  font-size: 35px;
+  text-transform: uppercase;
+  color: #4e2f42;
+  margin-bottom: 30px;
+}
+
 p {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
@@ -41,14 +49,6 @@ p > span {
   display: block;
   font-weight: 400;
   font-size: 9px;
-}
-
-h3 {
-  font-family: 'Dosis';
-  font-size: 35px;
-  text-transform: uppercase;
-  color: #4e2f42;
-  margin-bottom: 30px;
 }
 
 input,

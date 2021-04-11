@@ -16,15 +16,16 @@ export class ChatsController {
 
     @Post('private')
     async createPrivateChat(@Body() chat: AddContactPrivate){
-        let contactToAdd = this.usersService.findOneByUsername(chat.participant);
-
-        let chatCreated = await this.chatsService.createChat(chat);
+        let contactToAdd = this.usersService.findOneByUsername(chat.participants);
 
         if(contactToAdd !== undefined){
-            this.usersService.addChatToUser(chat.name,chatCreated._id);
-            this.usersService.addChatToUser(chat.participant, chatCreated._id);
+            let chatNew = new CreateChatDto(chat.name, true, "", chat.participants);
+            let chatCreated = await this.chatsService.createChat(chatNew);
+            this.usersService.addChatToUser(chat.name,chatCreated._id,true);
+            this.usersService.addChatToUser(chat.participants, chatCreated._id,true);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Post('group')
@@ -32,12 +33,12 @@ export class ChatsController {
 
         let chatCreated = await this.chatsService.createChat(chat);
 
-        this.usersService.addChatToUser(chat.name,chatCreated._id);
+        this.usersService.addChatToUser(chat.name,chatCreated._id,false);
 
         for (let i = 0; i < chat.participants.length; i++) {
             let contactToAdd = this.usersService.findOneByUsername(chat.participants[i]);
             if(contactToAdd !== undefined){
-                this.usersService.addChatToUser(chat.participants[i], chatCreated._id);
+                this.usersService.addChatToUser(chat.participants[i], chatCreated._id,false);
             }
         }
         return true;
@@ -47,11 +48,13 @@ export class ChatsController {
     async addContactToGroup(@Body() chat: AddContactGroup){
         let user = await this.usersService.findOneByUsername(chat.participant);
         if(user !== undefined){
+
             let chatToAdd = await this.chatsService.findOneGroupById(chat.groupId);
             chatToAdd.participants.push(user.userName);
             chatToAdd.save();
-            user.chats.unshift(chatToAdd._id);
-            user.save();
+
+            this.usersService.addChatToUser(user.userName,chatToAdd._id,false);
+
             if(user.socketId !== null){
                 this.chatsService.socket.to(user.socketId).emit("AddedToGroup", chatToAdd);
             }
@@ -66,7 +69,12 @@ export class ChatsController {
     }
 
     @Get('message')
-    async getMessagesThatMatchChat(@Body() search: SearchMessage){
+    getMessagesThatMatchChat(@Body() search: SearchMessage){
         return this.messagesService.searchMessagesMatchChat(search)
+    }
+
+    @Get(':id')
+    getChat(@Param('id') id: ObjectId){
+        return this.chatsService.findOneGroupById(id);
     }
 }

@@ -16,7 +16,8 @@ export class UsersService {
         let newUser = new this.userModel(user);
         newUser.socketId = null;
         newUser.idSettings = 1;
-        newUser.chats = [];
+        newUser.privateChats = [];
+        newUser.groupChats = [];
         return newUser.save();
     }
 
@@ -33,7 +34,18 @@ export class UsersService {
         return this.userModel.findOneAndUpdate({userName:username}, {socketId: socketId, active: true})
     }
 
-    addChatToUser(name: String, _id: any) {
-        
+    async addChatToUser(name: String, _id: any, isPrivate:boolean) {
+        let user = await this.userModel.findOne({userName:name});
+
+        if(isPrivate) {
+            if(user.privateChats == null) user.privateChats = [_id];
+            else user.privateChats.unshift(_id);
+        }
+        else {
+            if(user.groupChats == null) user.groupChats = [_id]
+            else user.groupChats.unshift(_id);
+        }
+
+        user.save();
     }
 }

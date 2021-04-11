@@ -7,7 +7,8 @@ export class CreateUserDto {
     readonly active: Boolean;
     readonly idSettings: Number;
     readonly password: String;
-    readonly chats: ObjectId[];
+    readonly privateChats: ObjectId[];
+    readonly groupChats: ObjectId[];
 }
 
 export class LoginUserDTO{

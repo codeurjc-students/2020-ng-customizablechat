@@ -18,10 +18,10 @@
 
 
 /deep/ .mat-tab-label{
-  width: calc(100%/3) !important;
+  width: calc(100%/2) !important;
 }
 
-/deep/ .mat-divider{
+.dividerChat{
   float: right!important;
   border-top-width: 0.125em!important;
   border-top-color: #00acee!important;

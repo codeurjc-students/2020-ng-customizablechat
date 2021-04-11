@@ -7,5 +7,6 @@ export interface User extends Document{
     active: Boolean,
     idSettings: Number,
     password: String,
-    chats: ObjectId[],
+    privateChats: ObjectId[],
+    groupChats: ObjectId[],
 }

@@ -26,8 +26,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
+import {environment} from "../environments/environment";
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {cors:true}};
+const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 
 @NgModule({
   declarations: [
@@ -39,28 +40,28 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {cors:tr
     DialogContent,
     LoginComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatGridListModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatMenuModule,
-    NgxDropzoneModule,
-    MatDialogModule,
-    FormsModule,
-    SocketIoModule.forRoot(config),
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatGridListModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatMenuModule,
+        NgxDropzoneModule,
+        MatDialogModule,
+        FormsModule,
+        SocketIoModule.forRoot(config),
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        HttpClientModule,
+    ],
   providers: [LoginService],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
-<div class="wrapper">
+<div class="wrapper" [ngClass]="{'disable-background': modalIsActive || modalFeedbackActive, 'enable-background': !modalIsActive || !modalFeedbackActive}">
   <div class="column left" id="boxSidebar">
-    <app-options-side-bar [user]="user"></app-options-side-bar>
+    <app-options-side-bar [user]="user" (modalActive)="onActivateModal($event)"></app-options-side-bar>
   </div>
   <div class="column middle" id="boxChatsContent">
     <app-chats [user]="user"></app-chats>
@@ -10,6 +10,24 @@
   </div>
 </div>
 
+<div class="modal form--modal-add-contact--dimensions" [ngClass]="{'modal-active': modalIsActive, 'modal-inactive': !modalIsActive}">
+  <form [formGroup]="formAddPrivateChat" class="form--add-private-chat">
+    <h3>Add contact</h3>
+    <p>Just enter their username<br></p>
+    <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert user name" autocomplete='off'required/>
+    <br>
+    <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found</mat-error>
+    <button class="form-btn sx back" type="button" (click)="onActivateModal(false);">Back</button>
+    <button class="form-btn dx" type="submit" (click)="addPrivateChat();">Create chat</button>
+  </form>
+</div>
 
+<div class="modal form--modal-feedback--dimensions" [ngClass]="{'modal-active': modalFeedbackActive, 'modal-inactive': !modalFeedbackActive}">
+  <form class="form--add-private-chat">
+    <h3>Contact added</h3>
+    <p>Click the button to continue<br></p>
+    <button class="form-btn dx" id="form--button-feedback--position" type="submit" (click)="changeModalFeedbackActive()">Continue</button>
+  </form>
+</div>
 
 

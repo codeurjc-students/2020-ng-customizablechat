@@ -17,7 +17,8 @@ export class User{
   active: Boolean;
   idSettings: Number;
   password: String;
-  chats: String[];
+  privateChats: String[];
+  groupChats: String[];
 
   constructor(userName: String,
   name: String,
@@ -25,13 +26,15 @@ export class User{
   active: Boolean,
   idSettings: Number,
   password: String,
-  chats: String[]) {
+  privateChats: String[],
+  groupChats:String[]) {
     this.name = name;
     this.socketId = socketId;
     this.active = active;
     this.idSettings = idSettings;
     this.password = password;
-    this.chats = chats;
+    this.privateChats = privateChats;
+    this.groupChats = groupChats;
   }
 }
 
@@ -42,7 +45,8 @@ export class CreateUser{
   active: Boolean;
   idSettings: Number;
   password: String;
-  chats: String[];
+  privateChats: String[];
+  groupChats: String[];
 
   constructor(userName: String, name: String, password: String,) {
     this.name = name;

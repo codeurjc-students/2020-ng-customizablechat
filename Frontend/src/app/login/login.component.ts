@@ -52,10 +52,9 @@ export class LoginComponent implements OnInit {
         this.loginService.login(newUser).subscribe(
           data=>{
             this.value = data;
-            console.log(this.value);
             if(this.value !== null){
               this.loginService.setUser(this.value);
-              this.router.navigate(['home']);
+              this.router.navigate(['app']);
             }else{
               this.passwordError = !this.passwordError;
             }
@@ -78,9 +77,8 @@ export class LoginComponent implements OnInit {
         this.loginService.signUp(newUser).subscribe(
           data=>{
             this.value = data;
-            console.log(data);
             if(this.value != null){
-              this.router.navigate(['home']);
+              this.router.navigate(['app']);
             }else{
               this.signUpError = true;
             }

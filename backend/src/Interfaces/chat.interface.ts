@@ -1,9 +1,9 @@
-import {Document, ObjectId} from "mongoose";
+import {Document} from "mongoose";
 
 export interface Chat extends Document {
     name: String;
     description: String;
     creationDate: Date;
-    participants: String[];
+    participants: any;
     isPrivate: Boolean;
 }
