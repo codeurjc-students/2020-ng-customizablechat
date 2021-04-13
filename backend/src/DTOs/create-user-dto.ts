@@ -3,7 +3,7 @@ import {ObjectId} from "mongoose";
 export class CreateUserDto {
     readonly userName: String;
     readonly name: String;
-    readonly socketId: Number;
+    readonly socketId: String;
     readonly active: Boolean;
     readonly idSettings: Number;
     readonly password: String;

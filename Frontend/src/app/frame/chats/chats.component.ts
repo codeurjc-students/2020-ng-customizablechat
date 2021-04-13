@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../models/login";
 import {AddContactPrivate, Chat} from "../../models/chat";
 import {ChatService} from "../../services/chat.service";
-import {Message} from "../../models/message";
 
 
 @Component({
@@ -23,7 +22,7 @@ export class ChatsComponent implements OnInit {
   ngOnInit(): void {
     this.returnPrivateChats();
     this.returnGroupChats();
-    this.chatService.sendMessage(new Message("This is a test", this.user.userName, this.user.privateChats[0]))
+    // this.chatService.sendMessage(new Message("This is a test", this.user.userName, this.user.privateChats[0]))
   }
 
   returnGroupChats(){
@@ -45,10 +44,13 @@ export class ChatsComponent implements OnInit {
     return this.privateChats;
   }
 
+  getGroupChats(){
+    return this.groupChats;
+  }
+
   returnPrivateChats(){
     let i = 0;
     while ( i < this.user.privateChats.length && i< 10) {
-      console.log(this.user.privateChats[0]);
       this.chatService.getChat(this.user.privateChats[i]).subscribe(
         data=>{
           this.privateChats.push(data);

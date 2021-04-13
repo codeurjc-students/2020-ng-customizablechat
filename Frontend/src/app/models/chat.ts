@@ -1,4 +1,17 @@
 export class Chat {
+  name: String;
+  description: String;
+  creationDate: Date;
+  participants: [String];
+  isPrivate: Boolean;
+
+  constructor(name:String, description:String,date: Date, participants:[String], isPrivate:boolean) {
+    this.name = name;
+    this.participants = participants;
+    this.isPrivate = isPrivate;
+    this.creationDate = date;
+    this.description = description;
+  }
 }
 
 export class AddContactPrivate {
@@ -6,9 +19,9 @@ export class AddContactPrivate {
   participants: String;
   isPrivate:Boolean;
 
-  constructor(name:String, participant:String) {
+  constructor(name:String, participant:String, isPrivate:boolean) {
     this.name = name;
     this.participants = participant;
-    this.isPrivate = true;
+    this.isPrivate = isPrivate;
   }
 }

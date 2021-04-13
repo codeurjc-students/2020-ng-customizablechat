@@ -16,11 +16,12 @@ export class ChatService {
   }
 
   public saveSocket(username){
-    this.socket.emit("saveSocket",  username);
+    console.log(username)
+    console.log("Esto debería funcionar")
+    this.socket.emit("saveSocket", username);
   }
 
   public sendMessage(message: Message) {
-    //console.log(`%cSocket: ${JSON.stringify(this.socket)}, Message: ${message}`, "color:blue");
     this.socket.emit('sendMessage', message);
     console.log("Has hecho lo que tenias");
   }

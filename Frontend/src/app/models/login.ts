@@ -13,7 +13,7 @@ export class Login{
 export class User{
   userName: String;
   name: String;
-  socketId?: Number;
+  socketId?: String;
   active: Boolean;
   idSettings: Number;
   password: String;
@@ -22,7 +22,7 @@ export class User{
 
   constructor(userName: String,
   name: String,
-  socketId: Number,
+  socketId: String,
   active: Boolean,
   idSettings: Number,
   password: String,
@@ -41,7 +41,7 @@ export class User{
 export class CreateUser{
   userName: String;
   name: String;
-  socketId?: Number;
+  socketId?: String;
   active: Boolean;
   idSettings: Number;
   password: String;

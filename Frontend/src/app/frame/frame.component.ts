@@ -31,8 +31,7 @@ export class FrameComponent implements OnInit {
     this.loginService.userSubject.subscribe(
       data =>{
         this.user = data;
-        console.log(data);
-        this.chatService.saveSocket(this.user.userName);
+        this.chatService.saveSocket(data.userName);
       }
     )
   }
@@ -43,16 +42,13 @@ export class FrameComponent implements OnInit {
 
   addPrivateChat(){
     if(this.formAddPrivateChat.valid) {
-      let newChat = new AddContactPrivate(this.user.userName, this.formAddPrivateChat.get('participant').value);
-      console.log(JSON.stringify(newChat));
+      let newChat = new AddContactPrivate(this.user.userName, this.formAddPrivateChat.get('participant').value, true);
       this.chatService.addPrivateChat(newChat).subscribe(
         data =>{
           this.chatCreated = data;
-          console.log(data)
           if(this.chatCreated == true ){
             this.onActivateModal(false);
             this.changeModalFeedbackActive();
-            //this.chatService.sendMessage(new Message("Patata", "izquierdo_ana", "606f50b2be955e042975ee98"));
           }
         }
       );

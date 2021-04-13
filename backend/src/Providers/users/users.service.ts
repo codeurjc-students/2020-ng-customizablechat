@@ -18,20 +18,21 @@ export class UsersService {
         newUser.idSettings = 1;
         newUser.privateChats = [];
         newUser.groupChats = [];
+        newUser.active = false;
         return newUser.save();
     }
 
     async logout( username: String):Promise<boolean>{
-        let value = await this.userModel.findOneAndUpdate({userName:username}, {socketId: null, active: false}, {new:true});
+        let value = await this.userModel.findOneAndUpdate({userName:username}, {socketId: null, active: false}, {new:true}).exec();
         return value != undefined;
     }
 
-    findOneBySocketIdAndEraseActivity(socketId: Number){
-        return this.userModel.findOneAndUpdate({socketId:socketId}, {socketId: null, active: false})
+    findOneBySocketIdAndEraseActivity(socketId: String){
+        return this.userModel.findOneAndUpdate({socketId:socketId}, {socketId: null, active: false}).exec();
     }
 
-    findOneBySocketIdAndAddActivity(socketId: Number, username: String){
-        return this.userModel.findOneAndUpdate({userName:username}, {socketId: socketId, active: true})
+    findOneBySocketIdAndAddActivity(socketId: String, username: String){
+        return this.userModel.findOneAndUpdate({userName:username}, {socketId: socketId, active:true}, {new:true}).exec();
     }
 
     async addChatToUser(name: String, _id: any, isPrivate:boolean) {

@@ -40,9 +40,10 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
   }
 
   @SubscribeMessage('saveSocket')
-  socketSave(@ConnectedSocket() client: Socket, username: string): void {
-    this.logger.log(`Working correctly!!! ${client.id}, ${username}`);
-    this.usersService.findOneBySocketIdAndAddActivity(client.id, username);
+  socketSave(client: Socket, username: string): void {
+    this.logger.log(`Im going to save the client's socket! ${client.id}, ${username}`);
+    let value = this.usersService.findOneBySocketIdAndAddActivity(client.id, username);
+    client.emit('isSocketSaved',true);
   }
 
   @SubscribeMessage('sendMessage')
