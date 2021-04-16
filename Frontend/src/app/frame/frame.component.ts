@@ -5,6 +5,7 @@ import {ChatService} from "../services/chat.service";
 import {Message} from "../models/message";
 import {AddContactPrivate} from "../models/chat";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MainChatSharedService} from "../services/main-chat-shared.service";
 
 @Component({
   selector: 'app-frame',
@@ -21,7 +22,7 @@ export class FrameComponent implements OnInit {
   chatCreated: boolean = null;
   modalFeedbackActive: boolean = false;
 
-  constructor(public loginService: LoginService, public chatService: ChatService, private fb: FormBuilder) { }
+  constructor(public loginService: LoginService, public chatService: ChatService, private fb: FormBuilder, public mainChat:MainChatSharedService) { }
 
   ngOnInit(): void {
     this.modalIsActive =false;

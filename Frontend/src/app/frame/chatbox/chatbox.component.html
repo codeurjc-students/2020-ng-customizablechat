@@ -1,136 +1,137 @@
 <div class="chatBox">
-  <div class="upper">
-    <mat-toolbar id="upperChat" color="warn">
-      <!--<span>Selecciona un chat para mostrar los mensajes</span>-->
-      <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
-      <span class="spacerImageText"></span>
-      <span>ChatPrueba</span>
-    </mat-toolbar>
-  </div>
-  <div class="medium">
-    <mat-list class="chatFrame messageWrapper">
-      <mat-list-item class="leftCard">
-        <mat-card>
-          <mat-card-title>ChatPrueba</mat-card-title>
-          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
-            redimensiones.
-            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
-            Esto debería estar ocupando el ancho de la pantalla para testear
-            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="messageBox rightItem">
-        <mat-card class="rightCard">
-          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="leftCard">
-        <mat-card>
-          <mat-card-title>ChatPrueba</mat-card-title>
-          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="messageBox rightItem">
-        <mat-card class="rightCard">
-          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
-            redimensiones.
-            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
-            Esto debería estar ocupando el ancho de la pantalla para testear
-            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="leftCard">
-        <mat-card>
-          <mat-card-title>ChatPrueba</mat-card-title>
-          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
-            redimensiones.
-            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
-            Esto debería estar ocupando el ancho de la pantalla para testear
-            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="messageBox rightItem">
-        <mat-card class="rightCard">
-          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="leftCard">
-        <mat-card>
-          <mat-card-title>ChatPrueba</mat-card-title>
-          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="messageBox rightItem">
-        <mat-card class="rightCard">
-          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
-            redimensiones.
-            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
-            Esto debería estar ocupando el ancho de la pantalla para testear
-            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="leftCard">
-        <mat-card>
-          <mat-card-title>ChatPrueba</mat-card-title>
-          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
-            redimensiones.
-            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
-            Esto debería estar ocupando el ancho de la pantalla para testear
-            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="messageBox rightItem">
-        <mat-card class="rightCard">
-          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="leftCard">
-        <mat-card>
-          <mat-card-title>ChatPrueba</mat-card-title>
-          <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item class="messageBox rightItem">
-        <mat-card class="rightCard">
-          <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
-            redimensiones.
-            Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
-            Esto debería estar ocupando el ancho de la pantalla para testear
-            Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
-          </mat-card-subtitle>
-        </mat-card>
-      </mat-list-item>
-    </mat-list>
-  </div>
-  <div class="lower">
-    <mat-toolbar id="lowerChat" color="warn">
-      <!--<span>Selecciona un chat para mostrar los mensajes</span>-->
-      <div class="leftButtonClip">
-        <button mat-icon-button class="clipButton" (click)="openDialog()" aria-label="Drop files">
-          <i class="fas fa-paperclip fa-3x"></i>
-        </button>
-      </div>
-      <div class="midGifButton">
-        <button mat-icon-button class="clipButton" aria-label="">
-          <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/gifUnfilled.png" alt="">
-        </button>
-      </div>
-      <div class="rightTextArea">
-        <form [formGroup]="" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-          <textarea id="textAreaForm" #message formControlName="message"></textarea>
+  <div *ngIf="chatObs  != null">
+    <div class="upper">
+      <mat-toolbar id="upperChat" color="warn">
+        <!--<span>Selecciona un chatObs para mostrar los mensajes</span>-->
+        <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+        <span class="spacerImageText"></span>
+        <span *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
+              style="font-size:xx-large">{{chatObs.participants}}</span>
+        <span *ngIf="!chatObs.isPrivate || chatObs.name != user.userName">{{chatObs.name}}</span>
+      </mat-toolbar>
+    </div>
+    <div class="medium">
+      <mat-list class="chatFrame messageWrapper">
+        <mat-list-item *ngFor="let message of messageList" [ngClass]="{leftCard:message.sender != user.userName, 'messageBox rightItem': message.sender == user.userName}">
+          <mat-card [ngClass]="{rightCard : message.sender == user.userName}">
+            <mat-card-title *ngIf="message.sender != user.userName">{{chatObs.participants}}</mat-card-title>
+            <mat-card-subtitle>{{message.message}}</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
 
-          <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
-            <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="">
+        <mat-list-item class="messageBox rightItem">
+          <mat-card class="rightCard">
+            <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="leftCard">
+          <mat-card>
+            <mat-card-title>chatObsPrueba</mat-card-title>
+            <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="messageBox rightItem">
+          <mat-card class="rightCard">
+            <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+              redimensiones.
+              Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+              Esto debería estar ocupando el ancho de la pantalla para testear
+              Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+            </mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="leftCard">
+          <mat-card>
+            <mat-card-title>chatObsPrueba</mat-card-title>
+            <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+              redimensiones.
+              Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+              Esto debería estar ocupando el ancho de la pantalla para testear
+              Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+            </mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="messageBox rightItem">
+          <mat-card class="rightCard">
+            <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="leftCard">
+          <mat-card>
+            <mat-card-title>chatObsPrueba</mat-card-title>
+            <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="messageBox rightItem">
+          <mat-card class="rightCard">
+            <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+              redimensiones.
+              Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+              Esto debería estar ocupando el ancho de la pantalla para testear
+              Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+            </mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="leftCard">
+          <mat-card>
+            <mat-card-title>chatObsPrueba</mat-card-title>
+            <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+              redimensiones.
+              Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+              Esto debería estar ocupando el ancho de la pantalla para testear
+              Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+            </mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="messageBox rightItem">
+          <mat-card class="rightCard">
+            <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="leftCard">
+          <mat-card>
+            <mat-card-title>chatObsPrueba</mat-card-title>
+            <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+        <mat-list-item class="messageBox rightItem">
+          <mat-card class="rightCard">
+            <mat-card-subtitle>Esto es un mensaje de prueba. Vamos a comprobar cuanto de largo se hace para las
+              redimensiones.
+              Prueba a hacerlo más largo todavía que no superamos el width de la pantalla
+              Esto debería estar ocupando el ancho de la pantalla para testear
+              Vale, pues no, esto es muy grande. A ver si así se sobrepasa el tamaño
+            </mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+
+      </mat-list>
+    </div>
+    <div class="lower">
+      <mat-toolbar id="lowerChat" color="warn">
+        <!--<span>Selecciona un chatObs para mostrar los mensajes</span>-->
+        <div class="leftButtonClip">
+          <button mat-icon-button class="clipButton" (click)="openDialog()" aria-label="Drop files">
+            <i class="fas fa-paperclip fa-3x"></i>
           </button>
+        </div>
+        <div class="midGifButton">
+          <button mat-icon-button class="clipButton" aria-label="">
+            <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/gifUnfilled.png" alt="">
+          </button>
+        </div>
+        <div class="rightTextArea">
+          <form [formGroup]="messageData" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+            <textarea id="textAreaForm" #message formControlName="message"></textarea>
 
-        </form>
-      </div>
+            <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
+              <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="">
+            </button>
 
-    </mat-toolbar>
+          </form>
+        </div>
+
+      </mat-toolbar>
+    </div>
   </div>
 </div>

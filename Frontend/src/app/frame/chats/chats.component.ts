@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../models/login";
 import {AddContactPrivate, Chat} from "../../models/chat";
 import {ChatService} from "../../services/chat.service";
+import {MainChatSharedService} from "../../services/main-chat-shared.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ChatsComponent implements OnInit {
   groupChats:Chat[] = [];
   dataLoaded:boolean = false;
 
-  constructor(public chatService:ChatService) { }
+  constructor(private chatService:ChatService, public mainChat:MainChatSharedService) { }
 
   ngOnInit(): void {
     this.returnPrivateChats();
@@ -60,6 +61,10 @@ export class ChatsComponent implements OnInit {
       );
       i++;
     }
+  }
+
+  changeMainChat(value:any){
+    this.mainChat.setChat(value);
   }
 
 }

@@ -47,7 +47,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
   }
 
   @SubscribeMessage('sendMessage')
-  sendMessage(@ConnectedSocket() client: Socket, message: CreateMessageDto){
+  sendMessage(client: Socket, message: CreateMessageDto){
     try{
       this.logger.log(`Send message is working`);
       this.messagesService.saveMessage(message);

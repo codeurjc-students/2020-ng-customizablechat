@@ -4,7 +4,7 @@
     <mat-tab label="Private Chats">
       <ng-template matTabContent>
         <mat-nav-list class="chatsWrapper">
-          <mat-list-item *ngFor="let chat of getPrivateChats()" class="manualCard">
+          <mat-list-item *ngFor="let chat of getPrivateChats()" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
               <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
             </div>
@@ -25,7 +25,7 @@
     <mat-tab label="Group Chats">
       <ng-template matTabContent>
         <mat-nav-list class="chatsWrapper">
-          <mat-list-item *ngFor="let chat of getGroupChats()" class="manualCard">
+          <mat-list-item *ngFor="let chat of getGroupChats()" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
               <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
             </div>

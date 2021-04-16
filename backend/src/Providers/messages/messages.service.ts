@@ -14,7 +14,10 @@ export class MessagesService {
     }
 
     async retrieveMessages(chatId: ObjectId, page: number){
-        this.messageModel.find( {chatId: chatId}).sort({_id: -1}).skip(page*10).limit(10);
+        console.log(chatId);console.log(page)
+        let data = await  this.messageModel.find( {chatId: chatId}).sort({_id: -1}).skip(page*10).limit(10).exec();
+        console.info(data);
+        return data;
     }
 
     async searchMessagesMatchChat(match: SearchMessage){
