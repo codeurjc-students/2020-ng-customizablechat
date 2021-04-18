@@ -34,7 +34,4 @@ export class MainChatSharedService {
     return this.http.get<any>(this.Api_url+ 'chats/'+ id + "/" + page);
   }
 
-  // public sendMessage(chatId:String, message:Message){
-  //   return this.http.post<any>(this.Api_url+ 'chats/'+ id + "/" + page);
-  // }
 }

@@ -1,40 +1,4 @@
 <div id="login">
-<!--  <mat-card>-->
-<!--    <mat-card-content>-->
-<!--      <form [formGroup]="form">-->
-<!--        <h2>Log In</h2>-->
-<!--        <mat-error *ngIf="loginInvalid">-->
-<!--          The username and/or password are not valid credentials-->
-<!--        </mat-error>-->
-<!--        <mat-form-field class="full-width-input" appearance="outline" hintLabel="Max 15 characters">-->
-<!--          <mat-label>Enter your username</mat-label>-->
-<!--          <input matInput type="text" formControlName="username" #username maxlength="15" placeholder="Placeholder"-->
-<!--                 required>-->
-<!--          <mat-hint align="end">{{username.value?.length || 0}}/15</mat-hint>-->
-<!--          <mat-error>-->
-<!--            Please enter a valid email address-->
-<!--          </mat-error>-->
-<!--        </mat-form-field>-->
-
-<!--        <mat-form-field class="full-width-input" appearance="outline">-->
-<!--          <mat-label>Enter your password</mat-label>-->
-<!--          <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" required>-->
-<!--          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"-->
-<!--                  [attr.aria-pressed]="hidePass">-->
-<!--            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>-->
-<!--          </button>-->
-<!--          <mat-error>-->
-<!--            Please enter a valid password-->
-<!--          </mat-error>-->
-<!--        </mat-form-field>-->
-<!--        <div class="flex-buttons">-->
-<!--          <button mat-raised-button color="primary" class="light-button-color" type="submit" id="login-button" (click)="onSubmit();">Sign In</button>-->
-<!--          <button mat-raised-button color="primary" class="light-button-color" id="register-button">Sign Up</button>-->
-<!--        </div>-->
-
-<!--      </form>-->
-<!--    </mat-card-content>-->
-<!--  </mat-card>-->
   <div class="container">
     <form class="signUp" [formGroup]="formSignUp" [ngClass]="{'inactive-sx': login, 'active-sx': !login}">
       <h3>Create Your Account</h3>

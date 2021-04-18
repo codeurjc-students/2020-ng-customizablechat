@@ -2,7 +2,6 @@
   <div *ngIf="chatObs  != null">
     <div class="upper">
       <mat-toolbar id="upperChat" color="warn">
-        <!--<span>Selecciona un chatObs para mostrar los mensajes</span>-->
         <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
         <span class="spacerImageText"></span>
         <span *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
@@ -12,13 +11,12 @@
     </div>
     <div class="medium">
       <mat-list class="chatFrame messageWrapper">
-        <mat-list-item *ngFor="let message of messageList" [ngClass]="{leftCard:message.sender != user.userName, 'messageBox rightItem': message.sender == user.userName}">
+        <mat-list-item *ngFor="let message of messageList" [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightItem :message.sender == user.userName}">
           <mat-card [ngClass]="{rightCard : message.sender == user.userName}">
-            <mat-card-title *ngIf="message.sender != user.userName">{{chatObs.participants}}</mat-card-title>
+            <mat-card-title *ngIf="message.sender != user.userName">{{message.sender}}</mat-card-title>
             <mat-card-subtitle>{{message.message}}</mat-card-subtitle>
           </mat-card>
         </mat-list-item>
-
         <mat-list-item class="messageBox rightItem">
           <mat-card class="rightCard">
             <mat-card-subtitle>Esto es una prueba de un mensaje corto</mat-card-subtitle>
@@ -104,12 +102,10 @@
             </mat-card-subtitle>
           </mat-card>
         </mat-list-item>
-
       </mat-list>
     </div>
     <div class="lower">
       <mat-toolbar id="lowerChat" color="warn">
-        <!--<span>Selecciona un chatObs para mostrar los mensajes</span>-->
         <div class="leftButtonClip">
           <button mat-icon-button class="clipButton" (click)="openDialog()" aria-label="Drop files">
             <i class="fas fa-paperclip fa-3x"></i>
@@ -122,7 +118,7 @@
         </div>
         <div class="rightTextArea">
           <form [formGroup]="messageData" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-            <textarea id="textAreaForm" #message formControlName="message"></textarea>
+            <textarea id="textAreaForm" formControlName="message"></textarea>
 
             <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
               <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="">

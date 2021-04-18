@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
 import {User} from "../../models/login";
 import {Observable} from "rxjs";
 import {Message} from "../../models/message";
 import {ChatService} from "../../services/chat.service";
+import {Socket} from "ngx-socket-io";
 
 
 @Component({
@@ -18,36 +19,29 @@ export class ChatboxComponent implements OnInit {
   @Input() user: User;
   chatObs: any = null;
   messageList: Message[];
-  page: number;
+  page: number = 0;
 
-  messageData = new FormGroup ({
-    message: new FormControl()
-  });
+  messageData: FormGroup;
+  socket: Socket;
 
-  message: string = this.messageData.controls['message'].value;
 
-  constructor(public dialog:MatDialog, public mainChat:MainChatSharedService, public chatService:ChatService) { }
+  constructor(public dialog:MatDialog, public mainChat:MainChatSharedService, public chatService:ChatService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.page = 0;
+    this.socket = this.chatService.socket;
+    this.messageData = this.fb.group({
+      message: ['', Validators.required],
+    });
     this.messageList = [];
     this.mainChat.chatChange.subscribe(
       data => {
         this.chatObs = data;
-        console.log("----->El Chat")
-        console.log(data)
-        this.mainChat.getMessages(this.chatObs._id, this.page).subscribe(
-          data2 =>{
-            this.messageList = data2;
-            console.log("----->Los mensajes")
-            console.log(data2);
-          }
-        );
         this.page = 0;
-        this.messageList.push(new Message("patata", "60708dde77b9920364d1be1e", "60747a42c99c1902fe482867"));
+        this.getMessages();
       }
 
-    )
+    );
+    this.onMessageSent();
   }
 
 
@@ -60,11 +54,32 @@ export class ChatboxComponent implements OnInit {
   }
 
   onSubmit(){
-    this.message = this.messageData.controls['message'].value;
-    console.log(this.message);
-    if(this.message != null){
-      this.chatService.sendMessage(new Message(this.message, this.user.userName, this.chatObs._id));
+    if(this.messageData.valid){
+      const newMessage = new Message(this.messageData.get("message").value , this.user.userName, this.chatObs._id);
+      this.messageData.reset();
+      if(this.chatObs.isPrivate){
+        this.chatService.sendMessagePrivate(newMessage);
+      }else {
+        this.chatService.sendMessageGroup(newMessage);
+      }
     }
+  }
+  onMessageSent(){
+    this.chatService.getMessage().subscribe(
+      data =>{
+        console.log(data);
+        this.messageList.push(data as Message);
+      }
+    )
+  }
+
+  getMessages(){
+    this.mainChat.getMessages(this.chatObs._id, this.page).subscribe(
+      messages =>{
+        this.messageList = messages;
+        this.page++;
+      }
+    );
   }
 
 }

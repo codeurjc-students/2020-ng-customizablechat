@@ -14,16 +14,13 @@ export class MessagesService {
     }
 
     async retrieveMessages(chatId: ObjectId, page: number){
-        console.log(chatId);console.log(page)
-        let data = await  this.messageModel.find( {chatId: chatId}).sort({_id: -1}).skip(page*10).limit(10).exec();
-        console.info(data);
-        return data;
+        let value = await this.messageModel.find( {chatId: chatId}).sort({_id: -1}).skip(page*10).limit(10).exec();
+        return value.reverse();
     }
 
     async searchMessagesMatchChat(match: SearchMessage){
         return this.messageModel.find({message: ('/'+ match.message + '/'), chatId: match.chatId});
     }
-
 
 
 }

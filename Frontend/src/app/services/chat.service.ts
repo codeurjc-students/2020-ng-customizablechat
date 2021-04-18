@@ -4,6 +4,7 @@ import {Message} from "../models/message";
 import {AddContactPrivate} from "../models/chat";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {Observable, Observer} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ChatService {
 
   private Api_url = environment.API_URL;
 
-  constructor(private socket: Socket, private http: HttpClient) {
+  constructor(public socket: Socket, private http: HttpClient) {
   }
 
   public saveSocket(username){
@@ -21,9 +22,12 @@ export class ChatService {
     this.socket.emit("saveSocket", username);
   }
 
-  public sendMessage(message: Message) {
-    this.socket.emit('sendMessage', message);
-    console.log("Has hecho lo que tenias");
+  public sendMessagePrivate(message: Message) {
+    this.socket.emit('sendMessagePrivate', message);
+  }
+
+  public sendMessageGroup(message: Message) {
+    this.socket.emit('sendMessageGroup', message);
   }
 
   public addPrivateChat(newContact: AddContactPrivate){
@@ -32,5 +36,9 @@ export class ChatService {
 
   public getChat(id: String){
     return this.http.get<any>(this.Api_url+ 'chats/'+id);
+  }
+
+  public getMessage(){
+      return this.socket.fromEvent('messageSent');
   }
 }

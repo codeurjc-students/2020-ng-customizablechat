@@ -75,7 +75,7 @@
     height: auto!important;
     float: left!important;
     margin-bottom: 1%;
-
+    max-width: 90%!important;
   }
 
   .rightItem{
@@ -84,9 +84,10 @@
     float: right!important;
     margin-bottom: 1%;
     right:0;
+    max-width: 90%!important;
   }
 
-  /deep/ .mat-list-item.rightItem .mat-list-item-content{
+  ::ng-deep .mat-list-item.rightItem .mat-list-item-content{
     float:right!important;
   }
 
