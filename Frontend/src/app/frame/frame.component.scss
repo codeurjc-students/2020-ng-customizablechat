@@ -1,3 +1,4 @@
+@import "src/styles";
 
 .wrapper{
   height:100%;
@@ -29,28 +30,50 @@
 }
 
 #boxSidebar{
-  border-right-color: #00acee!important;
+  @include themify($themes){
+    border-right-color: (themed('medium-color'));
+  }
   border-right-width: 5px;
+  border-right-style:solid;
+  height:100%;
+  float:left;
+  z-index: 101;
+}
+
+#boxChatsContent{
   border-right-style:solid;
   height:100%;
   float:left;
 }
 
-#boxChatsContent{
-  border-right-color: #00acee!important;
-  border-right-width: 5px;
-  border-right-style:solid;
-  height:100%;
-  float:left;
+#boxContent{
+  height: 100%;
+  width: 100%;
+
+  @include themify($themes){
+    border-left: 5px solid themed('medium-color');
+  }
 }
 
 .modal{
   position: absolute;
   box-shadow: rgba(0, 0, 0, 0.31) 3px -1px 25px -2px;
-  background:white;
   justify-content: center;
   border-radius: 1%;
+  @include themify($themes){
+    background: themed('modal')!important;
+  }
+
 }
+
+.modal-light-mode{
+  background: rgba(255, 255, 255, 1)!important;
+}
+
+.modal-dark-mode{
+  background: rgba(26, 32, 79, 1)!important;
+}
+
 
 .form--modal-add-contact--dimensions{
   height: 30%;
@@ -58,6 +81,15 @@
   left: 40%;
   top: 35%;
 }
+
+.form--modal-create-group--dimensions{
+  height: 45%;
+  width:20%;
+  left: 40%;
+  top: 27.5%;
+}
+
+
 
 .form--modal-feedback--dimensions{
   height: 20%;
@@ -75,21 +107,29 @@
 }
 
 .disable-background{
-  opacity: 0.15;
+  opacity: 0.3!important;
   background-color: #000;
 
 }
 
 .enable-background{
-  opacity: 1;
+  opacity: 1!important;
 }
 
 .modal h3 {
   font-family: 'Dosis';
   font-size: 35px;
   text-transform: uppercase;
-  color: #4e2f42;
+
   margin-bottom: 30px;
+}
+
+.modal-dark-mode h3, .modal-dark-mode p {
+  color: $white-smoke;
+}
+
+.modal-light-mode h3, .modal-light-mode p {
+  color: #4e2f42;
 }
 
 .modal p {
@@ -97,7 +137,6 @@
   font-weight: 100;
   text-transform: uppercase;
   font-size: 12px;
-  color: #4e2f42;
   margin-bottom: 40px;
 }
 
@@ -115,9 +154,16 @@
 }
 
 .modal ::placeholder{
-  background-color: #ace7ff;
   font-family: 'Roboto';
   font-weight:100;
+}
+
+.modal-light-mode ::placeholder {
+  background-color: $white;
+}
+
+.modal-dark-mode ::placeholder {
+  background-color: $white-smoke;
 }
 
 .modal input, button{
@@ -177,10 +223,27 @@ button.form-btn.dx:hover{
 }
 
 
-#form--button-feedback--position{
-  text-align: center;
-  width: 40%;
+.form--button-feedback--position{
+  width: 40%!important;
   left: 30%;
+  border-radius: 5px!important;
+  bottom: 10%!important;
+}
+
+.form-create-group--button--design{
+  font-family: 'Dosis';
+  font-size: 24px;
+  border: none;
+  cursor:pointer;
+  @include themify($themes){
+    background: themed('medium-color');
+  }
+  color:$white-smoke;
+  opacity: 0.5;
   border-radius: 5px;
-  bottom: 10%;
+  padding: 2% 4%;
+}
+
+.form-create-group--button--design:hover{
+  opacity: 1;
 }

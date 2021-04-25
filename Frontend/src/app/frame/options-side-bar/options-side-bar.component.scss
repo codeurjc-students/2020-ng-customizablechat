@@ -1,22 +1,21 @@
+@import "src/styles.scss";
 
-#imageProfile{
-  width:  30px;
-  height: 30px;
+.imagesButtons{
+  width:  25px;
+  height: 25px;
+  @include themify($themes) {
+    border: 2px solid themed('medium-color')!important;
+  }
   border-radius: 50%;
-  border: 2px solid #00acee;
 }
 
- .imagesButtons{
-   width:  30px;
-   height: 30px;
-   border: 2px solid #00acee;
-   border-radius: 50%;
- }
+  .mat-list--first-button--position{
+    margin-top:30%;
+  }
 
  .listButtons{
    align-content: center;
    height:100%;
-   margin-top:30%;
  }
 
  .rowButtons {
@@ -27,17 +26,17 @@
  button{
    border:none;
    background: none;
-   margin:auto;
+   margin-left:auto;
+   margin-right:auto;
+   margin-bottom:auto;
+   margin-top:30%;
  }
 
  .buttonsSidebar:hover{
-   background: white;
    border-radius: 50%;
    height: 35px;
    width: 35px;
 
-
-   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
    transform: scale(1);
    animation: pulse 2s infinite;
  }
@@ -45,17 +44,17 @@
  @keyframes pulse {
    0% {
      transform: scale(0.95);
-     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
    }
 
    60% {
      transform: scale(1);
-     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+     box-shadow: 0 0 0 10px rgba(255, 255, 255,0);
    }
 
    100% {
      transform: scale(0.95);
-     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+     box-shadow: 0 0 0 0 rgba(255, 255, 255,0);
    }
  }
 

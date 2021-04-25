@@ -54,3 +54,14 @@ export class CreateUser{
     this.password = password;
   }
 }
+
+export class SendChangeColor{
+  userName:String;
+  idSettings:Number;
+
+
+  constructor(username: String, idSettings: Number) {
+    this.userName = username;
+    this.idSettings = idSettings;
+  }
+}

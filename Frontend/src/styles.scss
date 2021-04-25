@@ -1,0 +1,91 @@
+/* You can add global styles to this file, and also import other style files */
+
+$light-blue: #ace7ff;
+$light-medium-blue: #00acee;
+$dark-blue: #1a204f;
+$dark-medium-blue: #6e8ee6;
+$black: #000000;
+$white: #ffffff;
+$white-smoke: #f5f5f5;
+$dark-pale-blue: #403f6a;
+$light-grey:#3e3c3c;
+
+$themes: (
+  light: (
+    //logo: url("../images/brand/logo_vertical.svg"),
+    bg-login: linear-gradient($light-blue, #caefff, $white),
+    bg-app: $white,
+    main-color: $light-blue,
+    medium-color: $light-medium-blue,
+    text: $black,
+    text-right: $light-grey,
+    background-chat:$white-smoke,
+    background-textarea:$white,
+    background-textarea-text:$black,
+    highlight-text-color:$white,
+    message-left-border:$light-blue,
+    message-right-border:$light-medium-blue,
+    message-right-fill:$light-blue,
+    message-left-fill:$white,
+    background-chat-opened: url("/assets/Fondo-Diurno2.png"),
+    modal: rgba(255, 255, 255, 1),
+    modal-text: #4e2f42,
+  ),
+  dark: (
+    bg-login: linear-gradient($black, $dark-blue, $dark-medium-blue),
+    bg-app: $dark-blue,
+    main-color: $dark-blue,
+    medium-color: $dark-medium-blue,
+    text: $white,
+    text-right: #e6e6e6,
+    background-chat:$dark-pale-blue,
+    background-textarea:$white-smoke,
+    background-textarea-text:$light-grey,
+    highlight-text-color:$black,
+    message-left-border:$dark-blue,
+    message-right-border:$dark-medium-blue,
+    message-right-fill:$dark-blue,
+    message-left-fill:$dark-medium-blue,
+    background-chat-opened: url("/assets/Fondo-Nocturno2.png"),
+    modal: rgba(26, 32, 79, 1),
+    modal-text: $white-smoke,
+  ),
+);
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+html, body { height: 100%;}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height:100%;
+  width:100%;
+}
+
+.background-frame{
+  @include themify($themes){
+    background-color: themed('bg-app')!important;
+    color: themed('text')!important;
+  }
+}
+
+

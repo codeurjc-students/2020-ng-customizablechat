@@ -1,20 +1,30 @@
-<div class="wrapper" [ngClass]="{'disable-background': modalIsActive || modalFeedbackActive, 'enable-background': !modalIsActive || !modalFeedbackActive}">
-  <div class="column left" id="boxSidebar">
-    <app-options-side-bar [user]="user" (modalActive)="onActivateModal($event)"></app-options-side-bar>
-  </div>
-  <div class="column middle" id="boxChatsContent">
-    <app-chats [user]="user"></app-chats>
-  </div>
-  <div class="column right" id="boxContent">
-    <app-chatbox [user]="user"></app-chatbox>
+<div [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
+  <div class="wrapper"
+       [ngClass]="{'disable-background': modalIsActive || modalFeedbackActive, 'enable-background': !modalIsActive || !modalFeedbackActive}">
+    <div class="column left" id="boxSidebar">
+      <app-options-side-bar [user]="user"
+                            (modalActive)="onActivateModal($event)"
+                            (colorActive)="onChangeColor($event)"
+                            (modalGroupActive)="onActivateGroupModal($event)"
+      ></app-options-side-bar>
+    </div>
+    <div class="column middle" id="boxChatsContent">
+      <app-chats [user]="user"></app-chats>
+    </div>
+    <div class="column right" id="boxContent">
+      <app-chatbox [user]="user"></app-chatbox>
+    </div>
   </div>
 </div>
-
-<div class="modal form--modal-add-contact--dimensions" [ngClass]="{'modal-active': modalIsActive, 'modal-inactive': !modalIsActive}">
+<div class="modal form--modal-add-contact--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 ,
+     'modal-active': modalIsActive, 'modal-inactive': !modalIsActive,
+     'modal-light-mode': modalIsActive && user.idSettings == 1, 'modal-dark-mode': modalIsActive && user.idSettings != 1}">
   <form [formGroup]="formAddPrivateChat" class="form--add-private-chat">
     <h3>Add contact</h3>
     <p>Just enter their username<br></p>
-    <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert user name" autocomplete='off'required/>
+    <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert user name"
+           autocomplete='off' required/>
     <br>
     <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found</mat-error>
     <button class="form-btn sx back" type="button" (click)="onActivateModal(false);">Back</button>
@@ -22,12 +32,40 @@
   </form>
 </div>
 
-<div class="modal form--modal-feedback--dimensions" [ngClass]="{'modal-active': modalFeedbackActive, 'modal-inactive': !modalFeedbackActive}">
+<div class="modal form--modal-feedback--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1,
+     'modal-active': modalFeedbackActive, 'modal-inactive': !modalFeedbackActive,
+     'modal-light-mode': modalFeedbackActive && user.idSettings == 1, 'modal-dark-mode': modalFeedbackActive && user.idSettings != 1}">
   <form class="form--add-private-chat">
-    <h3>Contact added</h3>
-    <p>Click the button to continue<br></p>
-    <button class="form-btn dx" id="form--button-feedback--position" type="submit" (click)="changeModalFeedbackActive()">Continue</button>
+    <h3>Action successfully completed</h3>
+    <button class="form-btn dx form--button-feedback--position" type="submit"
+            (click)="changeModalFeedbackActive()">Continue
+    </button>
   </form>
 </div>
 
 
+<div class="modal form--modal-create-group--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 ,
+     'modal-active': modalGroupIsActive, 'modal-inactive': !modalGroupIsActive,
+     'modal-light-mode': modalGroupIsActive && user.idSettings == 1, 'modal-dark-mode': modalGroupIsActive && user.idSettings != 1}">
+  <form [formGroup]="formCreateGroupChat" class="form--add-private-chat">
+    <h3>Create a group chat</h3>
+    <p>Just enter a name, description and add one by one their usernames<br></p>
+    <input matInput class="w100" type="text" formControlName="name" placeholder="Insert chat name"
+           autocomplete='off' required/>
+    <br>
+    <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found</mat-error>
+    <input matInput class="w100" type="text" formControlName="description" placeholder="Insert description"
+           autocomplete='off'/>
+    <br>
+    <div>
+    <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert participant name"
+               autocomplete='off' required/>
+    <br>
+    <button class="form-create-group--button--design" type="button" (click)="addParticipantToGroup();">Add participant</button>
+    </div>
+    <button class="form-btn sx back" type="button" (click)="onActivateGroupModal(false);">Back</button>
+    <button class="form-btn dx" type="submit" (click)="createGroupChat();">Create chat</button>
+  </form>
+</div>

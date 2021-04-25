@@ -1,23 +1,39 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {User} from "../../models/login";
+import {SendChangeColor, User} from "../../models/login";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-options-side-bar',
   templateUrl: './options-side-bar.component.html',
-  styleUrls: ['./options-side-bar.component.css']
+  styleUrls: ['./options-side-bar.component.scss']
 })
 export class OptionsSideBarComponent implements OnInit {
 
   @Input() user: User;
 
   @Output() modalActive  = new EventEmitter<boolean>();
+  @Output() colorActive  = new EventEmitter<boolean>();
+  @Output() modalGroupActive  = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(public usersService:UsersService) { }
 
   ngOnInit(): void {
   }
 
   changeModal(value:boolean){
     this.modalActive.emit(value);
+  }
+
+  changeColor(value:boolean){
+    this.usersService.changeColorMode(new SendChangeColor(this.user.userName,(value? 2:1))).subscribe(
+      data=>{
+        console.log(data);
+        this.colorActive.emit(value);
+      }
+    );
+  }
+
+  setModalCreateGroup(value:boolean){
+    this.modalGroupActive.emit(value);
   }
 }

@@ -15,3 +15,9 @@ export class LoginUserDTO{
     readonly userName: String;
     readonly password: String;
 }
+
+
+export class SendChangeColor{
+    userName:String;
+    idSettings:Number;
+}

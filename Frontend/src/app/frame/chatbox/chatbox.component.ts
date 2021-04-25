@@ -12,7 +12,7 @@ import {Socket} from "ngx-socket-io";
 @Component({
   selector: 'app-chatbox',
   templateUrl: './chatbox.component.html',
-  styleUrls: ['./chatbox.component.css']
+  styleUrls: ['./chatbox.component.scss']
 })
 export class ChatboxComponent implements OnInit {
 
@@ -55,12 +55,17 @@ export class ChatboxComponent implements OnInit {
 
   onSubmit(){
     if(this.messageData.valid){
-      const newMessage = new Message(this.messageData.get("message").value , this.user.userName, this.chatObs._id);
-      this.messageData.reset();
-      if(this.chatObs.isPrivate){
-        this.chatService.sendMessagePrivate(newMessage);
-      }else {
-        this.chatService.sendMessageGroup(newMessage);
+      const valueMessage = this.messageData.get("message").value;
+      if(valueMessage!="") {
+        const newMessage = new Message(valueMessage, this.user.userName, this.chatObs._id);
+        this.messageData.reset();
+        if (this.chatObs.isPrivate) {
+          console.log("IsPrivate")
+          this.chatService.sendMessagePrivate(newMessage);
+        } else {
+          console.log("Is a Group")
+          this.chatService.sendMessageGroup(newMessage);
+        }
       }
     }
   }

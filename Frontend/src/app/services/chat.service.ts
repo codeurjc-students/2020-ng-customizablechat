@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Socket} from "ngx-socket-io";
 import {Message} from "../models/message";
-import {AddContactPrivate} from "../models/chat";
+import {AddContactPrivate, Chat} from "../models/chat";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable, Observer} from "rxjs";
@@ -32,6 +32,10 @@ export class ChatService {
 
   public addPrivateChat(newContact: AddContactPrivate){
     return this.http.post<any>(this.Api_url+ 'chats/private', newContact);
+  }
+
+  public createGroupChat(newChat: Chat){
+    return this.http.post<any>(this.Api_url+ 'chats/group', newChat);
   }
 
   public getChat(id: String){

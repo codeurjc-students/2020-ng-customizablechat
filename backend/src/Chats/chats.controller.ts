@@ -19,21 +19,28 @@ export class ChatsController {
         let contactToAdd = this.usersService.findOneByUsername(chat.participants);
 
         if(contactToAdd !== undefined){
-            let chatNew = new CreateChatDto(chat.name, true, "", chat.participants);
-            let chatCreated = await this.chatsService.createChat(chatNew);
-            this.usersService.addChatToUser(chat.name,chatCreated._id,true);
-            this.usersService.addChatToUser(chat.participants, chatCreated._id,true);
-            return true;
+            let chatNew = new CreateChatDto(chat.name, true, "", new Date(), chat.participants);
+
+            //Section may be used to check chats duplication
+            //let user = await this.usersService.findOneByUsername(chat.name);
+            // var isUnique = true;
+            // for(let i = 0; user.privateChats.length; i++){
+            //     let value = await this.chatsService.findChatPrivateExistence(chat.name, chat.participants)
+            // }
+            // if(isUnique){
+                let chatCreated = await this.chatsService.createChat(chatNew);
+                this.usersService.addChatToUser(chat.name,chatCreated._id,true);
+                this.usersService.addChatToUser(chat.participants, chatCreated._id,true);
+                return true;
+            // }
         }
         return false;
     }
 
     @Post('group')
     async createGroup(@Body() chat: CreateChatDto){
-
+        console.log(chat);
         let chatCreated = await this.chatsService.createChat(chat);
-
-        this.usersService.addChatToUser(chat.name,chatCreated._id,false);
 
         for (let i = 0; i < chat.participants.length; i++) {
             let contactToAdd = this.usersService.findOneByUsername(chat.participants[i]);

@@ -1,5 +1,5 @@
-<div class="globalWrapper">
-  <mat-tab-group mat-align-tabs="center" dynamicHeight>
+<div class="globalWrapper background-frame" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
+  <mat-tab-group mat-align-tabs="center" dynamicHeight >
 
     <mat-tab label="Private Chats">
       <ng-template matTabContent>

@@ -1,9 +1,9 @@
+@import "src/styles";
+
   .chatBox{
     position: absolute;
     height: 100%;
     width:100%;
-    border-left: 5px solid #00acee;
-/*    background-color: #cdfdff!important;*/
   }
 
   .imageChatProfile {
@@ -17,16 +17,22 @@
   }
 
   #upperChat{
-    border-bottom:2px solid #00acee;
+    @include themify($themes){
+      border-bottom: 2px solid themed('medium-color');
+      background: themed('main-color');
+    }
     color: white;
-    background:#ace7ff;
+
     width:100%;
     height:100%;
   }
 
+
   #lowerChat{
-    border-top:2px solid #00acee;
-    background:#ace7ff;
+    @include themify($themes){
+      border-top: 2px solid themed('medium-color');
+      background: themed('main-color');
+    }
     width:100%;
     height:100%;
   }
@@ -39,10 +45,13 @@
 
   .medium{
     position:fixed;
-    background: whitesmoke!important;
     height:86%;
     width:100%;
     top:7%;
+    @include themify($themes){
+      background: themed('background-chat-opened');
+    }
+    background-repeat: no-repeat;
   }
 
   .lower{
@@ -76,25 +85,45 @@
     float: left!important;
     margin-bottom: 1%;
     max-width: 90%!important;
+    word-break: break-all;
   }
 
-  .rightItem{
+  .leftItem{
+    @include themify($themes){
+      background: themed('message-left-fill');
+      border: 2px solid themed('message-left-border')
+    }
+
+  }
+
+  .rightCard{
     width: 90%!important;
     height: auto!important;
     float: right!important;
     margin-bottom: 1%;
     right:0;
     max-width: 90%!important;
+    word-break: break-all;
   }
 
-  ::ng-deep .mat-list-item.rightItem .mat-list-item-content{
+  ::ng-deep .mat-list-item.rightCard .mat-list-item-content{
     float:right!important;
   }
 
-  .rightCard{
+  .rightItem{
     float:right;
-    background:#ace7ff;
-    border:2px solid #00acee;
+    @include themify($themes){
+      background: themed('message-right-fill');
+      border: 2px solid themed('message-right-border');
+    }
+    word-break: break-all;
+  }
+
+
+  .chat-messages--text--color{
+    @include themify($themes){
+      color: themed('text-right');
+    }
   }
 
   #textAreaForm {
@@ -104,9 +133,14 @@
     min-height: 41px;
     max-height: 97px;
     width: 93%;
-    border: 1px solid #00acee;
+    @include themify($themes){
+      border: 1px solid themed('medium-color');
+    }
     border-radius: 20px;
-    background-color: white;
+    @include themify($themes){
+      background-color: themed('background-textarea') ;
+      color: themed('background-textarea-text')
+    }
     outline: none;
     padding: 0 1% 0 1%;
     overflow: hidden;

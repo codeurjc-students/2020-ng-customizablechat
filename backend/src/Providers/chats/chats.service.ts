@@ -22,4 +22,9 @@ export class ChatsService {
     async findOneGroupById(idChat: ObjectId){
         return this.chatModel.findOne({_id: idChat});
     }
+
+    // Future use if need to check chats created
+    async findChatPrivateExistence(name: String, person:String){
+        return this.chatModel.findOne({$or:[{userName: name, participants: person},{userName: person, participants: name}]});
+    }
 }

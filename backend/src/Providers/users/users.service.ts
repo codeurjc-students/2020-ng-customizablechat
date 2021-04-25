@@ -49,4 +49,9 @@ export class UsersService {
 
         user.save();
     }
+
+    changeColorMode(username:String, color: Number){
+        return this.userModel.findOneAndUpdate({userName:username}, {idSettings: color}, {new:true}).exec();
+    }
+
 }

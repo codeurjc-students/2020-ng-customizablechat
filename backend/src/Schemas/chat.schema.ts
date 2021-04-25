@@ -4,6 +4,6 @@ export const ChatSchema = new mongoose.Schema({
     name: String,
     description: String,
     creationDate: Date,
-    participants: String || [String],
+    participants: {},
     isPrivate: Boolean,
 });
