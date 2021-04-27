@@ -30,6 +30,7 @@ $themes: (
     background-chat-opened: url("/assets/Fondo-Diurno2.png"),
     modal: rgba(255, 255, 255, 1),
     modal-text: #4e2f42,
+    background-chat-closed: url("/assets/CityDay.png"),
   ),
   dark: (
     bg-login: linear-gradient($black, $dark-blue, $dark-medium-blue),
@@ -49,6 +50,7 @@ $themes: (
     background-chat-opened: url("/assets/Fondo-Nocturno2.png"),
     modal: rgba(26, 32, 79, 1),
     modal-text: $white-smoke,
+    background-chat-closed: url("/assets/CityNight.png"),
   ),
 );
 

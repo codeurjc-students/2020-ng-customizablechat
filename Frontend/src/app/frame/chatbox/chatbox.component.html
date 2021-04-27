@@ -1,4 +1,4 @@
-<div class="chatBox background-frame" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
+<div class="chatBox" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
   <div *ngIf="chatObs != null" >
     <div class="upper">
       <mat-toolbar id="upperChat" color="warn">
@@ -49,7 +49,7 @@
       </mat-toolbar>
     </div>
   </div>
-  <div *ngIf="chatObs==null" class="background-frame">
+  <div *ngIf="chatObs==null" class="chatbox--background-no-chat--image">
 
   </div>
 </div>

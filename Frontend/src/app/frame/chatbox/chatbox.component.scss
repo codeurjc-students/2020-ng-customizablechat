@@ -198,3 +198,12 @@
   .midGifButton{
     width:4%;
   }
+
+  .chatbox--background-no-chat--image{
+
+    @include themify($themes){
+      background-image: themed('background-chat-closed')
+    }
+    width:100%!important;
+    height: 100%!important;
+  }
