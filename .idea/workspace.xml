@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfd49f96-3b46-454f-b950-05c91542d518" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Frontend/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +187,9 @@
       <workItem from="1619210523811" duration="3823000" />
       <workItem from="1619260225906" duration="25798000" />
       <workItem from="1619343503898" duration="21958000" />
-      <workItem from="1619444462284" duration="4534000" />
+      <workItem from="1619444462284" duration="5234000" />
+      <workItem from="1619527660681" duration="3342000" />
+      <workItem from="1619644254262" duration="5478000" />
     </task>
     <servers />
   </component>

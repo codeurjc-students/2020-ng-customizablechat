@@ -3,7 +3,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
 import {User} from "../../models/login";
-import {Observable} from "rxjs";
 import {Message} from "../../models/message";
 import {ChatService} from "../../services/chat.service";
 import {Socket} from "ngx-socket-io";
@@ -55,7 +54,7 @@ export class ChatboxComponent implements OnInit {
 
   onSubmit(){
     if(this.messageData.valid){
-      const valueMessage = this.messageData.get("message").value;
+      const valueMessage = this.linkGenerator(this.messageData.get("message").value);
       if(valueMessage!="") {
         const newMessage = new Message(valueMessage, this.user.userName, this.chatObs._id);
         this.messageData.reset();
@@ -85,6 +84,17 @@ export class ChatboxComponent implements OnInit {
         this.page++;
       }
     );
+  }
+
+  linkGenerator(s:String ){
+    var x = s.split(" ");
+    for (let i = 0; i < x.length; i++) {
+      if(x[i].match("(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?")){
+        x[i] = "<a href='"+ x[i] + "'>"  +x[i]+ "</a>";
+        console.log("url found")
+      }
+    }
+    return x.join(" ");
   }
 
 }

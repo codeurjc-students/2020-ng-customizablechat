@@ -13,12 +13,12 @@
       <mat-list class="chatFrame messageWrapper">
         <mat-list-item *ngFor="let message of messageList" [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightCard :message.sender == user.userName}">
           <mat-card *ngIf="message.sender == user.userName" class="rightItem">
-            <mat-card-subtitle class="chat-messages--text--color test">{{message.message}}</mat-card-subtitle>
+            <mat-card-subtitle class="chat-messages--text--color test" [innerHTML]="message.message"></mat-card-subtitle>
           </mat-card>
 
           <mat-card *ngIf="message.sender != user.userName" class="leftItem">
             <mat-card-title class="chat-messages--text--color">{{message.sender}}</mat-card-title>
-            <mat-card-subtitle>{{message.message}}</mat-card-subtitle>
+            <mat-card-subtitle [innerHTML]="message.message"></mat-card-subtitle>
           </mat-card>
         </mat-list-item>
       </mat-list>
