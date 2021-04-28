@@ -2,21 +2,21 @@
 
 FROM node:16-alpine as build-step
 
-RUN mkdir -p /app
+RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/frontend
 
-WORKDIR /app
+WORKDIR /usr/src/app/frontend
 
-COPY package.json /app
+COPY package*.json ./
 
-RUN npm install
+RUN npm install --save --legacy-peer-deps
 
-COPY . /app
+COPY . .
 
-RUN npm run build --prod
+EXPOSE 4200
 
-# Stage 2
-FROM nginx:1.17.1-alpine
+CMD ["npm", "start"]
 
-COPY --from=build-step /app/dist/frontend /usr/share/nginx/html
+
 
 

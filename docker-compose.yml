@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  # Create frontend container
+  frontend: # Name of our service
+    build: ./Frontend # path to dockerfile
+    ports: # Port binding to host from docker container
+      - "4200:4200" # Bind port 4200 of host to 4200 of container
+    container_name: frontend-docker
+  backend:
+    # Create backend container
+    build: ./backend
+    ports:
+      - "3000:3000"
+    container_name: backend-docker
