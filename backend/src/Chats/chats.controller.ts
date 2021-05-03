@@ -1,10 +1,21 @@
-import {Body, Controller, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get, Logger,
+    NotFoundException,
+    Param,
+    Post,
+    Put,
+    UploadedFile,
+    UseInterceptors
+} from '@nestjs/common';
 import {AddContactGroup, AddContactPrivate, CreateChatDto} from "../DTOs/create-chat-dto";
 import {UsersService} from "../Providers/users/users.service";
 import {ChatsService} from "../Providers/chats/chats.service";
 import {ObjectId} from "mongoose";
 import {MessagesService} from "../Providers/messages/messages.service";
-import {SearchMessage} from "../DTOs/create-message-dto";
+import {CreateMessageDto, SearchMessage} from "../DTOs/create-message-dto";
+import {FileInterceptor} from "@nestjs/platform-express";
 
 @Controller('chats')
 export class ChatsController {
@@ -13,6 +24,8 @@ export class ChatsController {
         private chatsService:ChatsService,
         private readonly messagesService: MessagesService
     ) {}
+
+    private logger: Logger = new Logger('ChatsController');
 
     @Post('private')
     async createPrivateChat(@Body() chat: AddContactPrivate){
@@ -70,7 +83,7 @@ export class ChatsController {
         }
     }
 
-    @Get('/:id/:page')
+    @Get(':id/:page')
     async retrievePageMessages(@Param('id') id: ObjectId, @Param('page') page: number){
         return this.messagesService.retrieveMessages(id, page);
     }
@@ -84,4 +97,5 @@ export class ChatsController {
     getChat(@Param('id') id: ObjectId){
         return this.chatsService.findOneGroupById(id);
     }
+
 }

@@ -4,7 +4,6 @@ import {Message} from "../models/message";
 import {AddContactPrivate, Chat} from "../models/chat";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Observable, Observer} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +29,22 @@ export class ChatService {
     this.socket.emit('sendMessageGroup', message);
   }
 
+  public sendFiles(messages:any){
+    console.log("Service send Files post")
+    console.log(messages);
+    return this.http.post<any>(this.Api_url + 'files', messages);
+  }
+
+  public fileSentMessage(sender:any,messageId:any,chatId:any){
+    console.log("Sender")
+    console.log(sender);
+    console.log("MessageId")
+    console.log(messageId);
+    console.log("chatId")
+    console.log(chatId);
+    this.socket.emit('fileSentMessage',sender, messageId, chatId);
+  }
+
   public addPrivateChat(newContact: AddContactPrivate){
     return this.http.post<any>(this.Api_url+ 'chats/private', newContact);
   }
@@ -42,7 +57,16 @@ export class ChatService {
     return this.http.get<any>(this.Api_url+ 'chats/'+id);
   }
 
-  public getMessage(){
-      return this.socket.fromEvent('messageSent');
+  public receiveMessage(){
+    return this.socket.fromEvent('messageSent');
+  }
+
+  public receiveFile(){
+    return this.socket.fromEvent('fileReceived');
+  }
+
+  public getFile(fileId:any) {
+    console.log("Service asking for file", fileId)
+    return this.http.get<any>(this.Api_url + 'files/'+ fileId)
   }
 }

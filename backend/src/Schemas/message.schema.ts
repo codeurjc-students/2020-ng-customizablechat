@@ -5,4 +5,6 @@ export const MessageSchema = new mongoose.Schema({
     date: Date,
     sender: String,
     chatId: mongoose.Types.ObjectId,
+    type:String,
+    buffer:Buffer,
 });

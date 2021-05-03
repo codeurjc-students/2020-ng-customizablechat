@@ -26,7 +26,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     }
 
     @WebSocketServer() server;
-    private logger: Logger = new Logger('AppGateway');
+    private logger: Logger = new Logger('ChatsGateway');
 
     afterInit(server) {
         this.chatsService.socket = server;
@@ -50,7 +50,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     @SubscribeMessage('sendMessagePrivate')
     async sendMessagePrivate(client: Socket, message: CreateMessageDto) {
         try {
-            this.logger.log(`Send message is working`);
+            this.logger.log('Send message to private chat participant');
             const messageSaved = await this.messagesService.saveMessage(message);
             const chat = await this.chatsService.findOneGroupById(message.chatId);
             var user;
@@ -70,7 +70,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     @SubscribeMessage('sendMessageGroup')
     async sendMessageGroup(client: Socket, message: CreateMessageDto) {
         try {
-            this.logger.log(`Send message is working`);
+            this.logger.log('Send message to the participants of a group');
             let messageSaved = await this.messagesService.saveMessage(message);
             let chat = await this.chatsService.findOneGroupById(message.chatId);
             for (let i = 0; i < chat.participants.length; i++) {
@@ -81,6 +81,24 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
             }
         } catch (e: any) {
             throw new InternalServerErrorException();
+        }
+    }
+
+    @SubscribeMessage('fileSentMessage')
+    async sendFileReceived(client: Socket, data: any) {
+        this.logger.log("Send message to participants that a new file is sent to the chat")
+        const chat = await this.chatsService.findOneGroupById(data[2]);
+        if (chat.isPrivate) {
+            var user = await this.usersService.findOneByUsername(chat.participants);
+            if (user.userName == data[0]) {
+                user = await this.usersService.findOneByUsername(chat.name);
+            }
+            this.server.to(user.socketId).emit('fileReceived', data[1]);
+        } else {
+            for (let i = 0; i < chat.participants.length; i++) {
+                const user = await this.usersService.findOneByUsername(chat.participants);
+                if (data[0] != user.userName) this.server.to(user.socketId).emit('fileReceived', data[1])
+            }
         }
     }
 

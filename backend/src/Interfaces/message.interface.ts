@@ -5,4 +5,6 @@ export interface Message extends Document {
     date: Date;
     sender: String;
     chatId: ObjectId;
+    type:String;
+    buffer:Buffer;
 }

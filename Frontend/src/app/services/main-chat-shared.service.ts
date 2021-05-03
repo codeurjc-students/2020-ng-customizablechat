@@ -14,9 +14,10 @@ export class MainChatSharedService {
   chat: any = null;
   chatChange: Subject<any> = new Subject<any>();
 
+
   constructor(private http: HttpClient)  {
     this.chatChange.subscribe((value) => {
-      this.chat = value
+      this.chat = value;
     });
   }
 
@@ -33,5 +34,7 @@ export class MainChatSharedService {
   public getMessages(id: String, page: number){
     return this.http.get<any>(this.Api_url+ 'chats/'+ id + "/" + page);
   }
+
+
 
 }
