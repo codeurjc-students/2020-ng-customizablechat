@@ -7,6 +7,7 @@ import {Message} from "../../models/message";
 import {ChatService} from "../../services/chat.service";
 import {Socket} from "ngx-socket-io";
 import {Subject} from "rxjs";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ChatboxComponent implements OnInit {
 
   files: File[] = [];
 
-  constructor(public dialog: MatDialog, public mainChat: MainChatSharedService, public chatService: ChatService, private fb: FormBuilder) {
+  constructor(public dialog: MatDialog, public mainChat: MainChatSharedService, public chatService: ChatService, private fb: FormBuilder, private domSanitizer:DomSanitizer) {
   }
 
   ngOnInit(): void {
@@ -146,9 +147,14 @@ export class ChatboxComponent implements OnInit {
   }
 
   formatImage(img: any): any {
-    console.log(img)
-    console.log(img.buffer.data)
-    return 'data:'+ img.type+ ';base64,' + img.buffer.data;
+    // Converts arraybuffer to typed array object
+    const TYPED_ARRAY = new Uint8Array(img.buffer.data);
+    // converts the typed array to string of characters
+    const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+    //converts string of characters to base64String
+    let base64String = btoa(STRING_CHAR);
+    //sanitize the url that is passed as a value to image src attrtibute
+    return this.domSanitizer.bypassSecurityTrustUrl('data:'+img.type+';base64, ' + base64String);
   }
 
 }
