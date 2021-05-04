@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {SendChangeColor, User} from "../../models/login";
+import {Login, SendChangeColor, User} from "../../models/login";
 import {UsersService} from "../../services/users.service";
+import {Router} from "@angular/router";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-options-side-bar',
@@ -15,7 +17,7 @@ export class OptionsSideBarComponent implements OnInit {
   @Output() colorActive  = new EventEmitter<boolean>();
   @Output() modalGroupActive  = new EventEmitter<boolean>();
 
-  constructor(public usersService:UsersService) { }
+  constructor(public usersService:UsersService, public loginService:LoginService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -35,5 +37,14 @@ export class OptionsSideBarComponent implements OnInit {
 
   setModalCreateGroup(value:boolean){
     this.modalGroupActive.emit(value);
+  }
+
+  logout(){
+    this.loginService.logout(new Login(this.user.userName as string,this.user.password as string)).subscribe(
+      data =>{
+        console.log("User logged out");
+        this.router.navigate(['login']);
+      }
+    )
   }
 }

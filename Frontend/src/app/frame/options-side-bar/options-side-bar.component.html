@@ -6,12 +6,18 @@
   </mat-list-item>
   <mat-list-item class="rowButtons">
     <button mat-icon-button aria-label="">
-      <img class="buttonsSidebar imagesButtons" src="../../../assets/settingsUnfilled.png" alt="">
+      <img *ngIf="user.idSettings==1" class="buttonsSidebar imagesButtons" src="../../../assets/DaySettings1.png" alt="">
+      <img *ngIf="user.idSettings!=1" class="buttonsSidebar imagesButtons" src="../../../assets/NightSettings.png" alt="">
     </button>
   </mat-list-item>
   <mat-list-item class="rowButtons" (click)="changeModal(true);">
     <button mat-icon-button aria-label="">
       <img class="buttonsSidebar imagesButtons" src="../../../assets/addUserUnfilled.png" alt="">
+    </button>
+  </mat-list-item>
+  <mat-list-item class="rowButtons" (click)="setModalCreateGroup(true);">
+    <button mat-icon-button aria-label="">
+      <img class="buttonsSidebar imagesButtons" src="../../../assets/folderUnfilled.png" alt="">
     </button>
   </mat-list-item>
   <mat-list-item class="rowButtons">
@@ -26,23 +32,19 @@
   </mat-list-item>
   <mat-list-item class="rowButtons">
     <button mat-icon-button aria-label="">
-      <img class="buttonsSidebar imagesButtons" src="../../../assets/robotUnfilled.png" alt="">
-    </button>
-  </mat-list-item>
-  <mat-list-item class="rowButtons">
-    <button mat-icon-button aria-label="">
-      <img class="buttonsSidebar imagesButtons" src="../../../assets/galleryUnfilled.png" alt="">
-    </button>
-  </mat-list-item>
-  <mat-list-item class="rowButtons" (click)="setModalCreateGroup(true);">
-    <button mat-icon-button aria-label="">
-      <img class="buttonsSidebar imagesButtons" src="../../../assets/folderUnfilled.png" alt="">
+      <img *ngIf="user.idSettings==1" class="buttonsSidebar imagesButtons" src="../../../assets/DayGallery1.png" alt="">
+      <img *ngIf="user.idSettings!=1" class="buttonsSidebar imagesButtons" src="../../../assets/NightGallery.png" alt="">
     </button>
   </mat-list-item>
   <mat-list-item class="rowButtons" (click)="changeColor(user.idSettings == 1);">
     <button mat-icon-button aria-label="">
       <img *ngIf="user.idSettings==1" class="buttonsSidebar imagesButtons" src="../../../assets/NightButton2.png" alt="">
-      <img *ngIf="user.idSettings!=1" class="buttonsSidebar imagesButtons" src="../../../assets/DayButton2.png" alt="">
+      <img *ngIf="user.idSettings!=1" class="buttonsSidebar imagesButtons" src="../../../assets/DayButton1.png" alt="">
+    </button>
+  </mat-list-item>
+  <mat-list-item class="rowButtons">
+    <button mat-icon-button aria-label="">
+      <img class="buttonsSidebar imagesButtons" src="../../../assets/robotUnfilled.png" (click)="logout();" alt="">
     </button>
   </mat-list-item>
 </mat-list>

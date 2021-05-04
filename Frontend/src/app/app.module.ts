@@ -27,6 +27,7 @@ import {MatInputModule} from '@angular/material/input';
 import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
+import { ImageDialogComponent } from './frame/chatbox/image-dialog/image-dialog.component';
 
 const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 
@@ -38,7 +39,8 @@ const config: SocketIoConfig = { url: environment.API_URL, options:{}};
     ChatsComponent,
     ChatboxComponent,
     DialogContent,
-    LoginComponent
+    LoginComponent,
+    ImageDialogComponent
   ],
     imports: [
         BrowserModule,

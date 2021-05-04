@@ -8,6 +8,7 @@ import {ChatService} from "../../services/chat.service";
 import {Socket} from "ngx-socket-io";
 import {Subject} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
+import {ImageDialogComponent} from "./image-dialog/image-dialog.component";
 
 
 @Component({
@@ -155,6 +156,12 @@ export class ChatboxComponent implements OnInit {
     let base64String = btoa(STRING_CHAR);
     //sanitize the url that is passed as a value to image src attrtibute
     return this.domSanitizer.bypassSecurityTrustUrl('data:'+img.type+';base64, ' + base64String);
+  }
+
+  maximizeImage(image:any){
+    const dialogRef = this.dialog.open(ImageDialogComponent, {
+      data: {image:image},
+    });
   }
 
 }

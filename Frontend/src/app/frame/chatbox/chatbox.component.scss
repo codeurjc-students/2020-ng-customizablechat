@@ -76,9 +76,6 @@
     font-size: medium;
   }
 
-  .messageWrapper{
-  }
-
   .leftCard{
     width: 90%!important;
     height: auto!important;
@@ -207,3 +204,15 @@
     width:100%!important;
     height: 100%!important;
   }
+
+  .imageFile{
+    width: 20%;
+    height: 20%;
+    position: relative;
+    display: flex;
+    text-align: center;
+    left: 40%;
+    cursor: pointer;
+  }
+
+

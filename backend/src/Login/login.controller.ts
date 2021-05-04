@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import {User} from "../Interfaces/user.interface";
 import {UsersService} from "../Providers/users/users.service";
 import {CreateUserDto, LoginUserDTO} from "../DTOs/create-user-dto";
@@ -23,16 +23,13 @@ export class LoginController {
         else return null;
     }
 
-}
-
-@Controller('logout')
-export class LogoutController{
-    constructor(private readonly usersService: UsersService) {}
-
-    @Post(':userName')
-    async logout(@Param('userName') userName){
-        if( this.usersService.findOneByUsername(userName)!= undefined){
-            return await this.usersService.logout(userName);
+    @Put('out')
+    async logout(@Body() user:LoginUserDTO){
+        let data = await this.usersService.findOneByUsername(user.userName);
+        if( data != undefined && data.password == user.password){
+            let logoutResult =  await this.usersService.logout(user.userName);
+            this.usersService.findOneBySocketIdAndEraseActivity(data.socketId);
+            return logoutResult;
         }
         return false;
     }
