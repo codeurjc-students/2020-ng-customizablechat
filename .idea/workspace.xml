@@ -2,31 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfd49f96-3b46-454f-b950-05c91542d518" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/image-dialog/image-dialog.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/image-dialog/image-dialog.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/image-dialog/image-dialog.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/image-dialog/image-dialog.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/DayGallery.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/DayGallery1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/DaySettings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/DaySettings1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/NightGallery.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/NightGallery1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/NightSettings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/assets/NightSettings1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chats/chats.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chats/chats.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chats/chats.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chats/chats.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/options-side-bar/options-side-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/options-side-bar/options-side-bar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/options-side-bar/options-side-bar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/options-side-bar/options-side-bar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/options-side-bar/options-side-bar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/options-side-bar/options-side-bar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/services/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/services/login.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/Login/login.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/Login/login.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/Login/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/Login/login.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/fileDialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/fileDialog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/Chats/chats.gateway.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/Chats/chats.gateway.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +51,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="dayNightConfigurable" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/backend/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/Frontend/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -232,7 +213,8 @@
       <workItem from="1619967608280" duration="4078000" />
       <workItem from="1620035246678" duration="14967000" />
       <workItem from="1620074258435" duration="4873000" />
-      <workItem from="1620142593402" duration="9964000" />
+      <workItem from="1620142593402" duration="10126000" />
+      <workItem from="1620240313519" duration="6543000" />
     </task>
     <servers />
   </component>

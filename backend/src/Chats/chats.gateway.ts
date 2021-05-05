@@ -96,7 +96,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
             this.server.to(user.socketId).emit('fileReceived', data[1]);
         } else {
             for (let i = 0; i < chat.participants.length; i++) {
-                const user = await this.usersService.findOneByUsername(chat.participants);
+                const user = await this.usersService.findOneByUsername(chat.participants[i]);
                 if (data[0] != user.userName) this.server.to(user.socketId).emit('fileReceived', data[1])
             }
         }

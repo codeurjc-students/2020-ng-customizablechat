@@ -15,30 +15,41 @@
         <mat-list-item *ngFor="let message of messageList" [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightCard :message.sender == user.userName}">
           <!--This is the message that goes in the right part of the chat-->
           <mat-card *ngIf="message.sender == user.userName" class="rightItem">
+            <!-- This is a normal message-->
             <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 0"  [innerHTML]="message.message"></mat-card-subtitle>
-
+            <!-- This is an image message-->
             <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 1" >
               <img [src]="formatImage(message)" (click)="maximizeImage(formatImage(message));" class="imageFile">
               <br>
               {{message.message}}
             </mat-card-subtitle>
-
+            <!-- This is a file message-->
+            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 2" >
+              <img src="assets/galleryFilled.png" class="chat-messages--file-image--details" (click)="openFile(message);" >
+              <br>
+              {{message.message}}
+            </mat-card-subtitle>
           </mat-card>
 
           <!--This is the message that goes in the left part of the chat-->
           <mat-card *ngIf="message.sender != user.userName" class="leftItem">
+            <!-- This is the message sender's name-->
             <mat-card-title class="chat-messages--text--color">{{message.sender}}</mat-card-title>
-
+            <!-- This is a normal message-->
             <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 0" [innerHTML]="message.message"></mat-card-subtitle>
-
+            <!-- This is an image message-->
             <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 1" >
               <img [src]="formatImage(message)" (click)="maximizeImage(formatImage(message));" class="imageFile">
               <br>
               {{message.message}}
             </mat-card-subtitle>
-
+            <!-- This is a file message-->
+            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 2" >
+              <img src="assets/galleryFilled.png" class="chat-messages--file-image--details" (click)="openFile(message);" >
+              <br>
+              {{message.message}}
+            </mat-card-subtitle>
           </mat-card>
-
         </mat-list-item>
       </mat-list>
     </div>

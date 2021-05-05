@@ -164,6 +164,13 @@ export class ChatboxComponent implements OnInit {
     });
   }
 
+  openFile(response:any){
+    const blob = new Blob([new Uint8Array(response.buffer.data)], { type: response.type});
+    const exportUrl = URL.createObjectURL(blob);
+    window.open(exportUrl);
+    URL.revokeObjectURL(exportUrl);
+  }
+
 }
 
 
