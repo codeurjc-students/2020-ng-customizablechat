@@ -28,6 +28,7 @@ import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import { ImageDialogComponent } from './frame/chatbox/image-dialog/image-dialog.component';
+import {PickerModule} from "@ctrl/ngx-emoji-mart";
 
 const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 
@@ -63,6 +64,7 @@ const config: SocketIoConfig = { url: environment.API_URL, options:{}};
         MatFormFieldModule,
         MatInputModule,
         HttpClientModule,
+        PickerModule
     ],
   providers: [LoginService],
   bootstrap: [AppComponent]
