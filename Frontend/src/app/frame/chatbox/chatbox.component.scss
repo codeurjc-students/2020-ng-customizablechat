@@ -142,6 +142,7 @@
     padding: 0 1% 0 1%;
     overflow: hidden;
     margin-top:1%;
+    font-size: large;
   }
 
   .clipButton{
@@ -154,7 +155,7 @@
     animation: pulse 2s infinite;
   }
 
-  form {
+  .form--send-message {
     width:60%;
     float:left;
   }
@@ -192,7 +193,7 @@
     float:left;
   }
 
-  .midGifButton{
+  .midEmojiButton{
     width:4%;
   }
 
@@ -215,9 +216,25 @@
     cursor: pointer;
   }
 
-
   .chat-messages--file-image--details{
     width: 30%;
     height: 30%;
   }
 
+
+.button--emoji-mart {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.chat-messages--text-title--dimension{
+  font-size: larger;
+}
+
+.chat-messages--text-subtitle--dimension{
+  font-size: large;
+}

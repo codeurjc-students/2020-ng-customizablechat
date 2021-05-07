@@ -1,5 +1,5 @@
 <div class="chatBox" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
-  <div *ngIf="chatObs != null" >
+  <div *ngIf="chatObs != null">
     <div class="upper">
       <mat-toolbar id="upperChat" color="warn">
         <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
@@ -12,20 +12,23 @@
 
     <div class="medium">
       <mat-list class="chatFrame messageWrapper">
-        <mat-list-item *ngFor="let message of messageList" [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightCard :message.sender == user.userName}">
+        <mat-list-item *ngFor="let message of messageList"
+                       [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightCard :message.sender == user.userName}">
           <!--This is the message that goes in the right part of the chat-->
           <mat-card *ngIf="message.sender == user.userName" class="rightItem">
             <!-- This is a normal message-->
-            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 0"  [innerHTML]="message.message"></mat-card-subtitle>
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" *ngIf="recogniseFileType(message.type) == 0"
+                               [innerHTML]="message.message"></mat-card-subtitle>
             <!-- This is an image message-->
-            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 1" >
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" *ngIf="recogniseFileType(message.type) == 1">
               <img [src]="formatImage(message)" (click)="maximizeImage(formatImage(message));" class="imageFile">
               <br>
               {{message.message}}
             </mat-card-subtitle>
             <!-- This is a file message-->
-            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 2" >
-              <img src="assets/galleryFilled.png" class="chat-messages--file-image--details" (click)="openFile(message);" >
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" *ngIf="recogniseFileType(message.type) == 2">
+              <img src="assets/galleryFilled.png" class="chat-messages--file-image--details"
+                   (click)="openFile(message);">
               <br>
               {{message.message}}
             </mat-card-subtitle>
@@ -34,18 +37,20 @@
           <!--This is the message that goes in the left part of the chat-->
           <mat-card *ngIf="message.sender != user.userName" class="leftItem">
             <!-- This is the message sender's name-->
-            <mat-card-title class="chat-messages--text--color">{{message.sender}}</mat-card-title>
+            <mat-card-title class="chat-messages--text--color chat-messages--text-title--dimension">{{message.sender}}</mat-card-title>
             <!-- This is a normal message-->
-            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 0" [innerHTML]="message.message"></mat-card-subtitle>
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" *ngIf="recogniseFileType(message.type) == 0"
+                               [innerHTML]="message.message"></mat-card-subtitle>
             <!-- This is an image message-->
-            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 1" >
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" *ngIf="recogniseFileType(message.type) == 1">
               <img [src]="formatImage(message)" (click)="maximizeImage(formatImage(message));" class="imageFile">
               <br>
               {{message.message}}
             </mat-card-subtitle>
             <!-- This is a file message-->
-            <mat-card-subtitle class="chat-messages--text--color" *ngIf="recogniseFileType(message.type) == 2" >
-              <img src="assets/galleryFilled.png" class="chat-messages--file-image--details" (click)="openFile(message);" >
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" *ngIf="recogniseFileType(message.type) == 2">
+              <img src="assets/galleryFilled.png" class="chat-messages--file-image--details"
+                   (click)="openFile(message);">
               <br>
               {{message.message}}
             </mat-card-subtitle>
@@ -60,20 +65,20 @@
             <i class="fas fa-paperclip fa-3x"></i>
           </button>
         </div>
-        <div class="midGifButton">
-          <button mat-icon-button class="clipButton" aria-label="">
-            <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/gifUnfilled.png" alt="">
+        <div class="midEmojiButton">
+          <button class="button--emoji-mart clipButton" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀
           </button>
+          <br>
+          <emoji-mart class="emoji-mart" darkMode="{{user.idSettings==2}}" style="transform: translateY(-100%)" *ngIf="this.isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
+                      title="Choose your emoji"></emoji-mart>
         </div>
         <div class="rightTextArea">
-          <form [formGroup]="messageData" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-            <textarea id="textAreaForm" formControlName="message"></textarea>
-
+          <div class="form--send-message">
+            <textarea [(ngModel)]="textArea" id="textAreaForm" placeholder="Escribe un mensaje"></textarea>
             <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
-              <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="">
+              <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="" (click)="onSubmit();">
             </button>
-
-          </form>
+          </div>
         </div>
 
       </mat-toolbar>

@@ -22,20 +22,18 @@ export class ChatboxComponent implements OnInit {
   chatObs: any = null;
   messageList: Message[] ;
   page: number = 0;
-
-  messageData: FormGroup;
   socket: Socket;
 
   files: File[] = [];
+
+  public textArea = "";
+  public isEmojiPickerVisible: boolean;
 
   constructor(public dialog: MatDialog, public mainChat: MainChatSharedService, public chatService: ChatService, private fb: FormBuilder, private domSanitizer:DomSanitizer) {
   }
 
   ngOnInit(): void {
     this.socket = this.chatService.socket;
-    this.messageData = this.fb.group({
-      message: ['', Validators.required],
-    });
     this.messageList = [];
     this.mainChat.chatChange.subscribe(
       data => {
@@ -76,11 +74,10 @@ export class ChatboxComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.messageData.valid) {
-      const valueMessage = this.linkGenerator(this.messageData.get("message").value);
-      if (valueMessage != "") {
+    if (this.textArea != "") {
+      const valueMessage = this.linkGenerator(this.textArea);
         const newMessage = new Message(valueMessage, this.user.userName, this.chatObs._id, "message", null);
-        this.messageData.reset();
+        this.textArea = "";
         if (this.chatObs.isPrivate) {
           console.log("IsPrivate")
           this.chatService.sendMessagePrivate(newMessage);
@@ -88,7 +85,7 @@ export class ChatboxComponent implements OnInit {
           console.log("Is a Group")
           this.chatService.sendMessageGroup(newMessage);
         }
-      }
+
     }
   }
 
@@ -169,6 +166,13 @@ export class ChatboxComponent implements OnInit {
     const exportUrl = URL.createObjectURL(blob);
     window.open(exportUrl);
     URL.revokeObjectURL(exportUrl);
+  }
+
+  public addEmoji(event) {
+    this.textArea = `${this.textArea}${event.emoji.native}`;
+    console.log(event.emoji.native);
+    console.log(this.textArea)
+    this.isEmojiPickerVisible = false;
   }
 
 }
