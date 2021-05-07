@@ -5,9 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/chatbox.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/fileDialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/frame/chatbox/fileDialog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/Chats/chats.gateway.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/Chats/chats.gateway.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,6 +212,7 @@
       <workItem from="1620074258435" duration="4873000" />
       <workItem from="1620142593402" duration="10126000" />
       <workItem from="1620240313519" duration="6543000" />
+      <workItem from="1620410956775" duration="3578000" />
     </task>
     <servers />
   </component>

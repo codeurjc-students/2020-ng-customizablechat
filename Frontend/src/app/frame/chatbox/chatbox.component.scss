@@ -149,7 +149,20 @@
     width:auto;
   }
 
-  .clipButton:hover{
+  .emoji-mart--button--dimensions{
+    width:auto;
+    height: auto;
+    font-size: xx-large;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .clipButton:hover, .emoji-mart--button--dimensions:hover{
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
     transform: scale(1);
     animation: pulse 2s infinite;
@@ -221,20 +234,15 @@
     height: 30%;
   }
 
-
-.button--emoji-mart {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  &:focus {
-    outline: 0;
-  }
-}
-
 .chat-messages--text-title--dimension{
   font-size: larger;
 }
 
 .chat-messages--text-subtitle--dimension{
   font-size: large;
+}
+
+.emoji-mart-class{
+  position: fixed;
+  bottom: 8%;
 }

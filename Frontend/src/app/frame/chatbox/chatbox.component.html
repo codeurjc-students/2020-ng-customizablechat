@@ -66,15 +66,16 @@
           </button>
         </div>
         <div class="midEmojiButton">
-          <button class="button--emoji-mart clipButton" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀
+          <button class="emoji-mart--button--dimensions" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀
           </button>
           <br>
-          <emoji-mart class="emoji-mart" darkMode="{{user.idSettings==2}}" style="transform: translateY(-100%)" *ngIf="this.isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
+          <emoji-mart class="emoji-mart emoji-mart-class" sheetSize="64" [darkMode]="this.user.idSettings == 2"
+                      *ngIf="this.isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
                       title="Choose your emoji"></emoji-mart>
         </div>
         <div class="rightTextArea">
           <div class="form--send-message">
-            <textarea [(ngModel)]="textArea" id="textAreaForm" placeholder="Escribe un mensaje"></textarea>
+            <textarea [(ngModel)]="textArea" id="textAreaForm" placeholder="Type anything"></textarea>
             <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
               <img class="" style="max-width: 30px;max-height: 30px;" src="../../../assets/sendUnfilled.png" alt="" (click)="onSubmit();">
             </button>
