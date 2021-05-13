@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
 import {User} from "../../models/login";
 import {Message} from "../../models/message";
 import {ChatService} from "../../services/chat.service";
-import {Socket} from "ngx-socket-io";
 import {Subject} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ImageDialogComponent} from "./image-dialog/image-dialog.component";
+import {ChatMessages} from "../../models/chat";
 
 
 @Component({
@@ -20,51 +20,144 @@ export class ChatboxComponent implements OnInit {
 
   @Input() user: User;
   chatObs: any = null;
-  messageList: Message[] ;
   page: number = 0;
-  socket: Socket;
+
+  listChatsMessagesPrivate: ChatMessages[];
+  listChatsMessagesGroup: ChatMessages[];
 
   files: File[] = [];
 
   public textArea = "";
   public isEmojiPickerVisible: boolean;
 
-  constructor(public dialog: MatDialog, public mainChat: MainChatSharedService, public chatService: ChatService, private fb: FormBuilder, private domSanitizer:DomSanitizer) {
+  position: number;
+
+  constructor(public dialog: MatDialog, public mainChat: MainChatSharedService, public chatService: ChatService, private fb: FormBuilder, private domSanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
-    this.socket = this.chatService.socket;
-    this.messageList = [];
+    this.onSetChats();
+    this.onChatChange();
+    this.onMessageSent();
+    this.onFilesSent();
+    this.onNewChat();
+  }
+
+  onSetChats(){
+    this.listChatsMessagesPrivate = this.user.privateChats.map(
+      function(x){
+        return (new ChatMessages(x,[]));
+      }
+    );
+    this.listChatsMessagesGroup = this.user.groupChats.map(
+      function(x){
+        return (new ChatMessages(x,[]));
+      }
+    );
+
+  }
+
+  // Treats the change of the main chat
+  onChatChange() {
     this.mainChat.chatChange.subscribe(
       data => {
         this.chatObs = data;
         this.page = 0;
-        this.getMessages();
+        if (this.chatObs.isPrivate) {
+          let pos = this.findChatInList(this.listChatsMessagesPrivate, this.chatObs._id)
+          this.position = pos;
+          if (this.listChatsMessagesPrivate[pos].messageList.length == 0) {
+            this.getMessages();
+          }
+        } else {
+          let pos = this.findChatInList(this.listChatsMessagesGroup, this.chatObs._id);
+          this.position = pos;
+          if (this.listChatsMessagesGroup[pos].messageList.length == 0) {
+            this.getMessages();
+          }
+        }
       }
     );
-    this.onMessageSent();
-    this.onFilesSent();
   }
 
+  onNewChat() {
+    this.mainChat.addChatChange.subscribe(
+      chat => {
+        this.chatObs = chat;
+        if (chat.isPrivate) {
+            this.listChatsMessagesPrivate.unshift(new ChatMessages(chat._id, []));
+        } else {
+            this.listChatsMessagesGroup.unshift(new ChatMessages(chat._id, []));
+        }
+        this.position = 0;
+      }
+    )
+  }
 
+  // Asks for the messages if necessary of a chat
+  getMessages() {
+    console.log("Pedí chats")
+    this.mainChat.getMessages(this.chatObs._id, this.page).subscribe(
+      messages => {//Igualar o añadir??
+        if (this.chatObs.isPrivate) {
+          this.listChatsMessagesPrivate[this.position].messageList = messages;
+        } else {
+          this.listChatsMessagesGroup[this.position].messageList = messages;
+        }
+        this.page++;
+      }
+    );
+  }
+
+  // Sends text message through textArea
+  onSubmit() {
+    if (this.textArea != "") {
+      const newMessage = new Message(this.linkGenerator(this.textArea), this.user.userName, this.chatObs._id, "message", null);
+      this.textArea = "";
+      if (this.chatObs.isPrivate) {
+        this.chatService.sendMessagePrivate(newMessage);
+      } else {
+        this.chatService.sendMessageGroup(newMessage);
+      }
+    }
+  }
+
+  // On message received calls add to list of messages
+  onMessageSent() {
+    this.chatService.receiveMessage().subscribe(
+      (data: {message: Message, isPrivate:boolean})=> {
+        this.addMessageToList(data.message.chatId, data.message, data.isPrivate);
+      }
+    )
+  }
+
+  // Adds a message to a list (private or group) and pushes to the messages list if it is the main one
+  addMessageToList(chatId: String, message: Message, isPrivate: boolean) {
+    if (isPrivate) {
+      let i = this.findChatInList(this.listChatsMessagesPrivate, chatId)
+        this.listChatsMessagesPrivate[i].messageList.push(message)
+    } else {
+      let i = this.findChatInList(this.listChatsMessagesGroup, chatId)
+        this.listChatsMessagesGroup[i].messageList.push(message)
+    }
+  }
+
+  // Opens the dialog of files and treats
   openDialog() {
     const dialogRef = this.dialog.open(DialogContent);
-
     dialogRef.componentInstance.filesChange.subscribe(
-      data=>{
+      data => {
         this.files = data;
         for (let i = 0; i < this.files.length; i++) {
           const formData: FormData = new FormData();
-          formData.append('file', this.files[i],this.files[i].name);
-          formData.append('userName',this.user.userName as string);
-          formData.append('chatId',this.chatObs._id as string);
+          formData.append('file', this.files[i], this.files[i].name);
+          formData.append('userName', this.user.userName as string);
+          formData.append('chatId', this.chatObs._id as string);
           this.chatService.sendFiles(formData).subscribe(
-            e=>{
-              if(e!= null){
-                console.log("Este es el mensaje que se guardó");
-                console.log(e);
-                this.chatService.fileSentMessage(e.sender,e._id,e.chatId);
-                this.messageList.push(e);
+            e => {
+              if (e != null) {
+                this.chatService.fileSentMessage(e.sender, e._id, e.chatId);
+                this.addMessageToList(e.chatId, e, this.chatObs.isPrivate);
               }
             }
           )
@@ -73,56 +166,20 @@ export class ChatboxComponent implements OnInit {
     )
   }
 
-  onSubmit() {
-    if (this.textArea != "") {
-      const valueMessage = this.linkGenerator(this.textArea);
-        const newMessage = new Message(valueMessage, this.user.userName, this.chatObs._id, "message", null);
-        this.textArea = "";
-        if (this.chatObs.isPrivate) {
-          console.log("IsPrivate")
-          this.chatService.sendMessagePrivate(newMessage);
-        } else {
-          console.log("Is a Group")
-          this.chatService.sendMessageGroup(newMessage);
-        }
-
-    }
-  }
-
-  onMessageSent() {
-    this.chatService.receiveMessage().subscribe(
-      data => {
-        console.log(data);
-        this.messageList.push(data as Message);
-      }
-    )
-  }
-
-  onFilesSent(){
+  // On files message sent asks for the file
+  onFilesSent() {
     this.chatService.receiveFile().subscribe(
-      data=>{
-        console.log(data);
-        console.log("Ese es el id del mensaje")
+      data => {
         this.chatService.getFile(data).subscribe(
-          file =>{
-            console.log("Llego el fichero")
-            console.log(file);
-            this.messageList.push(file as Message);
+          file => {
+            this.addMessageToList(file.message.chatId, file.message, file.isPrivate);
           }
         )
       }
     )
   }
 
-  getMessages() {
-    this.mainChat.getMessages(this.chatObs._id, this.page).subscribe(
-      messages => {//Igualar o añadir??
-        this.messageList = messages;
-        this.page++;
-      }
-    );
-  }
-
+  // Generates clickable links from text urls
   linkGenerator(s: String) {
     var x = s.split(" ");
     for (let i = 0; i < x.length; i++) {
@@ -134,16 +191,18 @@ export class ChatboxComponent implements OnInit {
     return x.join(" ");
   }
 
-  recogniseFileType(type:String){
-    if(type == "message"){
+  // Differs file types
+  recogniseFileType(type: String) {
+    if (type == "message") {
       return 0;
-    }else if(type == "image/png" || type == "image/jpg" || type == "image/jpeg"){
+    } else if (type == "image/png" || type == "image/jpg" || type == "image/jpeg") {
       return 1;
-    }else{
+    } else {
       return 2;
     }
   }
 
+  // Formats byte array images to display them
   formatImage(img: any): any {
     // Converts arraybuffer to typed array object
     const TYPED_ARRAY = new Uint8Array(img.buffer.data);
@@ -152,29 +211,34 @@ export class ChatboxComponent implements OnInit {
     //converts string of characters to base64String
     let base64String = btoa(STRING_CHAR);
     //sanitize the url that is passed as a value to image src attrtibute
-    return this.domSanitizer.bypassSecurityTrustUrl('data:'+img.type+';base64, ' + base64String);
+    return this.domSanitizer.bypassSecurityTrustUrl('data:' + img.type + ';base64, ' + base64String);
   }
 
-  maximizeImage(image:any){
+  // Event that opens an image "full screen"
+  maximizeImage(image: any) {
     const dialogRef = this.dialog.open(ImageDialogComponent, {
-      data: {image:image},
+      data: {image: image},
     });
   }
 
-  openFile(response:any){
-    const blob = new Blob([new Uint8Array(response.buffer.data)], { type: response.type});
+  // Formats every other object to display it in a new window
+  openFile(response: any) {
+    const blob = new Blob([new Uint8Array(response.buffer.data)], {type: response.type});
     const exportUrl = URL.createObjectURL(blob);
     window.open(exportUrl);
     URL.revokeObjectURL(exportUrl);
   }
 
-  public addEmoji(event) {
+  // Adds an emoji to the textArea
+  addEmoji(event) {
     this.textArea = `${this.textArea}${event.emoji.native}`;
-    console.log(event.emoji.native);
-    console.log(this.textArea)
     this.isEmojiPickerVisible = false;
   }
 
+  // Finds a chat in a list
+  findChatInList(listChats: ChatMessages[], chatId: String) {
+    return listChats.findIndex(x => x.chatId == chatId);
+  }
 }
 
 
@@ -184,22 +248,19 @@ export class ChatboxComponent implements OnInit {
 })
 export class DialogContent {
   files: File[] = [];
-  filesChange : Subject<File[]> = new Subject();
+  filesChange: Subject<File[]> = new Subject();
 
   onSelect(event) {
     console.log("On select")
-    console.log(event);
-
     this.files.push(...event.addedFiles);
-    console.log(...event.addedFiles)
   }
 
   onRemove(event) {
-    console.log(event);
+    console.log("On remove");
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  sendFiles(){
+  sendFiles() {
     this.filesChange.next(this.files);
   }
 }

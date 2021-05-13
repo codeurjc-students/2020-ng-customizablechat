@@ -33,21 +33,16 @@ export class ChatsController {
 
         if(contactToAdd !== undefined){
             let chatNew = new CreateChatDto(chat.name, true, "", new Date(), chat.participants);
-
-            //Section may be used to check chats duplication
-            //let user = await this.usersService.findOneByUsername(chat.name);
-            // var isUnique = true;
-            // for(let i = 0; user.privateChats.length; i++){
-            //     let value = await this.chatsService.findChatPrivateExistence(chat.name, chat.participants)
-            // }
-            // if(isUnique){
+            let value = await this.chatsService.findChatPrivateExistence(chat.name, chat.participants);
+            if(value == null){
                 let chatCreated = await this.chatsService.createChat(chatNew);
                 this.usersService.addChatToUser(chat.name,chatCreated._id,true);
                 this.usersService.addChatToUser(chat.participants, chatCreated._id,true);
-                return true;
-            // }
+                this.logger.log(chatCreated)
+                return chatCreated;
+            }
         }
-        return false;
+        return null;
     }
 
     @Post('group')
@@ -61,7 +56,7 @@ export class ChatsController {
                 this.usersService.addChatToUser(chat.participants[i], chatCreated._id,false);
             }
         }
-        return true;
+        return chatCreated;
     }
 
     @Put('group')

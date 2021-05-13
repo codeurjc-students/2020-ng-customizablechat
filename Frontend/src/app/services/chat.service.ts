@@ -16,8 +16,6 @@ export class ChatService {
   }
 
   public saveSocket(username){
-    console.log(username)
-    console.log("Esto debería funcionar")
     this.socket.emit("saveSocket", username);
   }
 
@@ -30,18 +28,10 @@ export class ChatService {
   }
 
   public sendFiles(messages:any){
-    console.log("Service send Files post")
-    console.log(messages);
     return this.http.post<any>(this.Api_url + 'files', messages);
   }
 
   public fileSentMessage(sender:any,messageId:any,chatId:any){
-    console.log("Sender")
-    console.log(sender);
-    console.log("MessageId")
-    console.log(messageId);
-    console.log("chatId")
-    console.log(chatId);
     this.socket.emit('fileSentMessage',sender, messageId, chatId);
   }
 

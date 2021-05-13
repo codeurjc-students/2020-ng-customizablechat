@@ -29,7 +29,6 @@ export class OptionsSideBarComponent implements OnInit {
   changeColor(value:boolean){
     this.usersService.changeColorMode(new SendChangeColor(this.user.userName,(value? 2:1))).subscribe(
       data=>{
-        console.log(data);
         this.colorActive.emit(value);
       }
     );
@@ -42,7 +41,6 @@ export class OptionsSideBarComponent implements OnInit {
   logout(){
     this.loginService.logout(new Login(this.user.userName as string,this.user.password as string)).subscribe(
       data =>{
-        console.log("User logged out");
         this.router.navigate(['login']);
       }
     )

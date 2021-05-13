@@ -26,7 +26,7 @@
     <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert user name"
            autocomplete='off' required/>
     <br>
-    <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found</mat-error>
+    <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found or already found in a chat with you</mat-error>
     <button class="form-btn sx back" type="button" (click)="onActivateModal(false);">Back</button>
     <button class="form-btn dx" type="submit" (click)="addPrivateChat();">Create chat</button>
   </form>

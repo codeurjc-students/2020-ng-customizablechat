@@ -77,7 +77,9 @@
   width: 55%;
   height: 55%;
   border-radius: 50%;
-  border: 2px solid #00acee;
+  @include themify($themes) {
+    border: 2px solid themed('medium-color');
+  }
 }
 
 ::ng-deep .mat-ripple.mat-tab-label.mat-focus-indicator{

@@ -5,6 +5,7 @@ import {ChatService} from "../../services/chat.service";
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
 
 
+
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
@@ -16,14 +17,13 @@ export class ChatsComponent implements OnInit {
 
   privateChats:AddContactPrivate[] = [];
   groupChats:Chat[] = [];
-  dataLoaded:boolean = false;
 
   constructor(private chatService:ChatService, public mainChat:MainChatSharedService) { }
 
   ngOnInit(): void {
     this.returnPrivateChats();
     this.returnGroupChats();
-    // this.chatService.sendMessage(new Message("This is a test", this.user.userName, this.user.privateChats[0]))
+    this.onChatAdded();
   }
 
   returnGroupChats(){
@@ -32,21 +32,13 @@ export class ChatsComponent implements OnInit {
       this.chatService.getChat(this.user.groupChats[i]).subscribe(
         data=>{
           this.groupChats.push(data);
+
         },failure=>{
           console.log(failure);
         }
       );
       i++;
     }
-    this.dataLoaded = true;
-  }
-
-  getPrivateChats(){
-    return this.privateChats;
-  }
-
-  getGroupChats(){
-    return this.groupChats;
   }
 
   returnPrivateChats(){
@@ -65,6 +57,26 @@ export class ChatsComponent implements OnInit {
 
   changeMainChat(value:any){
     this.mainChat.setChat(value);
+  }
+
+  onChatAdded(){
+    this.mainChat.addChatChange.subscribe(
+      chat => {
+        if(chat.isPrivate){
+          if(this.privateChats != []){
+            this.privateChats.unshift(chat);
+          }else{
+            this.privateChats = [chat]
+          }
+        }else{
+          if(this.groupChats != []) {
+            this.groupChats.unshift(chat);
+          }else {
+            this.groupChats = [chat];
+          }
+        }
+      }
+    )
   }
 
 }

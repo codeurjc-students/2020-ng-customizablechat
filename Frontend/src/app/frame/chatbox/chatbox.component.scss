@@ -45,7 +45,7 @@
 
   .medium{
     position:fixed;
-    height:86%;
+    height:84%;
     width:100%;
     top:7%;
     @include themify($themes){
@@ -55,7 +55,7 @@
   }
 
   .lower{
-    height:7%;
+    height:9%;
     width:100%;
     bottom:0;
     position:fixed;
@@ -242,7 +242,7 @@
   font-size: large;
 }
 
-.emoji-mart-class{
+.emoji-mart--card--dimensions{
   position: fixed;
   bottom: 8%;
 }

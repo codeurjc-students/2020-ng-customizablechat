@@ -64,9 +64,10 @@ export class FrameComponent implements OnInit {
       this.chatService.addPrivateChat(newChat).subscribe(
         data => {
           this.chatCreated = data;
-          if (this.chatCreated == true) {
+          if (this.chatCreated != null) {
             this.onActivateModal(false);
             this.changeModalFeedbackActive();
+            this.mainChat.setNewChat(data);
           }
         }
       );
@@ -78,13 +79,13 @@ export class FrameComponent implements OnInit {
       this.groupParticipantsArray.push(this.user.userName);
       let newChat = new Chat(this.formCreateGroupChat.get('name').value, this.formCreateGroupChat.get('description').value, new Date(), this.groupParticipantsArray, false);
       this.groupParticipantsArray = [];
-      console.log(newChat);
       this.chatService.createGroupChat(newChat).subscribe(
         data => {
           this.chatCreated = data;
-          if (this.chatCreated == true) {
+          if (this.chatCreated != null) {
             this.onActivateGroupModal(false);
             this.changeModalFeedbackActive();
+            this.mainChat.setNewChat(data);
           }
         }
       );
@@ -104,8 +105,8 @@ export class FrameComponent implements OnInit {
         participant: ""
       })
     }
-
-
   }
+
+
 
 }

@@ -1,3 +1,5 @@
+import {Message} from "./message";
+
 export class Chat {
   name: String;
   description: String;
@@ -5,7 +7,7 @@ export class Chat {
   participants: String[];
   isPrivate: Boolean;
 
-  constructor(name:String, description:String,date: Date, participants:String[], isPrivate:boolean) {
+  constructor(name: String, description: String, date: Date, participants: String[], isPrivate: boolean) {
     this.name = name;
     this.participants = participants;
     this.isPrivate = isPrivate;
@@ -17,12 +19,25 @@ export class Chat {
 export class AddContactPrivate {
   name: String;
   participants: String;
-  isPrivate:Boolean;
+  isPrivate: Boolean;
 
-  constructor(name:String, participant:String, isPrivate:boolean) {
+  constructor(name: String, participant: String, isPrivate: boolean) {
     this.name = name;
     this.participants = participant;
     this.isPrivate = isPrivate;
   }
+}
+
+
+export class ChatMessages {
+  chatId: String;
+  messageList: Message[];
+
+
+  constructor(chatId: String, messageList: Message[]) {
+    this.chatId = chatId;
+    this.messageList = messageList;
+  }
+
 }
 

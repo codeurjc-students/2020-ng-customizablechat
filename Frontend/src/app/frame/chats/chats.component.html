@@ -1,10 +1,10 @@
 <div class="globalWrapper background-frame" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
   <mat-tab-group mat-align-tabs="center" dynamicHeight >
 
-    <mat-tab label="Private Chats" >
+    <mat-tab label="Private Chats" #private >
       <ng-template matTabContent>
         <mat-nav-list class="chatsWrapper">
-          <mat-list-item *ngFor="let chat of getPrivateChats()" class="manualCard" (click)="changeMainChat(chat);">
+          <mat-list-item *ngFor="let chat of privateChats" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
               <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
             </div>
@@ -22,10 +22,10 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="Group Chats">
+    <mat-tab label="Group Chats" #group>
       <ng-template matTabContent>
         <mat-nav-list class="chatsWrapper">
-          <mat-list-item *ngFor="let chat of getGroupChats()" class="manualCard" (click)="changeMainChat(chat);">
+          <mat-list-item *ngFor="let chat of groupChats" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
               <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
             </div>
