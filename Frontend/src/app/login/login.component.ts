@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {LoginService} from "../services/login.service";
-import {CreateUser, Login, User} from "../models/login";
+import {CreateUser, Login, User, UserImageNotProcessed} from "../models/login";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     public loginService : LoginService,
     private router: Router,
+    private domSanitizer: DomSanitizer
   ) {
   }
 
@@ -51,9 +53,8 @@ export class LoginComponent implements OnInit {
         let newUser = new Login(this.formLogin.get('username').value, this.formLogin.get('password').value);
         this.loginService.login(newUser).subscribe(
           data=>{
-            this.value = data;
-            if(this.value !== null){
-              this.loginService.setUser(this.value);
+            if(data != null){
+              this.loginService.setUser(this.transformUser(data as UserImageNotProcessed));
               this.router.navigate(['app']);
             }else{
               this.passwordError = !this.passwordError;
@@ -76,8 +77,8 @@ export class LoginComponent implements OnInit {
         let newUser = new CreateUser(this.formSignUp.get(['username']).value, this.formSignUp.get(['name']).value, this.formSignUp.get(['password']).value);
         this.loginService.signUp(newUser).subscribe(
           data=>{
-            this.value = data;
-            if(this.value != null){
+            if(data != null){
+              this.loginService.setUser(this.transformUser(data as UserImageNotProcessed));
               this.router.navigate(['app']);
             }else{
               this.signUpError = true;
@@ -100,6 +101,20 @@ export class LoginComponent implements OnInit {
 
   validateSignUp(){
     return this.formSignUp.valid && this.formSignUp.get(['password']).value === this.formSignUp.get(['verifyPassword']).value;
+  }
+
+  transformUser(user: UserImageNotProcessed){
+    var image;
+    console.log(user);
+    if(user.imageType != "noType") {
+      const TYPED_ARRAY = new Uint8Array(user.image.data);
+      const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+      let base64String = btoa(STRING_CHAR);
+      image = this.domSanitizer.bypassSecurityTrustUrl('data:' + user.imageType + ';base64, ' + base64String);
+    }else{
+      image = null;
+    }
+    return new User(user.userName, user.name, user.socketId, user.active, user.idSettings,user.password, user.privateChats, user.groupChats, image, user.description);
   }
 
 }

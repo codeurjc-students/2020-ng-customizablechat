@@ -59,4 +59,8 @@ export class ChatService {
     console.log("Service asking for file", fileId)
     return this.http.get<any>(this.Api_url + 'files/'+ fileId)
   }
+
+  public obtainImagePrivateChat(user:any){
+    return this.http.get<any>(this.Api_url+ 'users/images/:user-name');
+  }
 }

@@ -1,12 +1,13 @@
 <div class="globalWrapper background-frame" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
   <mat-tab-group mat-align-tabs="center" dynamicHeight >
 
-    <mat-tab label="Private Chats" #private >
+    <mat-tab label="Private Chats">
       <ng-template matTabContent>
         <mat-nav-list class="chatsWrapper">
           <mat-list-item *ngFor="let chat of privateChats" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
-              <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+              <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
+              <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
             </div>
             <div class="midChat">
               <h2 *ngIf="user.userName == chat?.name" style="margin-bottom: 0px;">{{chat.participants}}</h2>
@@ -22,12 +23,13 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="Group Chats" #group>
+    <mat-tab label="Group Chats">
       <ng-template matTabContent>
         <mat-nav-list class="chatsWrapper">
           <mat-list-item *ngFor="let chat of groupChats" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
-              <img class="imageChatProfile" src="../../../assets/profileExample.png" alt="">
+              <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
+              <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
             </div>
             <div class="midChat">
               <h2 style="margin-bottom: 0px;">{{chat.name}}</h2>

@@ -9,4 +9,7 @@ export interface User extends Document{
     password: String,
     privateChats: ObjectId[],
     groupChats: ObjectId[],
+    image: Buffer,
+    imageType: String,
+    description: String,
 }

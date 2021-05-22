@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../services/login.service";
-import {User} from "../models/login";
+import {SendChangeProfile, User} from "../models/login";
 import {ChatService} from "../services/chat.service";
 
 import {AddContactPrivate, Chat} from "../models/chat";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MainChatSharedService} from "../services/main-chat-shared.service";
+import {UsersService} from "../services/users.service";
 
 @Component({
   selector: 'app-frame',
@@ -15,17 +16,21 @@ import {MainChatSharedService} from "../services/main-chat-shared.service";
 export class FrameComponent implements OnInit {
 
   user: User;
+  imageToDisplay:any;
+  sendImage:File;
 
   modalIsActive: boolean;
   modalGroupIsActive: boolean;
+  modalProfile: boolean;
 
   formAddPrivateChat: FormGroup;
   formCreateGroupChat: FormGroup;
+  formChangeProfile: FormGroup;
   groupParticipantsArray: String[] = [];
   chatCreated: boolean = null;
   modalFeedbackActive: boolean = false;
 
-  constructor(public loginService: LoginService, public chatService: ChatService, private fb: FormBuilder, public mainChat: MainChatSharedService) {
+  constructor(public loginService: LoginService, public chatService: ChatService, private fb: FormBuilder, public mainChat: MainChatSharedService, public usersService: UsersService) {
   }
 
   ngOnInit(): void {
@@ -37,6 +42,10 @@ export class FrameComponent implements OnInit {
       name: new FormControl(),
       description: new FormControl(),
       participant: new FormControl(),
+    });
+    this.formChangeProfile = new FormGroup({
+      image: new FormControl(),
+      description: new FormControl(),
     });
     this.loginService.userSubject.subscribe(
       data => {
@@ -56,6 +65,10 @@ export class FrameComponent implements OnInit {
 
   onChangeColor(value: boolean) {
     this.user.idSettings = value ? 2 : 1;
+  }
+
+  onChangeProfile(value: boolean){
+    this.modalProfile = value;
   }
 
   addPrivateChat() {
@@ -107,6 +120,35 @@ export class FrameComponent implements OnInit {
     }
   }
 
+  changeUserProfile(){
+    if(this.imageToDisplay!= null || this.formChangeProfile.get('description').value != null) {
+      const body: FormData = new FormData();
+      body.append('username', this.user.userName as string)
+      body.append('description', this.formChangeProfile.get('description').value as string)
+      body.append('image', this.sendImage, this.sendImage.name)
+      this.usersService.changeProfile(body).subscribe(
+        data => {
+          console.log(data);
+          if (data) {
+            this.changeUserProfile();
+            this.changeModalFeedbackActive();
+          }
+        }
+      )
+    }
+  }
 
 
+  onImageSelected(event){
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      this.sendImage = event.target.files[0];
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.imageToDisplay = event.target.result;
+      }
+    }
+  }
 }

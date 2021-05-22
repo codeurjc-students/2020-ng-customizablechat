@@ -9,6 +9,9 @@ export class CreateUserDto {
     readonly password: String;
     readonly privateChats: ObjectId[];
     readonly groupChats: ObjectId[];
+    readonly image: Buffer;
+    readonly imageType: String;
+    readonly description:String;
 }
 
 export class LoginUserDTO{

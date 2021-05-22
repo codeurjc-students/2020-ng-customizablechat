@@ -31,6 +31,8 @@ export class ChatboxComponent implements OnInit {
   public isEmojiPickerVisible: boolean;
 
   position: number;
+  chatContent: boolean = false;
+  startAnimation: boolean = false;
 
   constructor(public dialog: MatDialog, public mainChat: MainChatSharedService, public chatService: ChatService, private fb: FormBuilder, private domSanitizer: DomSanitizer) {
   }
@@ -238,6 +240,11 @@ export class ChatboxComponent implements OnInit {
   // Finds a chat in a list
   findChatInList(listChats: ChatMessages[], chatId: String) {
     return listChats.findIndex(x => x.chatId == chatId);
+  }
+
+  changeChatContentState(){
+    this.chatContent = !this.chatContent;
+    this.startAnimation = true;
   }
 }
 

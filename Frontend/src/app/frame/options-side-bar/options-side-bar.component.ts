@@ -16,6 +16,7 @@ export class OptionsSideBarComponent implements OnInit {
   @Output() modalActive  = new EventEmitter<boolean>();
   @Output() colorActive  = new EventEmitter<boolean>();
   @Output() modalGroupActive  = new EventEmitter<boolean>();
+  @Output() modalProfile = new EventEmitter<boolean>();
 
   constructor(public usersService:UsersService, public loginService:LoginService, private router:Router) { }
 
@@ -36,6 +37,10 @@ export class OptionsSideBarComponent implements OnInit {
 
   setModalCreateGroup(value:boolean){
     this.modalGroupActive.emit(value);
+  }
+
+  setModalProfile(value:boolean){
+    this.modalProfile.emit(value)
   }
 
   logout(){

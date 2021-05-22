@@ -15,4 +15,10 @@ export class UsersService {
   changeColorMode(body:SendChangeColor){
     return this.http.put(this.Api_url + 'users/color-modes', body)
   }
+
+  changeProfile(body:any ){
+    return this.http.put(this.Api_url + 'files/profiles', body);
+  }
+
+
 }

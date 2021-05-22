@@ -19,7 +19,6 @@ export class MessagesService {
     async retrieveMessages(chatId: ObjectId, page: number){
         this.logger.log("Retrieving messages")
         let value = await this.messageModel.find( {chatId: chatId}).sort({_id: -1}).skip(page*10).limit(10).exec();
-        this.logger.log(value)
         return value.reverse();
     }
 

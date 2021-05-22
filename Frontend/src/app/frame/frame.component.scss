@@ -66,13 +66,6 @@
 
 }
 
-.modal-light-mode{
-  background: rgba(255, 255, 255, 1)!important;
-}
-
-.modal-dark-mode{
-  background: rgba(26, 32, 79, 1)!important;
-}
 
 
 .form--modal-add-contact--dimensions{
@@ -246,4 +239,16 @@ button.form-btn.dx:hover{
 
 .form-create-group--button--design:hover{
   opacity: 1;
+}
+
+
+.modal-change-profile--image--dimensions{
+  width: 15%;
+  height: 14%;
+  border-radius: 50%;
+}
+
+
+.inputfile{
+  cursor: pointer;
 }

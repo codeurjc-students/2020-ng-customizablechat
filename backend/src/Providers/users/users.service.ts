@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {User} from "../../Interfaces/user.interface";
@@ -7,6 +7,8 @@ import {CreateUserDto} from "../../DTOs/create-user-dto";
 @Injectable()
 export class UsersService {
     constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+
+    private logger: Logger = new Logger('UsersService');
 
     async findOneByUsername(name: String): Promise<User> {
         return this.userModel.findOne({ userName: name });
@@ -19,6 +21,9 @@ export class UsersService {
         newUser.privateChats = [];
         newUser.groupChats = [];
         newUser.active = false;
+        newUser.image = null;
+        newUser.imageType = "noType";
+        newUser.description = "";
         return newUser.save();
     }
 
@@ -54,4 +59,19 @@ export class UsersService {
         return this.userModel.findOneAndUpdate({userName:username}, {idSettings: color}, {new:true}).exec();
     }
 
+    changeProfile(profile:any){
+        this.logger.log(profile);
+        if(profile.image == null && profile.description != null){
+            return this.userModel.findOneAndUpdate({userName: profile.username},{description:profile.description}, {new:true}).exec();
+        }else if(profile.description == null && profile.image != null){
+            return this.userModel.findOneAndUpdate({userName: profile.username},{image: profile.image, imageType: profile.imageType}, {new:true}).exec();
+        }else{
+            return this.userModel.findOneAndUpdate({userName: profile.username},{image: profile.image, imageType: profile.imageType, description:profile.description}, {new:true}).exec();
+        }
+
+    }
+
+    getImageProfile(userName: String) {
+        return this.userModel.findOne({userName:userName},{projection: {image: 1, imageType:1}});
+    }
 }

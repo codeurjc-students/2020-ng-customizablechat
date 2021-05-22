@@ -3,6 +3,8 @@ import {User} from "../../models/login";
 import {AddContactPrivate, Chat} from "../../models/chat";
 import {ChatService} from "../../services/chat.service";
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {UsersService} from "../../services/users.service";
 
 
 
@@ -15,10 +17,12 @@ export class ChatsComponent implements OnInit {
 
   @Input() user : User;
 
-  privateChats:AddContactPrivate[] = [];
-  groupChats:Chat[] = [];
+  privateChats:any[] = [];
+  groupChats:any[] = [];
 
-  constructor(private chatService:ChatService, public mainChat:MainChatSharedService) { }
+  constructor(private chatService:ChatService,
+              public mainChat:MainChatSharedService,
+              public domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.returnPrivateChats();
@@ -31,8 +35,9 @@ export class ChatsComponent implements OnInit {
     while( i < this.user.groupChats.length && i < 10) {
       this.chatService.getChat(this.user.groupChats[i]).subscribe(
         data=>{
-          this.groupChats.push(data);
-
+            let chatInfo = data;
+            chatInfo.image = this.transformImage({image:chatInfo.image, imageType: chatInfo.imageType})
+            this.groupChats.push(chatInfo);
         },failure=>{
           console.log(failure);
         }
@@ -46,7 +51,14 @@ export class ChatsComponent implements OnInit {
     while ( i < this.user.privateChats.length && i< 10) {
       this.chatService.getChat(this.user.privateChats[i]).subscribe(
         data=>{
-          this.privateChats.push(data);
+          let chatInfo = data;
+            this.chatService.obtainImagePrivateChat((data.name == this.user.userName)? data.participants : data.name).subscribe(
+              data=>{
+                chatInfo.image = this.transformImage(data);
+                this.privateChats.push(chatInfo);
+              }
+            )
+
         },failure=>{
           console.log(failure);
         }
@@ -79,4 +91,15 @@ export class ChatsComponent implements OnInit {
     )
   }
 
+
+  transformImage(imageData: any){
+    var image;
+    if(imageData.imageType != "noType") {
+      let base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(imageData.image.data)));
+      image = this.domSanitizer.bypassSecurityTrustUrl('data:' + imageData.imageType + ';base64, ' + base64String);
+    }else{
+      image = null;
+    }
+    return image;
+  }
 }

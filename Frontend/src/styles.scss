@@ -31,6 +31,7 @@ $themes: (
     modal: rgba(255, 255, 255, 1),
     modal-text: #4e2f42,
     background-chat-closed: url("/assets/CityDay1.png"),
+    user-default-icon: url("/assets/UserDay3.png"),
   ),
   dark: (
     bg-login: linear-gradient($black, $dark-blue, $dark-medium-blue),
@@ -50,7 +51,8 @@ $themes: (
     background-chat-opened: url("/assets/Fondo-Nocturno2.png"),
     modal: rgba(26, 32, 79, 1),
     modal-text: $white-smoke,
-    background-chat-closed: url("/assets/CityNight1.png"),
+    background-chat-closed: url("/assets/CityNight.png"),
+    user-default-icon: url("/assets/UserNight2.png"),
   ),
 );
 
@@ -90,4 +92,11 @@ body {
   }
 }
 
+.modal-light-mode{
+  background: rgba(255, 255, 255, 1)!important;
+}
+
+.modal-dark-mode{
+  background: rgba(26, 32, 79, 1)!important;
+}
 

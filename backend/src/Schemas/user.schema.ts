@@ -8,5 +8,8 @@ export const UserSchema = new mongoose.Schema({
     idSettings: Number,
     password: String,
     privateChats: [mongoose.Types.ObjectId],
-    groupChats: [mongoose.Types.ObjectId]
+    groupChats: [mongoose.Types.ObjectId],
+    image: Buffer,
+    imageType: String,
+    description:String,
 });

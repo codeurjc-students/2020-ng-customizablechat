@@ -1,16 +1,16 @@
+import * as Buffer from "buffer";
 
-
-export class Login{
+export class Login {
   userName: String;
   password: String;
 
-  constructor(userName:string, password:string) {
+  constructor(userName: string, password: string) {
     this.userName = userName;
     this.password = password;
   }
 }
 
-export class User{
+export class UserImageNotProcessed {
   userName: String;
   name: String;
   socketId?: String;
@@ -19,15 +19,13 @@ export class User{
   password: String;
   privateChats: String[];
   groupChats: String[];
+  image: Buffer;
+  imageType: String;
+  description:String;
 
-  constructor(userName: String,
-  name: String,
-  socketId: String,
-  active: Boolean,
-  idSettings: Number,
-  password: String,
-  privateChats: String[],
-  groupChats:String[]) {
+
+  constructor(userName: String, name: String, socketId: String, active: Boolean, idSettings: Number, password: String, privateChats: String[], groupChats: String[], image: Buffer, imageType: String, description: String) {
+    this.userName = userName;
     this.name = name;
     this.socketId = socketId;
     this.active = active;
@@ -35,10 +33,13 @@ export class User{
     this.password = password;
     this.privateChats = privateChats;
     this.groupChats = groupChats;
+    this.image = image;
+    this.imageType = imageType;
+    this.description = description;
   }
 }
 
-export class CreateUser{
+export class User {
   userName: String;
   name: String;
   socketId?: String;
@@ -47,6 +48,35 @@ export class CreateUser{
   password: String;
   privateChats: String[];
   groupChats: String[];
+  image: any;
+  description:String
+
+
+  constructor(userName: String, name: String, socketId: String, active: Boolean, idSettings: Number, password: String, privateChats: String[], groupChats: String[], image: any, description: String) {
+    this.userName = userName;
+    this.name = name;
+    this.socketId = socketId;
+    this.active = active;
+    this.idSettings = idSettings;
+    this.password = password;
+    this.privateChats = privateChats;
+    this.groupChats = groupChats;
+    this.image = image;
+    this.description = description;
+  }
+}
+
+export class CreateUser {
+  userName: String;
+  name: String;
+  socketId?: String;
+  active: Boolean;
+  idSettings: Number;
+  password: String;
+  privateChats: String[];
+  groupChats: String[];
+  image: File;
+  description:String;
 
   constructor(userName: String, name: String, password: String,) {
     this.name = name;
@@ -55,13 +85,26 @@ export class CreateUser{
   }
 }
 
-export class SendChangeColor{
-  userName:String;
-  idSettings:Number;
+export class SendChangeColor {
+  userName: String;
+  idSettings: Number;
 
 
   constructor(username: String, idSettings: Number) {
     this.userName = username;
     this.idSettings = idSettings;
+  }
+}
+
+export class SendChangeProfile {
+  username: String;
+  image: File;
+  description: String;
+
+
+  constructor(username: String, image: File, description: String) {
+    this.username = username;
+    this.image = image;
+    this.description = description;
   }
 }
