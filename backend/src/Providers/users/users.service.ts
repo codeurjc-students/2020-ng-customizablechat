@@ -71,7 +71,7 @@ export class UsersService {
 
     }
 
-    getImageProfile(userName: String) {
-        return this.userModel.findOne({userName:userName},{projection: {image: 1, imageType:1}});
+    async getImageProfile(userName: String) {
+        return this.userModel.findOne({userName},{image: 1, imageType:1});
     }
 }

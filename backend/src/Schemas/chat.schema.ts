@@ -6,4 +6,6 @@ export const ChatSchema = new mongoose.Schema({
     creationDate: Date,
     participants: {},
     isPrivate: Boolean,
+    image:Buffer,
+    imageType:String
 });

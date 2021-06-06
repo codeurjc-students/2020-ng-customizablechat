@@ -6,13 +6,18 @@ export class Chat {
   creationDate: Date;
   participants: String[];
   isPrivate: Boolean;
+  image: any;
+  imageType: String;
 
-  constructor(name: String, description: String, date: Date, participants: String[], isPrivate: boolean) {
+
+  constructor(name: String, description: String, creationDate: Date, participants: String[], isPrivate: Boolean, image: any, imageType: String) {
     this.name = name;
+    this.description = description;
+    this.creationDate = creationDate;
     this.participants = participants;
     this.isPrivate = isPrivate;
-    this.creationDate = date;
-    this.description = description;
+    this.image = image;
+    this.imageType = imageType;
   }
 }
 

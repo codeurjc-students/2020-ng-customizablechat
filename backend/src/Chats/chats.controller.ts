@@ -1,21 +1,12 @@
-import {
-    Body,
-    Controller,
-    Get, Logger,
-    NotFoundException,
-    Param,
-    Post,
-    Put,
-    UploadedFile,
-    UseInterceptors
-} from '@nestjs/common';
+import {Body, Controller, Get, Logger, NotFoundException, Param, Post, Put, UploadedFile, UseInterceptors} from '@nestjs/common';
 import {AddContactGroup, AddContactPrivate, CreateChatDto} from "../DTOs/create-chat-dto";
 import {UsersService} from "../Providers/users/users.service";
 import {ChatsService} from "../Providers/chats/chats.service";
 import {ObjectId} from "mongoose";
 import {MessagesService} from "../Providers/messages/messages.service";
-import {CreateMessageDto, SearchMessage} from "../DTOs/create-message-dto";
+import {SearchMessage} from "../DTOs/create-message-dto";
 import {FileInterceptor} from "@nestjs/platform-express";
+
 
 @Controller('chats')
 export class ChatsController {
@@ -32,7 +23,7 @@ export class ChatsController {
         let contactToAdd = this.usersService.findOneByUsername(chat.participants);
 
         if(contactToAdd !== undefined){
-            let chatNew = new CreateChatDto(chat.name, true, "", new Date(), chat.participants);
+            let chatNew = new CreateChatDto(chat.name, "", new Date(), chat.participants,true,  null, "noType");
             let value = await this.chatsService.findChatPrivateExistence(chat.name, chat.participants);
             if(value == null){
                 let chatCreated = await this.chatsService.createChat(chatNew);
@@ -46,14 +37,16 @@ export class ChatsController {
     }
 
     @Post('group')
-    async createGroup(@Body() chat: CreateChatDto){
-        console.log(chat);
-        let chatCreated = await this.chatsService.createChat(chat);
+    @UseInterceptors(FileInterceptor('image'))
+    async createGroup(@UploadedFile() image, @Body() chat) {
 
-        for (let i = 0; i < chat.participants.length; i++) {
-            let contactToAdd = this.usersService.findOneByUsername(chat.participants[i]);
+        let valueParticipants = JSON.parse(chat.participants);
+        let chatCreated = await this.chatsService.createChat(new CreateChatDto(chat.name, chat.description, new Date(),valueParticipants, false, image.buffer, image.mimetype));
+
+        for (let i = 0; i < valueParticipants.length; i++) {
+            let contactToAdd = await this.usersService.findOneByUsername(valueParticipants[i]);
             if(contactToAdd !== undefined){
-                this.usersService.addChatToUser(chat.participants[i], chatCreated._id,false);
+                this.usersService.addChatToUser(valueParticipants[i], chatCreated._id,false);
             }
         }
         return chatCreated;

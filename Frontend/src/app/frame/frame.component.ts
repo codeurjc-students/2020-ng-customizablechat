@@ -19,6 +19,9 @@ export class FrameComponent implements OnInit {
   imageToDisplay:any;
   sendImage:File;
 
+  imageDisplayCreateGroup: any;
+  sendImageGroup: File;
+
   modalIsActive: boolean;
   modalGroupIsActive: boolean;
   modalProfile: boolean;
@@ -41,6 +44,7 @@ export class FrameComponent implements OnInit {
     this.formCreateGroupChat = new FormGroup({
       name: new FormControl(),
       description: new FormControl(),
+      image: new FormControl(),
       participant: new FormControl(),
     });
     this.formChangeProfile = new FormGroup({
@@ -90,7 +94,11 @@ export class FrameComponent implements OnInit {
   createGroupChat() {
     if(this.groupParticipantsArray!= [] && this.formCreateGroupChat.get('name').value ) {
       this.groupParticipantsArray.push(this.user.userName);
-      let newChat = new Chat(this.formCreateGroupChat.get('name').value, this.formCreateGroupChat.get('description').value, new Date(), this.groupParticipantsArray, false);
+      let newChat = new FormData();
+      newChat.append('name',this.formCreateGroupChat.get('name').value );
+      newChat.append('description',this.formCreateGroupChat.get('description').value);
+      newChat.append('participants', JSON.stringify(this.groupParticipantsArray));
+      newChat.append('image', this.sendImageGroup);
       this.groupParticipantsArray = [];
       this.chatService.createGroupChat(newChat).subscribe(
         data => {
@@ -112,11 +120,7 @@ export class FrameComponent implements OnInit {
   addParticipantToGroup() {
     if (this.formCreateGroupChat.get('participant').value != "") {
       this.groupParticipantsArray.push(this.formCreateGroupChat.get('participant').value);
-      this.formCreateGroupChat.setValue({
-        name: this.formCreateGroupChat.get('name').value,
-        description: this.formCreateGroupChat.get('description').value,
-        participant: ""
-      })
+      this.formCreateGroupChat.controls['participant'].setValue("");
     }
   }
 
@@ -148,6 +152,19 @@ export class FrameComponent implements OnInit {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.imageToDisplay = event.target.result;
+      }
+    }
+  }
+
+  onImageGroup(event){
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      this.sendImageGroup = event.target.files[0];
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.imageDisplayCreateGroup = event.target.result;
       }
     }
   }

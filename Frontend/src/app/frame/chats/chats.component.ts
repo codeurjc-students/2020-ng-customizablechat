@@ -36,6 +36,7 @@ export class ChatsComponent implements OnInit {
       this.chatService.getChat(this.user.groupChats[i]).subscribe(
         data=>{
             let chatInfo = data;
+            console.log(data);
             chatInfo.image = this.transformImage({image:chatInfo.image, imageType: chatInfo.imageType})
             this.groupChats.push(chatInfo);
         },failure=>{
@@ -94,6 +95,7 @@ export class ChatsComponent implements OnInit {
 
   transformImage(imageData: any){
     var image;
+    console.log(imageData);
     if(imageData.imageType != "noType") {
       let base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(imageData.image.data)));
       image = this.domSanitizer.bypassSecurityTrustUrl('data:' + imageData.imageType + ';base64, ' + base64String);

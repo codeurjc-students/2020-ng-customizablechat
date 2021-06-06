@@ -52,7 +52,16 @@
      'modal-light-mode': modalGroupIsActive && user.idSettings == 1, 'modal-dark-mode': modalGroupIsActive && user.idSettings != 1}">
   <form [formGroup]="formCreateGroupChat" class="form--add-private-chat">
     <h3>Create a group chat</h3>
-    <p>Just enter a name, description and add one by one their usernames<br></p>
+    <p>Just enter a name, description, chat image and add one by one their usernames<br></p>
+    <img class="modal-change-profile--image--dimensions" *ngIf="imageDisplayCreateGroup != null; else imageGroup" [src]="imageDisplayCreateGroup" alt="">
+    <ng-template #imageGroup>
+      <img class="modal-change-profile--image--dimensions" *ngIf="user.idSettings == 1" src="assets/UserDay.png" alt="">
+      <img class="modal-change-profile--image--dimensions" *ngIf="user.idSettings == 2" src="assets/UserNight.png" alt="">
+    </ng-template>
+    <br>
+    <input class="w100 inputfile" type="file" formControlName="image" (change)="onImageGroup($event);" accept="image/*"/>
+    <br>
+    <br>
     <input matInput class="w100" type="text" formControlName="name" placeholder="Insert chat name"
            autocomplete='off' required/>
     <br>
@@ -60,12 +69,12 @@
     <input matInput class="w100" type="text" formControlName="description" placeholder="Insert description"
            autocomplete='off'/>
     <br>
-    <div>
     <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert participant name"
                autocomplete='off' required/>
     <br>
     <button class="form-create-group--button--design" type="button" (click)="addParticipantToGroup();">Add participant</button>
-    </div>
+    <br>
+    <br>
     <button class="form-btn sx back" type="button" (click)="onActivateGroupModal(false);">Back</button>
     <button class="form-btn dx" type="submit" (click)="createGroupChat();">Create chat</button>
   </form>
@@ -79,14 +88,16 @@
     <h3>Change your profile</h3>
     <p>Change your image or description displayed to the rest of the users</p>
     <br>
-    <img class="modal-change-profile--image--dimensions" *ngIf="imageToDisplay != null; else imageProfile" [src]="imageToDisplay" alt="">
+    <img class="modal-change-profile--image--dimensions" *ngIf="imageToDisplay != null; else imageProfile"
+         [src]="imageToDisplay" alt="">
     <ng-template #imageProfile>
       <img class="modal-change-profile--image--dimensions" *ngIf="user.image == null" src="assets/UserDay.png" alt="">
       <img class="modal-change-profile--image--dimensions" *ngIf="user.image != null" [src]="user.image" alt="">
     </ng-template>
     <br>
     <br>
-    <input class="w100 inputfile" type="file" formControlName="image" (change)="onImageSelected($event);" accept="image/*"/>
+    <input class="w100 inputfile" type="file" formControlName="image" (change)="onImageSelected($event);"
+           accept="image/*"/>
     <br>
     <br>
     <input matInput class="w100" type="text" formControlName="description" placeholder="{{user.description}}" autocomplete='off'/>

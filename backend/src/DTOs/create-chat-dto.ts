@@ -1,19 +1,25 @@
 import {ObjectId} from "mongoose";
 
 export class CreateChatDto {
-    constructor(name: String, isPrivate:boolean, description: String,date: Date,  participants : any) {
-        this.name = name;
-        this.isPrivate= isPrivate;
-        this.description = description;
-        this.creationDate = date;
-        this.participants = participants;
-    }
 
     name: String;
     description: String;
     creationDate: Date;
     participants: any;
     isPrivate: Boolean;
+    image:Buffer;
+    imageType:String;
+
+
+    constructor(name: String, description: String, creationDate: Date, participants: any, isPrivate: Boolean, image: Buffer, imageType: String) {
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.participants = participants;
+        this.isPrivate = isPrivate;
+        this.image = image;
+        this.imageType = imageType;
+    }
 }
 
 export class AddContactPrivate {

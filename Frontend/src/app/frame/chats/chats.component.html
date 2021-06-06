@@ -6,8 +6,11 @@
         <mat-nav-list class="chatsWrapper">
           <mat-list-item *ngFor="let chat of privateChats" class="manualCard" (click)="changeMainChat(chat);">
             <div class="leftChat">
-              <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
-              <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
+              <img class="imageChatProfile" *ngIf="chat.image != null; else imageProfile" [src]="chat.image" alt="">
+              <ng-template #imageProfile>
+                <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
+                <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
+              </ng-template>
             </div>
             <div class="midChat">
               <h2 *ngIf="user.userName == chat?.name" style="margin-bottom: 0px;">{{chat.participants}}</h2>

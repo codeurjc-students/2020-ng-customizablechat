@@ -63,7 +63,7 @@
   @include themify($themes){
     background: themed('modal')!important;
   }
-
+  overflow-y: scroll;
 }
 
 
@@ -76,10 +76,12 @@
 }
 
 .form--modal-create-group--dimensions{
-  height: 45%;
-  width:20%;
+  height: 55%;
+  min-height: 53%;
+  width: 20%;
+  min-width:18%;
   left: 40%;
-  top: 27.5%;
+  top: 22.5%;
 }
 
 
@@ -164,19 +166,21 @@
 }
 
 button.form-btn {
-  position: absolute;
   width: 50%;
-  height: 60px;
+  height: 2.5em;
   bottom: 0;
   border: 0;
   font-family: 'Dosis';
   font-size: 24px;
   text-transform: uppercase;
   cursor: pointer;
+  position: relative;
+  clear: both;
+  margin-top: 2em;
 }
 
 button.form-btn.sx {
-  left: 0;
+
   border-radius: 0 0 0 5px;
   background-color: rgba(0, 0, 0, 0.65);
   color: #fff;
@@ -198,7 +202,6 @@ button.form-btn.sx.back:hover {
 }
 
 button.form-btn.dx {
-  right: 0;
   border-radius: 0 0 5px 0;
   background-color: #ace7ff;
   color: #fff;
@@ -243,8 +246,8 @@ button.form-btn.dx:hover{
 
 
 .modal-change-profile--image--dimensions{
-  width: 15%;
-  height: 14%;
+  width: 5em;
+  height: 5em;
   border-radius: 50%;
 }
 

@@ -39,7 +39,7 @@ export class ChatService {
     return this.http.post<any>(this.Api_url+ 'chats/private', newContact);
   }
 
-  public createGroupChat(newChat: Chat){
+  public createGroupChat(newChat: any){
     return this.http.post<any>(this.Api_url+ 'chats/group', newChat);
   }
 
@@ -61,6 +61,6 @@ export class ChatService {
   }
 
   public obtainImagePrivateChat(user:any){
-    return this.http.get<any>(this.Api_url+ 'users/images/:user-name');
+    return this.http.get<any>(this.Api_url+ 'users/images/'+ user);
   }
 }

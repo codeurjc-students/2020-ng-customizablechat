@@ -6,4 +6,6 @@ export interface Chat extends Document {
     creationDate: Date;
     participants: any;
     isPrivate: Boolean;
+    image:Buffer;
+    imageType:String;
 }

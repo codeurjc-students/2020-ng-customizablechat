@@ -56,7 +56,6 @@ export class ChatboxComponent implements OnInit {
         return (new ChatMessages(x,[]));
       }
     );
-
   }
 
   // Treats the change of the main chat

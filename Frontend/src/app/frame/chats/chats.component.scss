@@ -74,8 +74,8 @@
 }
 
 .imageChatProfile {
-  width: 55%;
-  height: 55%;
+  width: 2.5em;
+  height: 2.5em;
   border-radius: 50%;
   @include themify($themes) {
     border: 2px solid themed('medium-color');

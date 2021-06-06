@@ -25,6 +25,6 @@ export class ChatsService {
 
     // Future use if need to check chats created
     async findChatPrivateExistence(name: String, person:String){
-        return this.chatModel.findOne({$or:[{userName: name, participants: person},{userName: person, participants: name}]}).exec();
+        return this.chatModel.findOne({$or:[{name: name, participants: person},{name: person, participants: name}]}).exec();
     }
 }

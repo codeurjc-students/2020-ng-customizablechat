@@ -2,8 +2,11 @@
   <div *ngIf="chatObs != null">
     <div class="upper">
       <mat-toolbar id="upperChat" color="warn">
-        <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
-        <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
+        <img class="imageChatProfile" *ngIf="chatObs.image != null; else imageProfile" [src]="chatObs.image" alt="">
+        <ng-template #imageProfile>
+          <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
+          <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
+        </ng-template>
         <span class="spacerImageText"></span>
         <span *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
               style="font-size:xx-large; cursor:pointer"
@@ -34,9 +37,11 @@
             <!-- This is a file message-->
             <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
                                *ngIf="recogniseFileType(message.type) == 2">
-              <img *ngIf="user.idSettings == 1" src="../../../assets/FileDay.png" class="chat-messages--file-image--details"
+              <img *ngIf="user.idSettings == 1" src="../../../assets/FileDay.png"
+                   class="chat-messages--file-image--details"
                    (click)="openFile(message);" alt="File">
-              <img *ngIf="user.idSettings != 1" src="../../../assets/FileNight1.png" class="chat-messages--file-image--details"
+              <img *ngIf="user.idSettings != 1" src="../../../assets/FileNight1.png"
+                   class="chat-messages--file-image--details"
                    (click)="openFile(message);" alt="File">
               <br>
               {{message.message}}
@@ -62,9 +67,11 @@
             <!-- This is a file message-->
             <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
                                *ngIf="recogniseFileType(message.type) == 2">
-              <img *ngIf="user.idSettings == 1" src="../../../assets/FileNight.png" class="chat-messages--file-image--details"
+              <img *ngIf="user.idSettings == 1" src="../../../assets/FileNight.png"
+                   class="chat-messages--file-image--details"
                    (click)="openFile(message);" alt="File">
-              <img *ngIf="user.idSettings != 1" src="../../../assets/FileDay.png" class="chat-messages--file-image--details"
+              <img *ngIf="user.idSettings != 1" src="../../../assets/FileDay.png"
+                   class="chat-messages--file-image--details"
                    (click)="openFile(message);" alt="File">
               <br>
               {{message.message}}
@@ -77,8 +84,10 @@
       <mat-toolbar id="lowerChat" color="warn">
         <div class="leftButtonClip">
           <button mat-icon-button class="clipButton" (click)="openDialog()" aria-label="Drop files">
-            <img *ngIf="user.idSettings == 1" class="" style="max-width: 40px;max-height: 40px;" src="../../../assets/AttachDay1.png" alt="">
-            <img *ngIf="user.idSettings != 1" class="" style="max-width: 40px;max-height: 40px;" src="../../../assets/AttachNight1.png" alt="">
+            <img *ngIf="user.idSettings == 1" class="" style="max-width: 40px;max-height: 40px;"
+                 src="../../../assets/AttachDay1.png" alt="">
+            <img *ngIf="user.idSettings != 1" class="" style="max-width: 40px;max-height: 40px;"
+                 src="../../../assets/AttachNight1.png" alt="">
           </button>
         </div>
         <div class="midEmojiButton">
@@ -93,8 +102,10 @@
           <div class="form--send-message">
             <textarea [(ngModel)]="textArea" id="textAreaForm" placeholder="Type anything"></textarea>
             <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
-              <img *ngIf="user.idSettings == 1" class="" style="max-width: 40px;max-height: 40px;" src="../../../assets/SendDay1.png" alt="" (click)="onSubmit();">
-              <img *ngIf="user.idSettings != 1" class="" style="max-width: 40px;max-height: 40px;" src="../../../assets/SendNight1.png" alt="" (click)="onSubmit();">
+              <img *ngIf="user.idSettings == 1" class="" style="max-width: 40px;max-height: 40px;"
+                   src="../../../assets/SendDay1.png" alt="" (click)="onSubmit();">
+              <img *ngIf="user.idSettings != 1" class="" style="max-width: 40px;max-height: 40px;"
+                   src="../../../assets/SendNight1.png" alt="" (click)="onSubmit();">
             </button>
           </div>
         </div>
@@ -102,30 +113,21 @@
       </mat-toolbar>
     </div>
 
-<!--    <mat-card *ngIf="chatContent" class="modal chat-description&#45;&#45;modal&#45;&#45;dimensions">-->
-<!--      <mat-card-title *ngIf="chatObs.isPrivate && chatObs.name == user.userName"-->
-<!--                      style="font-size:xx-large;">{{chatObs.participants}}</mat-card-title>-->
-<!--      <mat-card-title *ngIf="!chatObs.isPrivate || chatObs.name != user.userName"-->
-<!--                      style="font-size:xx-large;">{{chatObs.name}}</mat-card-title>-->
-<!--      <div mat-card-avatar class="example-header-image"></div>-->
-<!--      <mat-card-content>-->
-<!--        <p>{{chatObs.description}}</p>-->
-<!--      </mat-card-content>-->
-<!--      <mat-card-actions>-->
-<!--        <button class="form-create-group&#45;&#45;button&#45;&#45;design" type="button" (click)="">Add participant</button>-->
-<!--      </mat-card-actions>-->
-<!--    </mat-card>-->
-
     <div class="container modal chat-description--modal--dimension"
          [ngClass]="{'animation--modal': chatContent, 'animation--close-modal': !chatContent && startAnimation,
          'modal--chat-description--opacity-inactive': !chatContent && !startAnimation,
          'modal-light-mode': chatContent && user.idSettings == 1, 'modal-dark-mode': chatContent && user.idSettings != 1}">
       <div class="signUp active-sx" id="chat-description--content--dimensions">
         <h3 *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
-                        style="font-size:xx-large;">{{chatObs.participants}}</h3>
+            style="font-size:xx-large;">{{chatObs.participants}}</h3>
         <h3 *ngIf="!chatObs.isPrivate || chatObs.name != user.userName"
-                        style="font-size:xx-large;">{{chatObs.name}}</h3>
-        <div mat-card-avatar class="example-header-image"></div>
+            style="font-size:xx-large;">{{chatObs.name}}</h3>
+        <div *ngIf="chatObs.image != null; else imageProfileInfo">
+          <img class="imageChatProfileInfo" [src]="chatObs.image" alt="">
+        </div>
+        <ng-template #imageProfileInfo>
+          <div mat-card-avatar class="example-header-image"></div>
+        </ng-template>
         <p *ngIf="!chatObs.isPrivate">{{chatObs.description}}</p>
         <br>
         <br>

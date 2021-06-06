@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Put} from '@nestjs/common';
+import {Body, Controller, Get, Logger, Param, Put} from '@nestjs/common';
 import {UsersService} from "../Providers/users/users.service";
 import {SendChangeColor} from "../DTOs/create-user-dto";
 import {ObjectId} from "mongoose";
@@ -10,13 +10,15 @@ export class UsersController {
         private readonly usersService: UsersService,
     ) {}
 
+    private logger : Logger = new Logger('UsersController')
+
     @Put('color-modes')
     async retrievePageMessages(@Body() change: SendChangeColor){
         return await this.usersService.changeColorMode(change.userName,change.idSettings);
     }
 
-    @Get('images/:user-name')
-    async retrieveUserImage(@Param('user-name') userName:String) {
+    @Get('images/:userName')
+    async retrieveUserImage(@Param('userName') userName:String) {
         return this.usersService.getImageProfile(userName);
     }
 
