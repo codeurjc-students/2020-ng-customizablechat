@@ -7,6 +7,7 @@ import {AddContactPrivate, Chat} from "../models/chat";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MainChatSharedService} from "../services/main-chat-shared.service";
 import {UsersService} from "../services/users.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-frame',
@@ -33,7 +34,13 @@ export class FrameComponent implements OnInit {
   chatCreated: boolean = null;
   modalFeedbackActive: boolean = false;
 
-  constructor(public loginService: LoginService, public chatService: ChatService, private fb: FormBuilder, public mainChat: MainChatSharedService, public usersService: UsersService) {
+  constructor(
+    public loginService: LoginService,
+    public chatService: ChatService,
+    private fb: FormBuilder,
+    public mainChat: MainChatSharedService,
+    public usersService: UsersService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -53,10 +60,15 @@ export class FrameComponent implements OnInit {
     });
     this.loginService.userSubject.subscribe(
       data => {
-        this.user = data;
-        this.chatService.saveSocket(data.userName);
+        if(data == null){
+          this.router.navigate(['login']);
+        }else {
+          this.user = data;
+          this.chatService.saveSocket(data.userName);
+        }
       }
     )
+
   }
 
   onActivateModal(value: boolean) {

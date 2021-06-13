@@ -9,7 +9,7 @@ export class Message {
   type:String;
   buffer:Buffer;
 
-  constructor( message: String, sender: String, chatId: String,type:String, buffer:Byte[]) {
+  constructor( message: String, sender: String, chatId: String,type:String, buffer:Buffer) {
 
     this.message = message;
     this.date = new Date();

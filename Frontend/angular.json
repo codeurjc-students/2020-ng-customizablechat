@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "customizable-chat": {
+      "projectType": "library",
+      "root": "projects/customizable-chat",
+      "sourceRoot": "projects/customizable-chat/src",
+      "prefix": "cc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/customizable-chat/tsconfig.lib.json",
+            "project": "projects/customizable-chat/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/customizable-chat/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/customizable-chat/src/test.ts",
+            "tsConfig": "projects/customizable-chat/tsconfig.spec.json",
+            "karmaConfig": "projects/customizable-chat/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/customizable-chat/tsconfig.lib.json",
+              "projects/customizable-chat/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "Frontend",

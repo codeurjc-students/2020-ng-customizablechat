@@ -9,7 +9,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { OptionsSideBarComponent } from './frame/options-side-bar/options-side-bar.component';
 import { ChatsComponent } from './frame/chats/chats.component';
-import {ChatboxComponent, DialogContent} from './frame/chatbox/chatbox.component';
+import {ChatboxComponent} from './frame/chatbox/chatbox.component';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -27,8 +27,9 @@ import {MatInputModule} from '@angular/material/input';
 import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
-import { ImageDialogComponent } from './frame/chatbox/image-dialog/image-dialog.component';
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
+import {CustomizableChatChatboxModule} from "customizable-chat";
+import {CustomizableChatChatListModule} from "../../projects/customizable-chat/src/lib/Customizable-Chat-ChatList/customizable-chat-chatlist.module";
 
 const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 
@@ -39,9 +40,7 @@ const config: SocketIoConfig = { url: environment.API_URL, options:{}};
     OptionsSideBarComponent,
     ChatsComponent,
     ChatboxComponent,
-    DialogContent,
     LoginComponent,
-    ImageDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -64,7 +63,9 @@ const config: SocketIoConfig = { url: environment.API_URL, options:{}};
         MatFormFieldModule,
         MatInputModule,
         HttpClientModule,
-        PickerModule
+        PickerModule,
+        CustomizableChatChatboxModule,
+        CustomizableChatChatListModule
     ],
   providers: [LoginService],
   bootstrap: [AppComponent]

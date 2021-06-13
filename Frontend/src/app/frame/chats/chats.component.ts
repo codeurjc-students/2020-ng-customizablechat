@@ -1,10 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../models/login";
-import {AddContactPrivate, Chat} from "../../models/chat";
 import {ChatService} from "../../services/chat.service";
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {UsersService} from "../../services/users.service";
+import {Subject} from "rxjs";
 
 
 
@@ -19,6 +18,7 @@ export class ChatsComponent implements OnInit {
 
   privateChats:any[] = [];
   groupChats:any[] = [];
+  chatChange: Subject<any> = new Subject<any>();
 
   constructor(private chatService:ChatService,
               public mainChat:MainChatSharedService,
@@ -28,6 +28,7 @@ export class ChatsComponent implements OnInit {
     this.returnPrivateChats();
     this.returnGroupChats();
     this.onChatAdded();
+    this.onChangeMainChat();
   }
 
   returnGroupChats(){
@@ -68,8 +69,12 @@ export class ChatsComponent implements OnInit {
     }
   }
 
-  changeMainChat(value:any){
-    this.mainChat.setChat(value);
+  onChangeMainChat(){
+    this.chatChange.subscribe(
+      value=> this.mainChat.setChat(value),
+       failure=> console.error(failure)
+    )
+
   }
 
   onChatAdded(){

@@ -94,15 +94,13 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
         const chat = await this.chatsService.findOneGroupById(data[2]);
         if (chat.isPrivate) {
             var user = await this.usersService.findOneByUsername(chat.participants);
-            if (user.userName == data[0]) {
-                user = await this.usersService.findOneByUsername(chat.name);
-            }
-            if(user.active == true) this.server.to(user.socketId).emit('fileReceived', data[1]);
+            if (user.active == true) this.server.to(user.socketId).emit('fileReceived', data[1]);
+            user = await this.usersService.findOneByUsername(chat.name);
+            if (user.active == true) this.server.to(user.socketId).emit('fileReceived', data[1]);
         } else {
             for (let i = 0; i < chat.participants.length; i++) {
                 const user = await this.usersService.findOneByUsername(chat.participants[i]);
-
-                if (data[0] != user.userName && user.active == true) {
+                if (user.active == true) {
                     console.log(user);
                     this.server.to(user.socketId).emit('fileReceived', data[1])
                 }

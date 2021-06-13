@@ -1,5 +1,3 @@
-import * as Buffer from "buffer";
-
 export class Login {
   userName: String;
   password: String;
@@ -7,35 +5,6 @@ export class Login {
   constructor(userName: string, password: string) {
     this.userName = userName;
     this.password = password;
-  }
-}
-
-export class UserImageNotProcessed {
-  userName: String;
-  name: String;
-  socketId?: String;
-  active: Boolean;
-  idSettings: Number;
-  password: String;
-  privateChats: String[];
-  groupChats: String[];
-  image: Buffer;
-  imageType: String;
-  description:String;
-
-
-  constructor(userName: String, name: String, socketId: String, active: Boolean, idSettings: Number, password: String, privateChats: String[], groupChats: String[], image: Buffer, imageType: String, description: String) {
-    this.userName = userName;
-    this.name = name;
-    this.socketId = socketId;
-    this.active = active;
-    this.idSettings = idSettings;
-    this.password = password;
-    this.privateChats = privateChats;
-    this.groupChats = groupChats;
-    this.image = image;
-    this.imageType = imageType;
-    this.description = description;
   }
 }
 

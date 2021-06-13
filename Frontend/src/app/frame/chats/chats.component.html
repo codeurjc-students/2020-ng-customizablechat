@@ -1,53 +1,6 @@
-<div class="globalWrapper background-frame" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
-  <mat-tab-group mat-align-tabs="center" dynamicHeight >
-
-    <mat-tab label="Private Chats">
-      <ng-template matTabContent>
-        <mat-nav-list class="chatsWrapper">
-          <mat-list-item *ngFor="let chat of privateChats" class="manualCard" (click)="changeMainChat(chat);">
-            <div class="leftChat">
-              <img class="imageChatProfile" *ngIf="chat.image != null; else imageProfile" [src]="chat.image" alt="">
-              <ng-template #imageProfile>
-                <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
-                <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
-              </ng-template>
-            </div>
-            <div class="midChat">
-              <h2 *ngIf="user.userName == chat?.name" style="margin-bottom: 0px;">{{chat.participants}}</h2>
-              <h2 *ngIf="user.userName != chat?.name" style="margin-bottom: 0px;">{{chat.name}}</h2>
-              <p style="margin-top: 0px; font-size: larger;">Esto es una prueba</p>
-            </div>
-            <div class="rightChat">
-              <mat-icon matBadge="15" matBadgeColor="primary"></mat-icon>
-            </div>
-            <mat-divider class="dividerChat"></mat-divider>
-          </mat-list-item>
-        </mat-nav-list>
-      </ng-template>
-    </mat-tab>
-
-    <mat-tab label="Group Chats">
-      <ng-template matTabContent>
-        <mat-nav-list class="chatsWrapper">
-          <mat-list-item *ngFor="let chat of groupChats" class="manualCard" (click)="changeMainChat(chat);">
-            <div class="leftChat">
-              <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="../../../assets/UserDay3.png" alt="">
-              <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="../../../assets/UserNight2.png" alt="">
-            </div>
-            <div class="midChat">
-              <h2 style="margin-bottom: 0px;">{{chat.name}}</h2>
-              <p style="margin-top: 0px; font-size: larger;">Esto es una prueba</p>
-            </div>
-            <div class="rightChat">
-              <mat-icon matBadge="15" matBadgeColor="primary"></mat-icon>
-            </div>
-            <mat-divider class="dividerChat"></mat-divider>
-          </mat-list-item>
-        </mat-nav-list>
-      </ng-template>
-    </mat-tab>
-
-  </mat-tab-group>
-</div>
-
-
+<cc-customizable-chat-chat-list
+  [user]="user"
+  [chatChange]="chatChange"
+  [groupChats]="groupChats"
+  [privateChats]="privateChats"
+></cc-customizable-chat-chat-list>

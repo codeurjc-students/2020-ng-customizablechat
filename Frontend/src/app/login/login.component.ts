@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {LoginService} from "../services/login.service";
-import {CreateUser, Login, User, UserImageNotProcessed} from "../models/login";
+import {CreateUser, Login, User} from "../models/login";
 import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.loginService.login(newUser).subscribe(
           data=>{
             if(data != null){
-              this.loginService.setUser(this.transformUser(data as UserImageNotProcessed));
+              this.loginService.setUser(this.transformUser(data as any));
               this.router.navigate(['app']);
             }else{
               this.passwordError = !this.passwordError;
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
         this.loginService.signUp(newUser).subscribe(
           data=>{
             if(data != null){
-              this.loginService.setUser(this.transformUser(data as UserImageNotProcessed));
+              this.loginService.setUser(this.transformUser(data as any));
               this.router.navigate(['app']);
             }else{
               this.signUpError = true;
@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
     return this.formSignUp.valid && this.formSignUp.get(['password']).value === this.formSignUp.get(['verifyPassword']).value;
   }
 
-  transformUser(user: UserImageNotProcessed){
+  transformUser(user: any){
     var image;
     console.log(user);
     if(user.imageType != "noType") {
