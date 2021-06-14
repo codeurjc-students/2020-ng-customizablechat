@@ -92,6 +92,9 @@ export class ChatboxComponent implements OnInit {
     console.log("Pedí chats")
     this.mainChat.getMessages(this.chatObs._id, this.page).subscribe(
       messages => {//Igualar o añadir??
+        for (let i = 0; i < messages.length; i++) {
+          this.formatImage(messages[i]);
+        }
         if (this.chatObs.isPrivate) {
           this.listChatsMessagesPrivate[this.position].messageList = messages;
         } else {
@@ -128,6 +131,7 @@ export class ChatboxComponent implements OnInit {
       data => {
         this.chatService.getFile(data).subscribe(
           file => {
+            this.formatImage(file.message);
             this.addMessageToList(file.message.chatId, file.message, file.isPrivate);
           }
         )
@@ -138,5 +142,17 @@ export class ChatboxComponent implements OnInit {
   // Finds a chat in a list
   findChatInList(listChats: ChatMessages[], chatId: String) {
     return listChats.findIndex(x => x.chatId == chatId);
+  }
+
+  // Formats images
+  formatImage(img:any){
+    if(img.type == "image/jpeg" || img.type == "image/jpg" || img.type == "image/png") {
+      const base64String = btoa(new Uint8Array(img.buffer.data).reduce((data, byte) => {
+        return data + String.fromCharCode(byte);
+      }, ''));
+      img.image =  this.domSanitizer.bypassSecurityTrustUrl('data:' + img.type + ';base64, ' + base64String);
+    }else {
+      img.image = null;
+    }
   }
 }

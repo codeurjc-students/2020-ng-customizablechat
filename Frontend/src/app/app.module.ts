@@ -29,7 +29,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {CustomizableChatChatboxModule} from "customizable-chat";
-import {CustomizableChatChatListModule} from "../../projects/customizable-chat/src/lib/Customizable-Chat-ChatList/customizable-chat-chatlist.module";
+import {CustomizableChatChatListModule} from "customizable-chat";
 
 const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 

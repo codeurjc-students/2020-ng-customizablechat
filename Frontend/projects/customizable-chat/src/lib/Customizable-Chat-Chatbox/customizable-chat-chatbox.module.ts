@@ -12,6 +12,7 @@ import { FileDialogContent } from './customizable-chat-chatbox.component';
 import {ImageDialogContent} from "./image-dialog-content/image-dialog-content.component";
 import {CustomizableChatChatboxService} from "./customizable-chat-chatbox.service";
 import {MatButtonModule} from "@angular/material/button";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatListModule,
     MatDialogModule,
     NgxDropzoneModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   exports: [
     CustomizableChatChatboxComponent,

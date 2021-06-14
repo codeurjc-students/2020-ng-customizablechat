@@ -29,9 +29,9 @@
                                *ngIf="recogniseFileType(message.type) == 0"
                                [innerHTML]="message.message"></mat-card-subtitle>
             <!-- This is an image message-->
-            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" style="text-align: center"
                                *ngIf="recogniseFileType(message.type) == 1">
-              <img [src]="formatImage(message)" (click)="maximizeImage(formatImage(message));" class="imageFile" alt="">
+              <img [src]="message.image" (click)="maximizeImage(message.image);" class="imageFile" alt="">
               <br>
               {{message.message}}
             </mat-card-subtitle>
@@ -59,9 +59,9 @@
                                *ngIf="recogniseFileType(message.type) == 0"
                                [innerHTML]="message.message"></mat-card-subtitle>
             <!-- This is an image message-->
-            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+            <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension" style="text-align: center"
                                *ngIf="recogniseFileType(message.type) == 1">
-              <img [src]="formatImage(message)" (click)="maximizeImage(formatImage(message));" class="imageFile" alt="">
+              <img [src]="message.image" (click)="maximizeImage(message.image);" class="imageFile" alt="">
               <br>
               {{message.message}}
             </mat-card-subtitle>

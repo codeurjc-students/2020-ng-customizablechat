@@ -18,7 +18,7 @@ export class FilesController {
     @Post('')
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(@UploadedFile() file, @Body() body) {
-        this.logger.log("Saving file...")
+        this.logger.log("Saving file...");
         var data = await this.messagesService.saveMessage(new CreateMessageDto(file.originalname, new Date(), body.userName,body.chatId, file.mimetype, file.buffer));
         return data;
     }

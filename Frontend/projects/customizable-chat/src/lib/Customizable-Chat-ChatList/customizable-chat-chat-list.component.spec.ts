@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomizableChatChatListComponent } from './customizable-chat-chat-list.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('CustomizableChatChatListComponent', () => {
   let component: CustomizableChatChatListComponent;
@@ -8,7 +9,8 @@ describe('CustomizableChatChatListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CustomizableChatChatListComponent ]
+      declarations: [ CustomizableChatChatListComponent ],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });

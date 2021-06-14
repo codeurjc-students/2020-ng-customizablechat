@@ -25,9 +25,4 @@ export class CustomizableChatChatboxService {
   public fileSentMessage(socket:Socket, socketMessage:string, sender:any,messageId:any,chatId:any){
     socket.emit(socketMessage,sender, messageId, chatId);
   }
-
-  public getFile(baseUrl:String, fileId:any) {
-    console.log("Service asking for file", fileId)
-    return this.http.get<any>(baseUrl + 'files/'+ fileId)
-  }
 }
