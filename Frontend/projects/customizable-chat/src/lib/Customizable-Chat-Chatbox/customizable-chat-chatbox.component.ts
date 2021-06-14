@@ -89,57 +89,6 @@ export class CustomizableChatChatboxComponent {
       return 2;
     }
   }
-
-  // Formats byte array images to display them
-  formatImage(img: any): any {
-    let image = null;
-/*    if(img.imageType == "noType"){
-      return image;
-    }else {*/
-/*      // Converts arraybuffer to typed array object
-      // converts the typed array to string of characters
-      // converts string of characters to base64String
-      let base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(img.buffer.data)));
-      // sanitize the url that is passed as a value to image src attrtibute
-      return this.domSanitizer.bypassSecurityTrustUrl('data:' + img.type + ';base64, ' + base64String);*/
-
-      /*const reader = new FileReader();
-      reader.onload = (e) => image = e.target.result;
-      reader.readAsDataURL(new Blob([img]));
-      return image;*/
-
-/*      const blob = new Blob([new Uint8Array(img.buffer.data)], {type: img.type});
-      const url =  URL.createObjectURL(blob);
-      image = new Image();
-      image.onload =() => {
-        URL.revokeObjectURL(url);
-        resolve(image);
-      }
-      image.src = url;
-      return image;*/
-
-/*      const byteArray = new Uint8Array(img.buffer.data);
-      return new Blob([byteArray], {type: img.type});*/
-
-/*      if(img.type != "noType") {
-        const TYPED_ARRAY = new Uint8Array(img.buffer.data);
-        const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-        let base64String = btoa(STRING_CHAR);
-        return this.domSanitizer.bypassSecurityTrustUrl('data:' + img.type + ';base64, ' + base64String);
-      }else{
-        return null;
-      }*/
-
-/*      const reader = new FileReader();
-      reader.onload = (e) => image = e.target.result;
-      reader.readAsDataURL(new Blob([img.buffer.data]));
-      return image;*/
-
-    let objectURL = 'data:' + img.type +';base64,' + img.buffer.data;
-
-    return this.domSanitizer.bypassSecurityTrustUrl(objectURL);
-/*    }*/
-  }
   // Event that opens an image "full screen"
   maximizeImage(image: any) {
     const dialogRef = this.dialog.open(ImageDialogContent, {
@@ -169,7 +118,6 @@ export class CustomizableChatChatboxComponent {
 }
 
 import {Subject} from "rxjs";
-import {resolve} from "url";
 
 @Component({
   selector: 'cc-customizable-chat-chatbox-file-dialog',

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import {CustomizableChatChatboxComponent} from './customizable-chat-chatbox.component';
 import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
@@ -21,7 +20,6 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   imports: [
     CommonModule,
-    FormsModule,
     PickerModule,
     MatToolbarModule,
     MatCardModule,
