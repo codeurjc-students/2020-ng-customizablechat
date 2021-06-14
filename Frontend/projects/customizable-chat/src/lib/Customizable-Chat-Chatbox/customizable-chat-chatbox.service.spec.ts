@@ -1,4 +1,4 @@
-import { TestBed} from '@angular/core/testing';
+import {getTestBed, TestBed} from '@angular/core/testing';
 
 import { CustomizableChatChatboxService } from './customizable-chat-chatbox.service';
 import {HttpTestingController} from "@angular/common/http/testing";
