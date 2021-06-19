@@ -6,7 +6,7 @@ import {CreateUserDto, LoginUserDTO} from "../DTOs/create-user-dto";
 export class LoginController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Post('in')
+    @Put('in')
     async loginUser(@Body() user: LoginUserDTO){
         let userPromise = await this.usersService.findOneByUsername(user.userName);
         if(userPromise?.password === user.password){

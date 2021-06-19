@@ -10,7 +10,6 @@ $light-grey:#3e3c3c;
 
 $themes: (
   light: (
-    bg-login: linear-gradient($light-blue, #caefff, $white),
     bg-app: $white,
     main-color: $light-blue,
     medium-color: $light-medium-blue,
@@ -27,11 +26,9 @@ $themes: (
     background-chat-opened: url("Fondo-Diurno2.png"),
     modal: rgba(255, 255, 255, 1),
     modal-text: #4e2f42,
-    background-chat-closed: url("CityDay1.png"),
     user-default-icon: url("UserDay3.png"),
   ),
   dark: (
-    bg-login: linear-gradient($black, $dark-blue, $dark-medium-blue),
     bg-app: $dark-blue,
     main-color: $dark-blue,
     medium-color: $dark-medium-blue,
@@ -48,7 +45,6 @@ $themes: (
     background-chat-opened: url("Fondo-Nocturno2.png"),
     modal: rgba(26, 32, 79, 1),
     modal-text: $white-smoke,
-    background-chat-closed: url("CityNight.png"),
     user-default-icon: url("UserNight2.png"),
   ),
 );
@@ -514,17 +510,6 @@ button.form-btn.dx:hover {
 .imageButtonBottomPart{
   max-width: 40px;
   max-height: 40px;
-}
-
-//Background for ChatBox when there's no image
-
-.chatbox--background-no-chat--image {
-
-  @include themify($themes) {
-    background-image: themed('background-chat-closed')
-  }
-  width: 100% !important;
-  height: 100% !important;
 }
 
 //ImageDialog junto con background frame

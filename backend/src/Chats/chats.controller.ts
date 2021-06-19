@@ -38,7 +38,7 @@ export class ChatsController {
 
     @Post('group')
     @UseInterceptors(FileInterceptor('image'))
-    async createGroup(@UploadedFile() image, @Body() chat) {
+    async createGroupChat(@UploadedFile() image, @Body() chat) {
 
         let valueParticipants = JSON.parse(chat.participants);
         let chatCreated = await this.chatsService.createChat(new CreateChatDto(chat.name, chat.description, new Date(),valueParticipants, false, image.buffer, image.mimetype));

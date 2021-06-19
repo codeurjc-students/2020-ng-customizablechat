@@ -19,7 +19,7 @@ export class LoginService {
   }
 
   login(user: Login){
-    return this.http.post<any>(this.Api_url+ 'sign/in', user);
+    return this.http.put<any>(this.Api_url+ 'sign/in', user);
   }
 
   logout(user: Login){

@@ -1,6 +1,6 @@
 import {
-    ConnectedSocket, OnGatewayConnection, OnGatewayDisconnect,
-    OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer
+    OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit,
+    SubscribeMessage, WebSocketGateway, WebSocketServer
 } from '@nestjs/websockets';
 import {InternalServerErrorException, Logger} from '@nestjs/common';
 import {Socket} from 'socket.io';

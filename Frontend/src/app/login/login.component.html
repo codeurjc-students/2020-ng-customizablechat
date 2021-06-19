@@ -5,8 +5,8 @@
       <p>Just enter your user name, name<br>
         and your password to join.
       </p>
-      <input matInput class="w100" type="text" formControlName="username" placeholder="Insert user name" autocomplete='off'required/>
-      <input matInput class="w100" type="text" formControlName="name" placeholder="Insert your name" autocomplete='off'required/>
+      <input matInput class="w100" type="text" formControlName="username" placeholder="Insert your user name" autocomplete='off'required/>
+      <input matInput class="w100" type="text" formControlName="name" placeholder="Insert your real name" autocomplete='off'required/>
       <input matInput type="password" formControlName="password" placeholder="Insert password" autocomplete='off' required/>
       <input matInput type="password" formControlName="verifyPassword" placeholder="Verify password" autocomplete='off' required/>
       <br>
@@ -20,7 +20,7 @@
       <p>Type your user and password to have fun<br>
         <strong>We have been waiting for you!</strong>
       </p>
-      <input matInput type="text" formControlName="username" placeholder="Insert user name" required />
+      <input matInput type="text" formControlName="username" placeholder="Insert your user name" required />
       <mat-error *ngIf="passwordError">Password seems to be incorrect</mat-error>
       <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" placeholder="Insert password" required />
                 <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"

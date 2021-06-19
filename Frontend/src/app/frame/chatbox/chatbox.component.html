@@ -1,7 +1,15 @@
-<cc-customizable-chat-chatbox
-  [chatObs]="this.chatObs"
-  [listUrls]="['http://localhost:3000/files','sendMessagePrivate','sendMessageGroup','fileSentMessage']"
-  [messageList]="(chatObs.isPrivate ? this.listChatsMessagesPrivate[this.position].messageList : this.listChatsMessagesGroup[this.position].messageList)"
-  [socket]="this.chatService.socket"
-  [user]="this.user"></cc-customizable-chat-chatbox>
+<div *ngIf="chatObs!= null; else noChat">
+  <cc-customizable-chat-chatbox
+    [chatObs]="this.chatObs"
+    [listUrls]="['http://localhost:3000/files','sendMessagePrivate','sendMessageGroup','fileSentMessage']"
+    [messageList]="(chatObs.isPrivate ? this.listChatsMessagesPrivate[this.position].messageList : this.listChatsMessagesGroup[this.position].messageList)"
+    [socket]="this.chatService.socket"
+    [user]="this.user"></cc-customizable-chat-chatbox>
+</div>
+
+<ng-template #noChat>
+  <div class="chatbox--background-no-chat--image"></div>
+</ng-template>
+
+
 

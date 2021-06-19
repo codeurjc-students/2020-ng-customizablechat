@@ -17,7 +17,7 @@ describe('CustomizableChatService', () => {
     httpMock = TestBed.inject(HttpTestingController);
     socket = new Socket({ url: 'http://localhost:3000/', options:{}})
     socket.connect();
-    socketWorks  =false;
+    socketWorks = false;
   });
 
   it('should be created', () => {
