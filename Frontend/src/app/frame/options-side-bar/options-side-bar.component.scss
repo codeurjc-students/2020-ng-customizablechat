@@ -1,0 +1,61 @@
+@import "src/styles.scss";
+
+.imagesButtons{
+  width:  100%;
+  height: 100%;
+  @include themify($themes) {
+    border: 2px solid themed('medium-color')!important;
+  }
+  border-radius: 50%;
+}
+
+  .mat-list--first-button--position{
+    margin-top:30%;
+  }
+
+ .listButtons{
+   align-content: center;
+   height:100%;
+ }
+
+ .rowButtons {
+   height:10%!important;
+ }
+
+
+ button{
+   border:none;
+   background: none;
+   margin-left:auto;
+   margin-right:auto;
+   margin-bottom:auto;
+   margin-top:30%;
+ }
+
+ .buttonsSidebar:hover{
+   border-radius: 50%;
+   height: 120%;
+   width: 120%;
+
+   transform: scale(1);
+   animation: pulse 2s infinite;
+ }
+
+ @keyframes pulse {
+   0% {
+     transform: scale(0.95);
+     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+   }
+
+   60% {
+     transform: scale(1);
+     box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2);
+   }
+
+   100% {
+     transform: scale(0.95);
+     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+   }
+ }
+
+

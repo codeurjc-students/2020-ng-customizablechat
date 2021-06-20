@@ -1,0 +1,257 @@
+@import "src/styles";
+
+.wrapper{
+  height:100%;
+  position:fixed;
+}
+.wrapper:after{
+  display:table;
+  content:"";
+  clear:both;
+  background-color:white;
+}
+.column{
+  float:left;
+}
+
+.left{
+  width:5%;
+  position:fixed;
+}
+.middle{
+  width:27%;
+  position:fixed;
+  left:5%;
+}
+.right{
+  left:32%;
+  width:67%;
+  position:fixed;
+}
+
+#boxSidebar{
+  @include themify($themes){
+    border-right-color: (themed('medium-color'));
+  }
+  border-right-width: 5px;
+  border-right-style:solid;
+  height:100%;
+  float:left;
+  z-index: 101;
+}
+
+#boxChatsContent{
+  border-right-style:solid;
+  height:100%;
+  float:left;
+}
+
+#boxContent{
+  height: 100%;
+  width: 100%;
+
+  @include themify($themes){
+    border-left: 5px solid themed('medium-color');
+  }
+}
+
+.modal{
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.31) 3px -1px 25px -2px;
+  justify-content: center;
+  border-radius: 1%;
+  @include themify($themes){
+    background: themed('modal')!important;
+  }
+  overflow-y: scroll;
+}
+
+
+
+.form--modal-add-contact--dimensions{
+  height: 30%;
+  width:20%;
+  left: 40%;
+  top: 35%;
+}
+
+.form--modal-create-group--dimensions{
+  height: 55%;
+  min-height: 53%;
+  width: 20%;
+  min-width:18%;
+  left: 40%;
+  top: 22.5%;
+}
+
+
+
+.form--modal-feedback--dimensions{
+  height: 20%;
+  width:20%;
+  left: 40%;
+  top: 40%;
+}
+
+.modal-inactive{
+  display:none;
+}
+
+.modal-active{
+  display: flex;
+}
+
+.disable-background{
+  opacity: 0.3!important;
+  background-color: #000;
+
+}
+
+.enable-background{
+  opacity: 1!important;
+}
+
+.modal h3 {
+  font-family: 'Dosis';
+  font-size: 35px;
+  text-transform: uppercase;
+
+  margin-bottom: 30px;
+}
+
+.modal-dark-mode h3, .modal-dark-mode p {
+  color: $white-smoke;
+}
+
+.modal-light-mode h3, .modal-light-mode p {
+  color: #4e2f42;
+}
+
+.modal p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 40px;
+}
+
+.modal input {
+  border: none;
+  border-bottom: 1px solid #222870;
+  width: 85%;
+  font-family: 'Roboto';
+  color: black;
+  text-align: center;
+  font-size: 21px;
+  font-weight:100;
+  margin-bottom:25px;
+  position: static;
+}
+
+.modal ::placeholder{
+  font-family: 'Roboto';
+  font-weight:100;
+}
+
+.modal-light-mode ::placeholder {
+  background-color: $white;
+}
+
+.modal-dark-mode ::placeholder {
+  background-color: $white-smoke;
+}
+
+.modal input, button{
+  outline: none;
+}
+
+button.form-btn {
+  width: 50%;
+  height: 2.5em;
+  bottom: 0;
+  border: 0;
+  font-family: 'Dosis';
+  font-size: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  clear: both;
+  margin-top: 2em;
+}
+
+button.form-btn.sx {
+
+  border-radius: 0 0 0 5px;
+  background-color: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  transition:all 0.3s linear;
+}
+
+button.form-btn.sx:hover {
+  background-color: rgba(0, 0, 0, 1);
+  color: #fff;
+}
+
+button.form-btn.sx.back {
+  background-color: rgba(0, 0, 0, 0.65);
+  transition:all 0.3s linear;
+}
+
+button.form-btn.sx.back:hover {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+button.form-btn.dx {
+  border-radius: 0 0 5px 0;
+  background-color: #ace7ff;
+  color: #fff;
+}
+
+button.form-btn.dx:hover{
+  background-color: #00acee;
+}
+
+
+.form--add-private-chat{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+
+.form--button-feedback--position{
+  width: 40%!important;
+  left: 30%;
+  border-radius: 5px!important;
+  bottom: 10%!important;
+}
+
+.form-create-group--button--design{
+  font-family: 'Dosis';
+  font-size: 24px;
+  border: none;
+  cursor:pointer;
+  @include themify($themes){
+    background: themed('medium-color');
+  }
+  color:$white-smoke;
+  opacity: 0.5;
+  border-radius: 5px;
+  padding: 2% 4%;
+}
+
+.form-create-group--button--design:hover{
+  opacity: 1;
+}
+
+
+.modal-change-profile--image--dimensions{
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+}
+
+
+.inputfile{
+  cursor: pointer;
+}

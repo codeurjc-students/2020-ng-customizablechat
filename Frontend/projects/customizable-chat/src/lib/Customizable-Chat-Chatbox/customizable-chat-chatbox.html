@@ -1,0 +1,139 @@
+<div class="chatBox" [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
+  <div class="upper">
+    <mat-toolbar id="upperChat" color="warn">
+      <img class="imageChatProfile" *ngIf="chatObs.image != null; else imageProfile" [src]="chatObs.image" alt="">
+      <ng-template #imageProfile>
+        <img *ngIf="user.idSettings == 1" class="imageChatProfile" src="assets/UserDay3.png" alt="">
+        <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="assets/UserNight2.png" alt="">
+      </ng-template>
+      <span class="spacerImageText"></span>
+      <span *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
+            style="font-size:xx-large; cursor:pointer"
+            (click)="changeChatContentState();">{{chatObs.participants}}</span>
+      <span *ngIf="!chatObs.isPrivate || chatObs.name != user.userName" style="font-size:xx-large; cursor: pointer"
+            (click)="changeChatContentState();">{{chatObs.name}}</span>
+    </mat-toolbar>
+  </div>
+  <div class="medium">
+    <mat-list class="chatFrame messageWrapper">
+      <mat-list-item
+        *ngFor="let message of messageList"
+        [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightCard :message.sender == user.userName}">
+        <!--This is the message that goes in the right part of the chat-->
+        <mat-card *ngIf="message.sender == user.userName" class="rightItem">
+          <!-- This is a normal message-->
+          <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+                             *ngIf="recogniseFileType(message.type) == 0"
+                             [innerHTML]="message.message"></mat-card-subtitle>
+          <!-- This is an image message-->
+          <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+                             style="text-align: center"
+                             *ngIf="recogniseFileType(message.type) == 1">
+            <img [src]="message.image" (click)="maximizeImage(message.image);" class="imageFile" alt="">
+            <br>
+            {{message.message}}
+          </mat-card-subtitle>
+          <!-- This is a file message-->
+          <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+                             style="text-align: center"
+                             *ngIf="recogniseFileType(message.type) == 2">
+            <img *ngIf="user.idSettings == 1" src="assets/FileDay.png"
+                 class="chat-messages--file-image--details"
+                 (click)="openFile(message);" alt="File">
+            <img *ngIf="user.idSettings != 1" src="assets/FileNight1.png"
+                 class="chat-messages--file-image--details"
+                 (click)="openFile(message);" alt="File">
+            <br>
+            {{message.message}}
+          </mat-card-subtitle>
+        </mat-card>
+
+        <!--This is the message that goes in the left part of the chat-->
+        <mat-card *ngIf="message.sender != user.userName" class="leftItem">
+          <!-- This is the message sender's name-->
+          <mat-card-title
+            class="chat-messages--text--color chat-messages--text-title--dimension">{{message.sender}}</mat-card-title>
+          <!-- This is a normal message-->
+          <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+                             *ngIf="recogniseFileType(message.type) == 0"
+                             [innerHTML]="message.message"></mat-card-subtitle>
+          <!-- This is an image message-->
+          <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+                             style="text-align: center"
+                             *ngIf="recogniseFileType(message.type) == 1">
+            <img [src]="message.image" (click)="maximizeImage(message.image);" class="imageFile" alt="">
+            <br>
+            {{message.message}}
+          </mat-card-subtitle>
+          <!-- This is a file message-->
+          <mat-card-subtitle class="chat-messages--text--color chat-messages--text-subtitle--dimension"
+                             style="text-align: center"
+                             *ngIf="recogniseFileType(message.type) == 2">
+            <img *ngIf="user.idSettings == 1" src="assets/FileNight.png"
+                 class="chat-messages--file-image--details"
+                 (click)="openFile(message);" alt="File">
+            <img *ngIf="user.idSettings != 1" src="assets/FileDay.png"
+                 class="chat-messages--file-image--details"
+                 (click)="openFile(message);" alt="File">
+            <br>
+            {{message.message}}
+          </mat-card-subtitle>
+        </mat-card>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="lower">
+    <mat-toolbar id="lowerChat" color="warn">
+      <div class="leftButtonClip">
+        <button mat-icon-button class="clipButton" (click)="openDialog()" aria-label="Drop files">
+          <img *ngIf="user.idSettings == 1" class="imageButtonBottomPart"
+               src="assets/AttachDay1.png" alt="">
+          <img *ngIf="user.idSettings != 1" class="imageButtonBottomPart"
+               src="assets/AttachNight1.png" alt="">
+        </button>
+      </div>
+      <div class="midEmojiButton">
+        <button class="emoji-mart--button--dimensions" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀
+        </button>
+        <br>
+        <emoji-mart class="emoji-mart--card--dimensions" sheetSize="64" [darkMode]="this.user.idSettings == 2"
+                    *ngIf="this.isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
+                    title="Choose your emoji"></emoji-mart>
+      </div>
+      <div class="rightTextArea">
+        <div class="form--send-message">
+          <textarea [(ngModel)]="textArea" id="textAreaForm" placeholder="Type anything"></textarea>
+          <button mat-icon-button class="clipButton" aria-label="" id="submitButton" type="submit">
+            <img *ngIf="user.idSettings == 1" class="imageButtonBottomPart"
+                 src="assets/SendDay1.png" alt="" (click)="onSubmit();">
+            <img *ngIf="user.idSettings != 1" class="imageButtonBottomPart"
+                 src="assets/SendNight1.png" alt="" (click)="onSubmit();">
+          </button>
+        </div>
+      </div>
+
+    </mat-toolbar>
+  </div>
+
+  <div class="container modal chat-description--modal--dimension" [ngClass]="{'animation--modal': chatContent, 'animation--close-modal': !chatContent && startAnimation,
+         'modal--chat-description--opacity-inactive': !chatContent && !startAnimation,
+         'modal-light-mode': chatContent && user.idSettings == 1, 'modal-dark-mode': chatContent && user.idSettings != 1}">
+    <div class="signUp active-sx" id="chat-description--content--dimensions">
+      <h3 *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
+          style="font-size:xx-large;">{{chatObs.participants}}</h3>
+      <h3 *ngIf="!chatObs.isPrivate || chatObs.name != user.userName"
+          style="font-size:xx-large;">{{chatObs.name}}</h3>
+      <div *ngIf="chatObs.image != null; else imageProfileInfo">
+        <img class="imageChatProfileInfo" [src]="chatObs.image" alt="">
+      </div>
+      <ng-template #imageProfileInfo>
+        <div mat-card-avatar class="example-header-image"></div>
+      </ng-template>
+      <p *ngIf="!chatObs.isPrivate">{{chatObs.description}}</p>
+      <br>
+      <br>
+      <button class="form-btn sx log-in" type="button" (click)="changeChatContentState();">Back</button>
+      <button class="form-btn dx" type="submit">Sign Up</button>
+    </div>
+  </div>
+</div>

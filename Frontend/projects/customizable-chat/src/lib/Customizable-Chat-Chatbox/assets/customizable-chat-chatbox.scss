@@ -1,0 +1,532 @@
+$light-blue: #ace7ff;
+$light-medium-blue: #00acee;
+$dark-blue: #1a204f;
+$dark-medium-blue: #6e8ee6;
+$black: #000000;
+$white: #ffffff;
+$white-smoke: #f5f5f5;
+$dark-pale-blue: #403f6a;
+$light-grey:#3e3c3c;
+
+$themes: (
+  light: (
+    bg-app: $white,
+    main-color: $light-blue,
+    medium-color: $light-medium-blue,
+    text: $black,
+    text-right: $light-grey,
+    background-chat:$white-smoke,
+    background-textarea:$white,
+    background-textarea-text:$black,
+    highlight-text-color:$white,
+    message-left-border:$light-blue,
+    message-right-border:$light-medium-blue,
+    message-right-fill:$light-blue,
+    message-left-fill:$white,
+    background-chat-opened: url("Fondo-Diurno2.png"),
+    modal: rgba(255, 255, 255, 1),
+    modal-text: #4e2f42,
+    user-default-icon: url("UserDay3.png"),
+  ),
+  dark: (
+    bg-app: $dark-blue,
+    main-color: $dark-blue,
+    medium-color: $dark-medium-blue,
+    text: $white,
+    text-right: #e6e6e6,
+    background-chat:$dark-pale-blue,
+    background-textarea:$white-smoke,
+    background-textarea-text:$light-grey,
+    highlight-text-color:$black,
+    message-left-border:$dark-blue,
+    message-right-border:$dark-medium-blue,
+    message-right-fill:$dark-blue,
+    message-left-fill:$dark-medium-blue,
+    background-chat-opened: url("Fondo-Nocturno2.png"),
+    modal: rgba(26, 32, 79, 1),
+    modal-text: $white-smoke,
+    user-default-icon: url("UserNight2.png"),
+  ),
+);
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+html, body { height: 100%;}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height:100%;
+  width:100%;
+}
+
+.background-frame{
+  @include themify($themes){
+    background-color: themed('bg-app')!important;
+    color: themed('text')!important;
+  }
+}
+
+.chatBox {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.imageChatProfile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  @include themify($themes) {
+    border: 2px solid themed('medium-color');
+  }
+}
+
+.spacerImageText {
+  margin-right: 2%;
+}
+
+#upperChat {
+  @include themify($themes) {
+    border-bottom: 2px solid themed('medium-color');
+    background: themed('main-color');
+  }
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+
+#lowerChat {
+  @include themify($themes) {
+    border-top: 2px solid themed('medium-color');
+    background: themed('main-color');
+  }
+  width: 100%;
+  height: 100%;
+}
+
+.upper {
+  height: 7%;
+  width: 100%;
+  position: fixed;
+}
+
+.medium {
+  position: fixed;
+  height: 84%;
+  width: 100%;
+  top: 7%;
+  @include themify($themes) {
+    background: themed('background-chat-opened');
+  }
+  background-repeat: no-repeat;
+}
+
+.lower {
+  height: 9%;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+}
+
+.chatFrame {
+  width: 62.5%;
+  height: 95%;
+  top: 2.5%;
+  bottom: 2.5%;
+  left: 2.5%;
+  right: 2.5%;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.mat-card-title {
+  font-size: medium;
+}
+
+.leftCard {
+  width: 90% !important;
+  height: auto !important;
+  float: left !important;
+  margin-bottom: 1%;
+  max-width: 90% !important;
+  word-break: break-all;
+}
+
+.leftItem {
+  @include themify($themes) {
+    background: themed('message-left-fill');
+    border: 2px solid themed('message-left-border')
+  }
+
+}
+
+.rightCard {
+  width: 90% !important;
+  height: auto !important;
+  float: right !important;
+  margin-bottom: 1%;
+  right: 0;
+  max-width: 90% !important;
+  word-break: break-all;
+}
+
+::ng-deep .mat-list-item.rightCard .mat-list-item-content {
+  float: right !important;
+}
+
+.rightItem {
+  float: right;
+  @include themify($themes) {
+    background: themed('message-right-fill');
+    border: 2px solid themed('message-right-border');
+  }
+  word-break: break-all;
+}
+
+
+.chat-messages--text--color {
+  @include themify($themes) {
+    color: themed('text-right');
+  }
+}
+
+#textAreaForm {
+  resize: none;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 41px;
+  max-height: 97px;
+  width: 93%;
+  @include themify($themes) {
+    border: 1px solid themed('medium-color');
+  }
+  border-radius: 20px;
+  @include themify($themes) {
+    background-color: themed('background-textarea');
+    color: themed('background-textarea-text')
+  }
+  outline: none;
+  padding: 0 1% 0 1%;
+  overflow: hidden;
+  margin-top: 1%;
+  font-size: large;
+}
+
+.clipButton {
+  width: auto;
+}
+
+.emoji-mart--button--dimensions {
+  width: auto;
+  height: auto;
+  font-size: xx-large;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.clipButton:hover, .emoji-mart--button--dimensions:hover {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+.form--send-message {
+  width: 60%;
+  float: left;
+}
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  60% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.mat-icon-button#submitButton {
+  display: flex;
+  float: right;
+  margin-top: 1%;
+}
+
+.leftButtonClip {
+  width: 4%;
+}
+
+.rightTextArea {
+  width: 86%;
+  float: left;
+}
+
+.midEmojiButton {
+  width: 4%;
+}
+
+.imageFile {
+  width: 20%;
+  height: 20%;
+  position: relative;
+  display: flex;
+  text-align: center;
+  left: 40%;
+  cursor: pointer;
+}
+
+.chat-messages--file-image--details {
+  width: 30%;
+  height: 30%;
+  position: relative;
+  display: flex;
+  text-align: center;
+  left: 35%;
+  cursor: pointer;
+}
+
+.chat-messages--text-title--dimension {
+  font-size: larger;
+}
+
+.chat-messages--text-subtitle--dimension {
+  font-size: large;
+}
+
+.emoji-mart--card--dimensions {
+  position: fixed;
+  bottom: 8%;
+}
+
+.example-header-image {
+  @include themify($themes) {
+    background-image: themed('user-default-icon');
+    border-radius: 50%;
+  }
+  background-size: cover;
+  align-content: center;
+  text-align: center;
+  position: relative;
+  width: 7em;
+  height: 7em;
+  left: 32.5%;
+}
+
+
+.imageChatProfileInfo{
+  align-content: center;
+  text-align: center;
+  position: relative;
+
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+  background-clip: padding-box;
+}
+
+.container {
+  position: absolute;
+  height: 25%;
+  width: 20%;
+  left: 23%;
+  top: 27.5%;
+}
+
+#chat-description--content--dimensions {
+  position: absolute;
+  text-align: center;
+  @include themify($themes){
+    background: themed('modal')!important;
+  }
+  width: 100%;
+  height: 570px;
+  border-radius: 5px;
+  padding: 30px 20px 0 20px;
+  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+h3 {
+  font-family: 'Dosis';
+  font-size: xx-large;
+  text-transform: uppercase;
+  color: #4e2f42;
+  margin-bottom: 30px;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: large;
+  color: #4e2f42;
+  margin-bottom: 40px;
+}
+
+p > span {
+  padding-top: 3px;
+  display: block;
+  font-weight: 400;
+  font-size: 9px;
+}
+
+
+button {
+  outline: none;
+}
+
+button.form-btn {
+  position: absolute;
+  width: 50%;
+  height: 60px;
+  bottom: 0;
+  border: 0;
+  font-family: 'Dosis';
+  font-size: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button.form-btn.sx {
+  left: 0;
+  border-radius: 0 0 0 5px;
+  background-color: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  transition: all 0.3s linear;
+}
+
+button.form-btn.sx:hover {
+  background-color: rgba(0, 0, 0, 1);
+  color: #fff;
+}
+
+button.form-btn.sx.back {
+  background-color: rgba(0, 0, 0, 0.65);
+  transition: all 0.3s linear;
+}
+
+button.form-btn.sx.back:hover {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+button.form-btn.dx {
+  right: 0;
+  border-radius: 0 0 5px 0;
+  background-color: #ace7ff;
+  color: #fff;
+}
+
+button.form-btn.dx:hover {
+  background-color: #00acee;
+}
+
+.signUp .w100 {
+  width: 100%;
+}
+
+.signUp {
+  z-index: 2;
+}
+
+.animation--modal{
+  animation-name: scale--open;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+.animation--close-modal{
+  animation-name: scale--close;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scale--open {
+  0%{
+    transform: scale(0);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scale--close {
+  0%{
+    transform: scale(1);
+    opacity: 1;
+  }
+  100%{
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.modal--chat-description--opacity-inactive{
+  opacity: 0;
+}
+
+.modal-dark-mode h3, .modal-dark-mode p {
+  color: $white-smoke;
+}
+
+.modal-light-mode h3, .modal-light-mode p {
+  color: #4e2f42;
+}
+
+.imageButtonBottomPart{
+  max-width: 40px;
+  max-height: 40px;
+}
+
+//ImageDialog junto con background frame
+
+body{
+  width: 100%;
+  height:100%;
+}
+
+.messages--image-file--dimensions{
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+}
+
+::ng-deep app-image-dialog{
+  display: block ruby;
+  text-align: center;
+}

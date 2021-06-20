@@ -1,0 +1,108 @@
+<div [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
+  <div class="wrapper"
+       [ngClass]="{'disable-background': modalIsActive || modalFeedbackActive, 'enable-background': !modalIsActive || !modalFeedbackActive}">
+    <div class="column left" id="boxSidebar">
+      <app-options-side-bar [user]="user"
+                            (modalActive)="onActivateModal($event)"
+                            (colorActive)="onChangeColor($event)"
+                            (modalGroupActive)="onActivateGroupModal($event)"
+                            (modalProfile)="onChangeProfile($event)"
+      ></app-options-side-bar>
+    </div>
+    <div class="column middle" id="boxChatsContent">
+      <app-chats [user]="user"></app-chats>
+    </div>
+    <div class="column right" id="boxContent">
+      <app-chatbox [user]="user"></app-chatbox>
+    </div>
+  </div>
+</div>
+<div class="modal form--modal-add-contact--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 ,
+     'modal-active': modalIsActive, 'modal-inactive': !modalIsActive,
+     'modal-light-mode': modalIsActive && user.idSettings == 1, 'modal-dark-mode': modalIsActive && user.idSettings != 1}">
+  <form [formGroup]="formAddPrivateChat" class="form--add-private-chat">
+    <h3>Add contact</h3>
+    <p>Just enter their username<br></p>
+    <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert user name"
+           autocomplete='off' required/>
+    <br>
+    <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found or already found in a chat with you</mat-error>
+    <button class="form-btn sx back" type="button" (click)="onActivateModal(false);">Back</button>
+    <button class="form-btn dx" type="submit" (click)="addPrivateChat();">Create chat</button>
+  </form>
+</div>
+
+<div class="modal form--modal-feedback--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1,
+     'modal-active': modalFeedbackActive, 'modal-inactive': !modalFeedbackActive,
+     'modal-light-mode': modalFeedbackActive && user.idSettings == 1, 'modal-dark-mode': modalFeedbackActive && user.idSettings != 1}">
+  <form class="form--add-private-chat">
+    <h3>Action successfully completed</h3>
+    <button class="form-btn dx form--button-feedback--position" type="submit"
+            (click)="changeModalFeedbackActive()">Continue
+    </button>
+  </form>
+</div>
+
+
+<div class="modal form--modal-create-group--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 ,
+     'modal-active': modalGroupIsActive, 'modal-inactive': !modalGroupIsActive,
+     'modal-light-mode': modalGroupIsActive && user.idSettings == 1, 'modal-dark-mode': modalGroupIsActive && user.idSettings != 1}">
+  <form [formGroup]="formCreateGroupChat" class="form--add-private-chat">
+    <h3>Create a group chat</h3>
+    <p>Just enter a name, description, chat image and add one by one their usernames<br></p>
+    <img class="modal-change-profile--image--dimensions" *ngIf="imageDisplayCreateGroup != null; else imageGroup" [src]="imageDisplayCreateGroup" alt="">
+    <ng-template #imageGroup>
+      <img class="modal-change-profile--image--dimensions" *ngIf="user.idSettings == 1" src="assets/UserDay.png" alt="">
+      <img class="modal-change-profile--image--dimensions" *ngIf="user.idSettings == 2" src="assets/UserNight.png" alt="">
+    </ng-template>
+    <br>
+    <input class="w100 inputfile" type="file" formControlName="image" (change)="onImageGroup($event);" accept="image/*"/>
+    <br>
+    <br>
+    <input matInput class="w100" type="text" formControlName="name" placeholder="Insert chat name"
+           autocomplete='off' required/>
+    <br>
+    <mat-error *ngIf="chatCreated!=null && chatCreated!=true">Username not found</mat-error>
+    <input matInput class="w100" type="text" formControlName="description" placeholder="Insert description"
+           autocomplete='off'/>
+    <br>
+    <input matInput class="w100" type="text" formControlName="participant" placeholder="Insert participant name"
+               autocomplete='off' required/>
+    <br>
+    <button class="form-create-group--button--design" type="button" (click)="addParticipantToGroup();">Add participant</button>
+    <br>
+    <br>
+    <button class="form-btn sx back" type="button" (click)="onActivateGroupModal(false);">Back</button>
+    <button class="form-btn dx" type="submit" (click)="createGroupChat();">Create chat</button>
+  </form>
+</div>
+
+<div class="modal form--modal-create-group--dimensions"
+     [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 ,
+     'modal-active': modalProfile, 'modal-inactive': !modalProfile,
+     'modal-light-mode': modalProfile && user.idSettings == 1, 'modal-dark-mode': modalProfile && user.idSettings != 1}">
+  <form [formGroup]="formChangeProfile" class="form--add-private-chat">
+    <h3>Change your profile</h3>
+    <p>Change your image or description displayed to the rest of the users</p>
+    <br>
+    <img class="modal-change-profile--image--dimensions" *ngIf="imageToDisplay != null; else imageProfile"
+         [src]="imageToDisplay" alt="">
+    <ng-template #imageProfile>
+      <img class="modal-change-profile--image--dimensions" *ngIf="user.image == null" src="assets/UserDay.png" alt="">
+      <img class="modal-change-profile--image--dimensions" *ngIf="user.image != null" [src]="user.image" alt="">
+    </ng-template>
+    <br>
+    <br>
+    <input class="w100 inputfile" type="file" formControlName="image" (change)="onImageSelected($event);"
+           accept="image/*"/>
+    <br>
+    <br>
+    <input matInput class="w100" type="text" formControlName="description" placeholder="{{user.description}}" autocomplete='off'/>
+    <br>
+    <button class="form-btn sx back" type="button" (click)="onChangeProfile(false);">Back</button>
+    <button class="form-btn dx" type="submit" (click)="changeUserProfile();">Change Profile</button>
+  </form>
+</div>

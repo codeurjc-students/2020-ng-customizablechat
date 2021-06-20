@@ -1,0 +1,34 @@
+<div id="login">
+  <div class="container">
+    <form class="signUp" [formGroup]="formSignUp" [ngClass]="{'inactive-sx': login, 'active-sx': !login}">
+      <h3>Create Your Account</h3>
+      <p>Just enter your user name, name<br>
+        and your password to join.
+      </p>
+      <input matInput class="w100" type="text" formControlName="username" placeholder="Insert your user name" autocomplete='off'required/>
+      <input matInput class="w100" type="text" formControlName="name" placeholder="Insert your real name" autocomplete='off'required/>
+      <input matInput type="password" formControlName="password" placeholder="Insert password" autocomplete='off' required/>
+      <input matInput type="password" formControlName="verifyPassword" placeholder="Verify password" autocomplete='off' required/>
+      <br>
+      <mat-error *ngIf="signUpError">That username already exists</mat-error>
+      <mat-error *ngIf="missingCreateData">There are fields missing</mat-error>
+      <button class="form-btn sx log-in" type="button" (click)="changeForms();">Log In</button>
+      <button class="form-btn dx" type="submit" (click)="onSignUp();">Sign Up</button>
+    </form>
+    <form class="signIn" [formGroup]="formLogin" [ngClass]="{'active-dx': login, 'inactive-dx': !login}">
+      <h3>Welcome<br>Back !</h3>
+      <p>Type your user and password to have fun<br>
+        <strong>We have been waiting for you!</strong>
+      </p>
+      <input matInput type="text" formControlName="username" placeholder="Insert your user name" required />
+      <mat-error *ngIf="passwordError">Password seems to be incorrect</mat-error>
+      <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" placeholder="Insert password" required />
+                <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hidePass"><mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+      <button class="form-btn sx back" type="button" (click)="changeForms();">Back</button>
+      <button class="form-btn dx" type="submit" (click)="onLogin()">Log In</button>
+    </form>
+  </div>
+</div>
+

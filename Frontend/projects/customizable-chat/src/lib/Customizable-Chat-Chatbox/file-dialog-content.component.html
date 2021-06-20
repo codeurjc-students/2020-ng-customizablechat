@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Add your files by dropping them or clicking on the box</h2>
+<mat-dialog-content>
+  <ngx-dropzone [accept]="'*'" [expandable]="true" (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop the files</ngx-dropzone-label>
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" (removed)="onRemove(f)" *ngFor="let f of files" [file]="f">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" (click)="sendFiles();">Send</button>
+</mat-dialog-actions>

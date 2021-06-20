@@ -1,0 +1,112 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from "../../models/login";
+import {ChatService} from "../../services/chat.service";
+import {MainChatSharedService} from "../../services/main-chat-shared.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {Subject} from "rxjs";
+
+
+
+@Component({
+  selector: 'app-chats',
+  templateUrl: './chats.component.html',
+  styleUrls: ['./chats.component.scss']
+})
+export class ChatsComponent implements OnInit {
+
+  @Input() user : User;
+
+  privateChats:any[] = [];
+  groupChats:any[] = [];
+  chatChange: Subject<any> = new Subject<any>();
+
+  constructor(private chatService:ChatService,
+              public mainChat:MainChatSharedService,
+              public domSanitizer: DomSanitizer) { }
+
+  ngOnInit(): void {
+    this.returnPrivateChats();
+    this.returnGroupChats();
+    this.onChatAdded();
+    this.onChangeMainChat();
+  }
+
+  returnGroupChats(){
+    let i = 0;
+    while( i < this.user.groupChats.length && i < 10) {
+      this.chatService.getChat(this.user.groupChats[i]).subscribe(
+        data=>{
+            let chatInfo = data;
+            console.log(data);
+            chatInfo.image = this.transformImage({image:chatInfo.image, imageType: chatInfo.imageType})
+            this.groupChats.push(chatInfo);
+        },failure=>{
+          console.log(failure);
+        }
+      );
+      i++;
+    }
+  }
+
+  returnPrivateChats(){
+    let i = 0;
+    while ( i < this.user.privateChats.length && i< 10) {
+      this.chatService.getChat(this.user.privateChats[i]).subscribe(
+        data=>{
+          let chatInfo = data;
+            this.chatService.obtainImagePrivateChat((data.name == this.user.userName)? data.participants : data.name).subscribe(
+              data=>{
+                chatInfo.image = this.transformImage(data);
+                this.privateChats.push(chatInfo);
+              }
+            )
+
+        },failure=>{
+          console.log(failure);
+        }
+      );
+      i++;
+    }
+  }
+
+  onChangeMainChat(){
+    this.chatChange.subscribe(
+      value=> this.mainChat.setChat(value),
+       failure=> console.error(failure)
+    )
+
+  }
+
+  onChatAdded(){
+    this.mainChat.addChatChange.subscribe(
+      chat => {
+        if(chat.isPrivate){
+          if(this.privateChats != []){
+            this.privateChats.unshift(chat);
+          }else{
+            this.privateChats = [chat]
+          }
+        }else{
+          if(this.groupChats != []) {
+            this.groupChats.unshift(chat);
+          }else {
+            this.groupChats = [chat];
+          }
+        }
+      }
+    )
+  }
+
+
+  transformImage(imageData: any){
+    var image;
+    console.log(imageData);
+    if(imageData.imageType != "noType") {
+      let base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(imageData.image.data)));
+      image = this.domSanitizer.bypassSecurityTrustUrl('data:' + imageData.imageType + ';base64, ' + base64String);
+    }else{
+      image = null;
+    }
+    return image;
+  }
+}
