@@ -11,7 +11,7 @@ export const user = {
   imageType: "noType",
   description: ""
 };
- 
+
 export const chatBox = {
   _id: {"$oid": "60855450ffe15f03165c7446"},
   name: "Diego_pf7",
