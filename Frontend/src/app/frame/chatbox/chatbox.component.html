@@ -1,10 +1,13 @@
 <div *ngIf="chatObs!= null; else noChat">
   <cc-customizable-chat-chatbox
     [chatObs]="this.chatObs"
-    [listUrls]="['http://localhost:3000/files','sendMessagePrivate','sendMessageGroup','fileSentMessage']"
-    [messageList]="(chatObs.isPrivate ? this.listChatsMessagesPrivate[this.position].messageList : this.listChatsMessagesGroup[this.position].messageList)"
+    [listUrls]="['http://localhost:3000/files','sendMessagePrivate','sendMessageGroup','fileSentMessage', 'http://localhost:3000/', 'messageSent', 'fileReceived']"
     [socket]="this.chatService.socket"
-    [user]="this.user"></cc-customizable-chat-chatbox>
+    [user]="this.user"
+    [listChatsPrivate]="listChatsMessagesPrivate"
+    [listChatsGroup]="listChatsMessagesGroup"
+  ></cc-customizable-chat-chatbox>
+  <!--getMessages y getFile, receiveMessage, receiveFile-->
 </div>
 
 <ng-template #noChat>
