@@ -25,4 +25,21 @@ export class CustomizableChatChatboxService {
   public fileSentMessage(socket:Socket, socketMessage:string, sender:any,messageId:any,chatId:any){
     socket.emit(socketMessage,sender, messageId, chatId);
   }
+
+  public getMessages(baseUrl:string, id: String, page: number){
+    return this.http.get<any>(baseUrl+ 'chats/'+ id + "/" + page);
+  }
+
+  public receiveMessage(socket:Socket, socketMessage:string){
+    return socket.fromEvent(socketMessage);
+  }
+
+  public receiveFile(socket:Socket, socketMessage:string){
+    return socket.fromEvent(socketMessage);
+  }
+
+  public getFile(baseUrl:string, fileId:any) {
+    console.log("Service asking for file", fileId)
+    return this.http.get<any>(baseUrl + 'files/'+ fileId)
+  }
 }

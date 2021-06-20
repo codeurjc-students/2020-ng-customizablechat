@@ -17,7 +17,7 @@
   <div class="medium">
     <mat-list class="chatFrame messageWrapper">
       <mat-list-item
-        *ngFor="let message of messageList"
+        *ngFor="let message of (chatObs.isPrivate ? this.listChatsPrivate[this.position].messageList : this.listChatsGroup[this.position].messageList)"
         [ngClass]="{leftCard:message.sender != user.userName, messageBox: message.sender == user.userName, rightCard :message.sender == user.userName}">
         <!--This is the message that goes in the right part of the chat-->
         <mat-card *ngIf="message.sender == user.userName" class="rightItem">
@@ -96,7 +96,7 @@
         <button class="emoji-mart--button--dimensions" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀
         </button>
         <br>
-        <emoji-mart class="emoji-mart--card--dimensions" sheetSize="64" [darkMode]="this.user.idSettings == 2"
+        <emoji-mart class="emoji-mart--card--dimensions" [sheetSize]="64" [darkMode]="this.user.idSettings == 2"
                     *ngIf="this.isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
                     title="Choose your emoji"></emoji-mart>
       </div>

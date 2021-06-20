@@ -28,8 +28,7 @@ import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
-import {CustomizableChatChatboxModule} from "customizable-chat";
-import {CustomizableChatChatListModule} from "customizable-chat";
+import {CustomizableChatChatboxModule, CustomizableChatChatListModule} from "customizable-chat";
 
 const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 
@@ -42,31 +41,32 @@ const config: SocketIoConfig = { url: environment.API_URL, options:{}};
     ChatboxComponent,
     LoginComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatGridListModule,
-        MatListModule,
-        MatIconModule,
-        MatButtonModule,
-        MatBadgeModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatMenuModule,
-        NgxDropzoneModule,
-        MatDialogModule,
-        FormsModule,
-        SocketIoModule.forRoot(config),
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        HttpClientModule,
-        PickerModule,
-        CustomizableChatChatboxModule,
-        CustomizableChatChatListModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatMenuModule,
+    NgxDropzoneModule,
+    MatDialogModule,
+    FormsModule,
+    SocketIoModule.forRoot(config),
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HttpClientModule,
+    PickerModule,
+    CustomizableChatChatboxModule,
+    CustomizableChatChatListModule,
+    CustomizableChatChatboxModule
+  ],
   providers: [LoginService],
   bootstrap: [AppComponent]
 })

@@ -30,11 +30,11 @@ export class ChatboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onSetChats();
-    this.onChatChange();
-    this.onMessageSent();
-    this.onFilesSent();
-    this.onNewChat();
+    this.onSetChats(); // No implementar
+    this.onChatChange(); //TODO a medias
+/*    this.onMessageSent(); //TODO
+    this.onFilesSent(); //TODO*/
+    this.onNewChat(); // No exportar
   }
 
   onSetChats() {
@@ -50,25 +50,23 @@ export class ChatboxComponent implements OnInit {
     );
   }
 
-  // Treats the change of the main chat
+  //TODO Treats the change of the main chat
   onChatChange() {
     this.mainChat.chatChange.subscribe(
       data => {
         this.chatObs = data;
-        this.page = 0;
+/*        this.page = 0;
         if (this.chatObs.isPrivate) {
-          let pos = this.findChatInList(this.listChatsMessagesPrivate, this.chatObs._id)
-          this.position = pos;
-          if (this.listChatsMessagesPrivate[pos].messageList.length == 0) {
+          this.position = this.findChatInList(this.listChatsMessagesPrivate, this.chatObs._id)
+          if (this.listChatsMessagesPrivate[this.position].messageList.length == 0) {
             this.getMessages();
           }
         } else {
-          let pos = this.findChatInList(this.listChatsMessagesGroup, this.chatObs._id);
-          this.position = pos;
-          if (this.listChatsMessagesGroup[pos].messageList.length == 0) {
+          this.position = this.findChatInList(this.listChatsMessagesGroup, this.chatObs._id);
+          if (this.listChatsMessagesGroup[this.position].messageList.length == 0) {
             this.getMessages();
           }
-        }
+        }*/
       }
     );
   }
@@ -87,7 +85,7 @@ export class ChatboxComponent implements OnInit {
     )
   }
 
-  // Asks for the messages if necessary of a chat
+/*  //TODO Asks for the messages if necessary of a chat
   getMessages() {
     console.log("Pedí chats")
     this.mainChat.getMessages(this.chatObs._id, this.page).subscribe(
@@ -103,18 +101,18 @@ export class ChatboxComponent implements OnInit {
         this.page++;
       }
     );
-  }
+  }*/
 
-  // On message received calls add to list of messages
+/*  //TODO On message received calls add to list of messages
   onMessageSent() {
     this.chatService.receiveMessage().subscribe(
       (data: { message: Message, isPrivate: boolean }) => {
         this.addMessageToList(data.message.chatId, data.message, data.isPrivate);
       }
     )
-  }
+  }*/
 
-  // Adds a message to a list (private or group) and pushes to the messages list if it is the main one
+/*  //TODO Adds a message to a list (private or group) and pushes to the messages list if it is the main one
   addMessageToList(chatId: String, message: Message, isPrivate: boolean) {
     if (isPrivate) {
       let i = this.findChatInList(this.listChatsMessagesPrivate, chatId)
@@ -125,7 +123,7 @@ export class ChatboxComponent implements OnInit {
     }
   }
 
-  // On files message sent asks for the file
+  //TODO On files message sent asks for the file
   onFilesSent() {
     this.chatService.receiveFile().subscribe(
       data => {
@@ -137,14 +135,14 @@ export class ChatboxComponent implements OnInit {
         )
       }
     )
-  }
+  }*/
 
-  // Finds a chat in a list
+/*  //TODO Finds a chat in a list
   findChatInList(listChats: ChatMessages[], chatId: String) {
     return listChats.findIndex(x => x.chatId == chatId);
   }
 
-  // Formats images
+  //TODO Formats images
   formatImage(img:any){
     if(img.type == "image/jpeg" || img.type == "image/jpg" || img.type == "image/png") {
       const base64String = btoa(new Uint8Array(img.buffer.data).reduce((data, byte) => {
@@ -154,5 +152,5 @@ export class ChatboxComponent implements OnInit {
     }else {
       img.image = null;
     }
-  }
+  }*/
 }

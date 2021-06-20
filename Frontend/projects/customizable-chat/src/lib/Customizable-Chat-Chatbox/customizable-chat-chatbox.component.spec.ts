@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CustomizableChatChatboxComponent } from './customizable-chat-chatbox.component';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {CustomizableChatChatboxService, FileDialogContent} from "customizable-chat";
-import {user} from "./Mocks/chatboxParameters";
+import {chatBox, listUrls, user} from "./Mocks/chatboxParameters";
 import {MatDialogModule} from "@angular/material/dialog";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -14,6 +14,7 @@ import {MatListModule} from "@angular/material/list";
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
+import {Socket} from "ngx-socket-io";
 
 describe('CustomizableChatComponent', () => {
   let componentChatbox: CustomizableChatChatboxComponent;
@@ -35,6 +36,8 @@ describe('CustomizableChatComponent', () => {
     .compileComponents();
   });
 
+
+
   beforeEach(() => {
     fixtureChatbox = TestBed.createComponent(CustomizableChatChatboxComponent);
     fixtureFile = TestBed.createComponent(FileDialogContent);
@@ -43,6 +46,24 @@ describe('CustomizableChatComponent', () => {
     componentFile = fixtureFile.componentInstance;
 
     componentChatbox.user = user;
+    componentChatbox.chatObs = chatBox;
+    componentChatbox.listUrls = listUrls;
+    componentChatbox.socket = new Socket({ url: 'http://localhost:3000/', options:{}})
+
+    componentChatbox.listChatsPrivate = componentChatbox.user.privateChats.map(
+      function (x) {
+        return ({chatId:x,messageList: []});
+      }
+    );
+    componentChatbox.listChatsGroup = componentChatbox.user.groupChats.map(
+      function (x) {
+        return ({chatId:x,messageList: []});
+      }
+    );
+
+
+    componentChatbox.ngOnInit();
+
 
     fixtureChatbox.detectChanges();
     fixtureFile.detectChanges();

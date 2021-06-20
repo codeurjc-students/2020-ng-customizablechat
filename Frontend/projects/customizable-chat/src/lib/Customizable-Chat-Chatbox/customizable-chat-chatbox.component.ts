@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Socket} from "ngx-socket-io";
@@ -11,13 +11,14 @@ import {Message} from "./Models/message";
   templateUrl: './customizable-chat-chatbox.html',
   styleUrls: ['./assets/customizable-chat-chatbox.scss']
 })
-export class CustomizableChatChatboxComponent {
+export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
 
   @Input() user: any;
   @Input() chatObs: any;
-  @Input() messageList: any[];
-  @Input() socket:Socket;
-  @Input() listUrls:string[];
+  @Input() socket: Socket;
+  @Input() listUrls: string[];
+  @Input() listChatsPrivate: any[];
+  @Input() listChatsGroup: any[];
 
   files: File[] = [];
 
@@ -27,17 +28,96 @@ export class CustomizableChatChatboxComponent {
   chatContent: boolean = false;
   startAnimation: boolean = false;
 
-  constructor(public dialog: MatDialog, private domSanitizer: DomSanitizer, private chatboxService:CustomizableChatChatboxService) {
+  page: number = 0;
+  position: number;
+
+  constructor(public dialog: MatDialog, private domSanitizer: DomSanitizer, private chatboxService: CustomizableChatChatboxService) {
+  }
+
+  ngOnInit(): void {
+    this.onMessageSent(); //TODO
+    this.onFilesSent(); //TODO
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'chatObs': {
+            console.log("Esto funciona");
+            console.log(this.chatObs);
+            if (this.chatObs) {
+              this.page = 0;
+              if (this.chatObs.isPrivate) {
+                this.position = this.findChatInList(this.listChatsPrivate, this.chatObs._id)
+                if (this.listChatsPrivate[this.position].messageList.length == 0) {
+                  this.getMessages();
+                }
+              } else {
+                this.position = this.findChatInList(this.listChatsGroup, this.chatObs._id);
+                if (this.listChatsGroup[this.position].messageList.length == 0) {
+                  this.getMessages();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //TODO Asks for the messages if necessary of a chat
+  getMessages() {
+    console.log("Pedí chats")
+    this.chatboxService.getMessages(this.listUrls[4], this.chatObs._id, this.page).subscribe(
+      messages => {//Igualar o añadir??
+        for (let i = 0; i < messages.length; i++) {
+          this.formatImage(messages[i]);
+        }
+        if (this.chatObs.isPrivate) {
+          this.listChatsPrivate[this.position].messageList = messages;
+        } else {
+          this.listChatsGroup[this.position].messageList = messages;
+        }
+        this.page++;
+      }
+    );
+  }
+
+  //TODO On message received calls add to list of messages
+  onMessageSent() {
+    if (this.chatObs) {
+      this.chatboxService.receiveMessage(this.socket, this.listUrls[5]).subscribe(
+        (data: { message: Message, isPrivate: boolean }) => {
+          this.addMessageToList(data.message.chatId, data.message, data.isPrivate);
+        }
+      )
+    }
+  }
+
+  //TODO On files message sent asks for the file
+  onFilesSent() {
+    if (this.chatObs) {
+      this.chatboxService.receiveFile(this.socket, this.listUrls[6]).subscribe(
+        data => {
+          this.chatboxService.getFile(this.listUrls[4], data).subscribe(
+            file => {
+              this.formatImage(file.message);
+              this.addMessageToList(file.message.chatId, file.message, file.isPrivate);
+            }
+          )
+        }
+      )
+    }
   }
 
   // Sends text message through textArea
   onSubmit() {
     if (this.textArea != "") {
       const newMessage = new Message(this.linkGenerator(this.textArea), this.user.userName, this.chatObs._id, "message", null);
-      console.table(newMessage);
       this.textArea = "";
       if (this.chatObs.isPrivate) {
-        this.chatboxService.sendMessagePrivate(this.socket,this.listUrls[1],newMessage);
+        this.chatboxService.sendMessagePrivate(this.socket, this.listUrls[1], newMessage);
       } else {
         this.chatboxService.sendMessageGroup(this.socket, this.listUrls[2], newMessage);
       }
@@ -46,7 +126,7 @@ export class CustomizableChatChatboxComponent {
 
   // Generates clickable links from text urls
   linkGenerator(s: String) {
-    var x = s.split(" ");
+    let x = s.split(" ");
     for (let i = 0; i < x.length; i++) {
       if (x[i].match("(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?")) {
         x[i] = "<a href='" + x[i] + "'>" + x[i] + "</a>";
@@ -67,10 +147,10 @@ export class CustomizableChatChatboxComponent {
           formData.append('file', this.files[i], this.files[i].name);
           formData.append('userName', this.user.userName as string);
           formData.append('chatId', this.chatObs._id as string);
-          this.chatboxService.sendFiles(this.listUrls[0],formData).subscribe(
+          this.chatboxService.sendFiles(this.listUrls[0], formData).subscribe(
             e => {
               if (e != null) {
-                this.chatboxService.fileSentMessage(this.socket,this.listUrls[3], e.sender, e._id, e.chatId);
+                this.chatboxService.fileSentMessage(this.socket, this.listUrls[3], e.sender, e._id, e.chatId);
               }
             }
           )
@@ -92,7 +172,7 @@ export class CustomizableChatChatboxComponent {
 
   // Event that opens an image "full screen"
   maximizeImage(image: any) {
-    const dialogRef = this.dialog.open(ImageDialogContent, {
+    this.dialog.open(ImageDialogContent, {
       data: {image: image},
     });
   }
@@ -111,9 +191,37 @@ export class CustomizableChatChatboxComponent {
     this.isEmojiPickerVisible = false;
   }
 
-  changeChatContentState(){
+  changeChatContentState() {
     this.chatContent = !this.chatContent;
     this.startAnimation = true;
+  }
+
+  //TODO Adds a message to a list (private or group) and pushes to the messages list if it is the main one
+  addMessageToList(chatId: String, message: Message, isPrivate: boolean) {
+    if (isPrivate) {
+      let i = this.findChatInList(this.listChatsPrivate, chatId)
+      this.listChatsPrivate[i].messageList.push(message)
+    } else {
+      let i = this.findChatInList(this.listChatsGroup, chatId)
+      this.listChatsGroup[i].messageList.push(message)
+    }
+  }
+
+  //TODO Finds a chat in a list
+  findChatInList(listChats: any[], chatId: String) {
+    return listChats.findIndex(x => x.chatId == chatId);
+  }
+
+  //TODO Formats images
+  formatImage(img: any) {
+    if (img.type == "image/jpeg" || img.type == "image/jpg" || img.type == "image/png") {
+      const base64String = btoa(new Uint8Array(img.buffer.data).reduce((data, byte) => {
+        return data + String.fromCharCode(byte);
+      }, ''));
+      img.image = this.domSanitizer.bypassSecurityTrustUrl('data:' + img.type + ';base64, ' + base64String);
+    } else {
+      img.image = null;
+    }
   }
 
 }
