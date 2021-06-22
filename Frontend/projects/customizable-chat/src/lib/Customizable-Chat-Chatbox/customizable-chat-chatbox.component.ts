@@ -66,7 +66,7 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
     }
   }
 
-  //TODO Asks for the messages if necessary of a chat
+  // Asks for the messages if necessary of a chat
   getMessages() {
     this.chatboxService.getMessages(this.listUrls[4], this.chatObs._id, this.page).subscribe(
       messages => {//Igualar o añadir??
@@ -83,7 +83,7 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
     );
   }
 
-  //TODO On message received calls add to list of messages
+  // On message received calls add to list of messages
   onMessageSent() {
     if (this.chatObs) {
       this.chatboxService.receiveMessage(this.socket, this.listUrls[5]).subscribe(
@@ -94,7 +94,7 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
     }
   }
 
-  //TODO On files message sent asks for the file
+  // On files message sent asks for the file
   onFilesSent() {
     if (this.chatObs) {
       this.chatboxService.receiveFile(this.socket, this.listUrls[6]).subscribe(
@@ -202,7 +202,7 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
     this.startAnimation = true;
   }
 
-  //TODO Adds a message to a list (private or group) and pushes to the messages list if it is the main one
+  // Adds a message to a list (private or group) and pushes to the messages list if it is the main one
   addMessageToList(chatId: String, message: Message, isPrivate: boolean) {
     if (isPrivate) {
       let i = this.findChatInList(this.listChatsPrivate, chatId)
@@ -213,12 +213,12 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
     }
   }
 
-  //TODO Finds a chat in a list
+  // Finds a chat in a list
   findChatInList(listChats: any[], chatId: String) {
     return listChats.findIndex(x => x.chatId == chatId);
   }
 
-  //TODO Formats images
+  // Formats images
   formatImage(img: any) {
     if (img.type == "image/jpeg" || img.type == "image/jpg" || img.type == "image/png") {
       const base64String = btoa(new Uint8Array(img.buffer.data).reduce((data, byte) => {
