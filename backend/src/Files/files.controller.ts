@@ -19,7 +19,9 @@ export class FilesController {
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(@UploadedFile() file, @Body() body) {
         this.logger.log("Saving file...");
-        var data = await this.messagesService.saveMessage(new CreateMessageDto(file.originalname, new Date(), body.userName,body.chatId, file.mimetype, file.buffer));
+        console.log(file)
+        let message = new CreateMessageDto(file.originalname, new Date(), body.userName,body.chatId, (file.size > 50000)? "compressed;" +file.mimetype : file.mimetype, file.buffer)
+        var data = await this.messagesService.saveMessage(message);
         return data;
     }
 

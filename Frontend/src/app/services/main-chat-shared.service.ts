@@ -33,9 +33,9 @@ export class MainChatSharedService {
     this.chatChange.next(value);
   }
 
-  public getMessages(id: String, page: number){
+/*  public getMessages(id: String, page: number){
     return this.http.get<any>(this.Api_url+ 'chats/'+ id + "/" + page);
-  }
+  }*/
 
   setNewChat(value:any){
     this.addChatChange.next(value);

@@ -25,14 +25,12 @@ describe('CustomizableChatService', () => {
   });
 
   it('should send a file ',()=>{
-    let data;
     let url = 'http://localhost:3000/files';
     service.sendFiles(url,formSendFile ).subscribe(
       response=>{
         expect(response).toBeDefined();
       }
     );
-
 
     const req = httpMock.expectOne(url);
     expect(req.request.method).toBe("POST");

@@ -35,8 +35,8 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.onMessageSent(); //TODO
-    this.onFilesSent(); //TODO
+    this.onMessageSent();
+    this.onFilesSent();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -68,7 +68,6 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
 
   //TODO Asks for the messages if necessary of a chat
   getMessages() {
-    console.log("Pedí chats")
     this.chatboxService.getMessages(this.listUrls[4], this.chatObs._id, this.page).subscribe(
       messages => {//Igualar o añadir??
         for (let i = 0; i < messages.length; i++) {
@@ -179,7 +178,14 @@ export class CustomizableChatChatboxComponent implements OnChanges, OnInit {
 
   // Formats every other object to display it in a new window
   openFile(response: any) {
-    const blob = new Blob([new Uint8Array(response.buffer.data)], {type: response.type});
+    let checkCompressedImage = response.type.split(";");
+    let blob;
+    console.log(checkCompressedImage);
+    if(checkCompressedImage[0] == "compressed"){
+      blob = new Blob([new Uint8Array(response.buffer.data)], {type: checkCompressedImage[1]});
+    }else{
+      blob = new Blob([new Uint8Array(response.buffer.data)], {type: response.type});
+    }
     const exportUrl = URL.createObjectURL(blob);
     window.open(exportUrl);
     URL.revokeObjectURL(exportUrl);

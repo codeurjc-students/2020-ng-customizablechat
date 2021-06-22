@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomizableChatChatboxComponent } from './customizable-chat-chatbox.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
-import {CustomizableChatChatboxService, FileDialogContent} from "customizable-chat";
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
+import {CustomizableChatChatboxService, FileDialogContent, Message} from "customizable-chat";
 import {chatBox, listUrls, user} from "./Mocks/chatboxParameters";
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
@@ -15,6 +15,8 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import {Socket} from "ngx-socket-io";
+import {DomSanitizer} from "@angular/platform-browser";
+
 
 describe('CustomizableChatComponent', () => {
   let componentChatbox: CustomizableChatChatboxComponent;
@@ -26,8 +28,8 @@ describe('CustomizableChatComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CustomizableChatChatboxComponent, FileDialogContent ],
-      schemas:[CUSTOM_ELEMENTS_SCHEMA],
-      providers:[CustomizableChatChatboxService],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      providers:[CustomizableChatChatboxService, DomSanitizer, MatDialog],
       imports:[
         CommonModule, FormsModule, PickerModule, MatToolbarModule, MatCardModule,
         MatListModule, MatDialogModule, NgxDropzoneModule, MatButtonModule, HttpClientModule
@@ -48,22 +50,20 @@ describe('CustomizableChatComponent', () => {
     componentChatbox.user = user;
     componentChatbox.chatObs = chatBox;
     componentChatbox.listUrls = listUrls;
-    componentChatbox.socket = new Socket({ url: 'http://localhost:3000/', options:{}})
+    componentChatbox.socket = new Socket({ url: listUrls[4], options:{}})
 
     componentChatbox.listChatsPrivate = componentChatbox.user.privateChats.map(
       function (x) {
-        return ({chatId:x,messageList: []});
+        return ({chatId:x,messageList: [new Message("Test","prueba", "609c3454908b9303cf985f14", "message", null)]});
       }
     );
     componentChatbox.listChatsGroup = componentChatbox.user.groupChats.map(
       function (x) {
-        return ({chatId:x,messageList: []});
+        return ({chatId:x,messageList: [new Message("Test","prueba", "609c3454908b9303cf985f14", "message", null)]});
       }
     );
 
-
     componentChatbox.ngOnInit();
-
 
     fixtureChatbox.detectChanges();
     fixtureFile.detectChanges();

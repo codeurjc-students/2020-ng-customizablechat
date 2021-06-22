@@ -1,6 +1,6 @@
 {
   "name": "customizable-chat",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/cdk": "^11.0.3",
     "@angular/common": "~11.0.5",
