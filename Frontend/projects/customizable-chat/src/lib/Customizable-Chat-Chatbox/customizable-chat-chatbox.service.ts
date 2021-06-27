@@ -39,7 +39,6 @@ export class CustomizableChatChatboxService {
   }
 
   public getFile(baseUrl:string, fileId:any) {
-    console.log("Service asking for file", fileId)
     return this.http.get<any>(baseUrl + 'files/'+ fileId)
   }
 }

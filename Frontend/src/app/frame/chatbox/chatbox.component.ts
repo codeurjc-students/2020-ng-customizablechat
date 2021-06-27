@@ -3,7 +3,6 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {MainChatSharedService} from "../../services/main-chat-shared.service";
 import {User} from "../../models/login";
-import {Message} from "../../models/message";
 import {ChatService} from "../../services/chat.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ChatMessages} from "../../models/chat";
@@ -30,9 +29,9 @@ export class ChatboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onSetChats(); // No implementar
-    this.onChatChange(); //TODO a medias
-    this.onNewChat(); // No exportar
+    this.onSetChats();
+    this.onChatChange();
+    this.onNewChat();
   }
 
   onSetChats() {
@@ -48,7 +47,7 @@ export class ChatboxComponent implements OnInit {
     );
   }
 
-  //TODO Treats the change of the main chat
+  // Treats the change of the main chat
   onChatChange() {
     this.mainChat.chatChange.subscribe(
       data => {

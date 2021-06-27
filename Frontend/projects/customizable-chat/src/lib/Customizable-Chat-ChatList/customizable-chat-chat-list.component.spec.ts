@@ -8,7 +8,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatTabsModule} from "@angular/material/tabs";
 import {CommonModule} from "@angular/common";
 import {MatBadgeModule} from "@angular/material/badge";
-import {user} from "../Customizable-Chat-Chatbox/Mocks/chatboxParameters";
+import {chatBox, user} from "../Customizable-Chat-Chatbox/Mocks/chatboxParameters";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('CustomizableChatChatListComponent', () => {
@@ -37,5 +37,15 @@ describe('CustomizableChatChatListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should changeMainChat', () => {
+
+    component.chatChange.subscribe(
+      data=>{
+        expect(data).toBeDefined();
+      }
+    );
+    component.changeMainChat(chatBox);
   });
 });

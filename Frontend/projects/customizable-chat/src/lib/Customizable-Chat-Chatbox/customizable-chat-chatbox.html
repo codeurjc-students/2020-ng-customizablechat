@@ -7,10 +7,11 @@
         <img *ngIf="user.idSettings != 1" class="imageChatProfile" src="assets/UserNight2.png" alt="">
       </ng-template>
       <span class="spacerImageText"></span>
-      <span *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
+      <span id="testChangesPrivate" *ngIf="chatObs.isPrivate && chatObs.name == user.userName"
             style="font-size:xx-large; cursor:pointer"
             (click)="changeChatContentState();">{{chatObs.participants}}</span>
-      <span *ngIf="!chatObs.isPrivate || chatObs.name != user.userName" style="font-size:xx-large; cursor: pointer"
+      <span id="testChangesGroup" *ngIf="!chatObs.isPrivate || chatObs.name != user.userName"
+            style="font-size:xx-large; cursor: pointer"
             (click)="changeChatContentState();">{{chatObs.name}}</span>
     </mat-toolbar>
   </div>

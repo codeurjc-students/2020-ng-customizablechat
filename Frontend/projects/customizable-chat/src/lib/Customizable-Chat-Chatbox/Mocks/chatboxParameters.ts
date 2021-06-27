@@ -1,3 +1,5 @@
+import {Message} from "customizable-chat";
+
 export const user = {
   privateChats: ["609d74490e76e501fe0e4562", "609c3454908b9303cf985f14"],
   groupChats: ["879542375049d5534890257"],
@@ -44,3 +46,17 @@ export const messageImage = {
     "$type": "0"
   }
 }
+
+export const normalMessagePrivate = new Message("testPrivate", "Diego_pf7", "609d74490e76e501fe0e4562","noType", null)
+export const normalMessageGroup = new Message("testGroup", "Diego_pf7", "879542375049d5534890257","noType", null)
+
+
+export const chatBoxChange = {
+  _id: {"$oid": "609c3454908b9303cf985f14"},
+  name: "test prueba",
+  isPrivate: true,
+  description: "",
+  creationDate: new Date("2021-05-12T20:02:28.668Z"),
+  participants: "izquierdo_ana",
+  type: "noType",
+};
