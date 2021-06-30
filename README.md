@@ -16,7 +16,7 @@ npm run start
 
 For the frontend directory:
 ```
-npm install --force
+npm install
 ng serve -o
 ```
 
