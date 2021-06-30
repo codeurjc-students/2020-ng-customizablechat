@@ -1,15 +1,15 @@
 {
   "name": "customizable-chat",
-  "version": "0.0.2",
+  "version": "0.0.9",
   "peerDependencies": {
     "@angular/cdk": "^11.0.3",
     "@angular/common": "~11.0.5",
     "@angular/core": "~11.0.5",
     "@angular/forms": "~11.0.5",
     "@angular/material": "^11.0.3",
-    "@ctrl/ngx-emoji-mart": "^5.1.1",
     "karma-coverage": "^2.0.3",
-    "ngx-dropzone": "^2.3.0"
+    "ngx-dropzone": "^2.3.0",
+    "@ctrl/ngx-emoji-mart": "^5.1.1"
   },
   "dependencies": {
     "tslib": "^2.0.0"
