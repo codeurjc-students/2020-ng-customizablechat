@@ -19,7 +19,7 @@ export class ChatService {
     this.socket.emit("saveSocket", username);
   }
 
-  public sendMessagePrivate(message: Message) {
+/*  public sendMessagePrivate(message: Message) {
     this.socket.emit('sendMessagePrivate', message);
   }
 
@@ -29,11 +29,11 @@ export class ChatService {
 
   public sendFiles(messages:any){
     return this.http.post<any>(this.Api_url + 'files', messages);
-  }
+  }*/
 
-  public fileSentMessage(sender:any,messageId:any,chatId:any){
+/*  public fileSentMessage(sender:any,messageId:any,chatId:any){
     this.socket.emit('fileSentMessage',sender, messageId, chatId);
-  }
+  }*/
 
   public addPrivateChat(newContact: AddContactPrivate){
     return this.http.post<any>(this.Api_url+ 'chats/private', newContact);
@@ -47,18 +47,18 @@ export class ChatService {
     return this.http.get<any>(this.Api_url+ 'chats/'+id);
   }
 
-  public receiveMessage(){
+/*  public receiveMessage(){
     return this.socket.fromEvent('messageSent');
-  }
+  }*/
 
-  public receiveFile(){
+/*  public receiveFile(){
     return this.socket.fromEvent('fileReceived');
-  }
+  }*/
 
-  public getFile(fileId:any) {
+/*  public getFile(fileId:any) {
     console.log("Service asking for file", fileId)
     return this.http.get<any>(this.Api_url + 'files/'+ fileId)
-  }
+  }*/
 
   public obtainImagePrivateChat(user:any){
     return this.http.get<any>(this.Api_url+ 'users/images/'+ user);

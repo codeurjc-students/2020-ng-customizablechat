@@ -3,6 +3,9 @@
   "dest": "../../dist/customizable-chat",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "ngx-dropzone","ctrl/ngx-emoji-mart"
+  ]
 
 }

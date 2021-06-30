@@ -47,12 +47,13 @@ The inputs of this component are the following:
 in the case of private chats you should include an image of the user whose chat is opened, the `name` and `participants` with the same function as in Chat list 
   component, `isPrivate` field is used to detect if the chat is of private or group type. 
 
-- [listChats] : This represents an array of strings corresponding with the urls or socket messages that the component is going to use to send messages and 
-  interact with teh api, listChats[0] --> where to send files via http request, listChats[1] --> socket message for a private message, listChats[2] --> socket 
-  message for a group message, listChats[3] --> socket message to indicate to the users that a file is saved in database and was sent to the chat, is indicates 
-  the users that they have to do an http request to obtain the file, this is cause sockets have size limits in messaging.
+- [listUrls] : This represents an array of strings corresponding with the urls or socket messages that the component is going to use to send messages and 
+  interact with teh api, listUrls[0] --> where to send files via http request, listUrls[1] --> socket message for a private message, listUrls[2] --> socket 
+  message for a group message, listUrls[3] --> socket message to indicate to the users that a file is saved in database and was sent to the chat, is indicates 
+  the users that they have to do an http request to obtain the file, this is cause sockets have size limits in messaging. listUrls[4] --> indicates the baseUrl used to ask for messages,
+  listUrls[5] --> corresponds with the message of the socket when receiving a message and listUrls[6] --> when a file is sent.
   
-- [messageList] : This contains the list of messages of the chat displayed, the format of the messages is the following:
+- [listChatsGroup] || [listChatsPrivate] : It is an array of chats, one of private chats other of group chats. This contains in  chatId the id of the chat and in messageList the list of messages of the chat, the format of the messages is the following:
 > Note : `class Message {
 message: String;
 date: Date;
