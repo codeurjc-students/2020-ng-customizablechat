@@ -63,34 +63,26 @@
   @include themify($themes){
     background: themed('modal')!important;
   }
-  overflow-y: scroll;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
 
 .form--modal-add-contact--dimensions{
-  height: 30%;
-  width:20%;
-  left: 40%;
-  top: 35%;
+  min-width:20%;
 }
 
 .form--modal-create-group--dimensions{
-  height: 55%;
-  min-height: 53%;
   width: 20%;
   min-width:18%;
-  left: 40%;
-  top: 22.5%;
 }
 
 
 
 .form--modal-feedback--dimensions{
-  height: 20%;
   width:20%;
-  left: 40%;
-  top: 40%;
 }
 
 .modal-inactive{
@@ -193,7 +185,7 @@ button.form-btn.sx:hover {
 }
 
 button.form-btn.sx.back {
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: #0f143a;
   transition:all 0.3s linear;
 }
 

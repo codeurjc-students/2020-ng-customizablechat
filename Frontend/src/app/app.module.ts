@@ -28,7 +28,7 @@ import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
-import {CustomizableChatChatboxModule, CustomizableChatChatListModule} from "customizable-chat";
+import { CustomizableChatChatboxModule, CustomizableChatChatListModule } from 'projects/customizable-chat/src/public-api';
 
 const config: SocketIoConfig = { url: environment.API_URL, options:{}};
 
