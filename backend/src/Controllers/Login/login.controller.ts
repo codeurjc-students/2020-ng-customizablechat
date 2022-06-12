@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Post, Put } from '@nestjs/common';
-import { UsersService } from '../Providers/users/users.service';
-import { CreateUserDto, LoginUserDTO } from '../DTOs/create-user-dto';
+import { UsersService } from '../../Providers/users/users.service';
+import { CreateUserDto, LoginUserDTO } from '../../DTOs/create-user-dto';
 
 @Controller('sign')
 export class LoginController {
@@ -26,7 +26,7 @@ export class LoginController {
   @Put('out')
   async logout(@Body() user: LoginUserDTO) {
     const data = await this.usersService.findOneByUsername(user.userName);
-    if (data && data.password === user.password) {
+    if (data?.password === user.password) {
       const logoutResult = await this.usersService.logout(user.userName);
       this.usersService.findOneBySocketIdAndEraseActivity(data.socketId);
       return logoutResult;

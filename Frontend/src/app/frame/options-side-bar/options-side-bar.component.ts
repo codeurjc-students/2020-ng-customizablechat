@@ -46,7 +46,8 @@ export class OptionsSideBarComponent implements OnInit {
   logout(){
     this.loginService.logout(new Login(this.user.userName as string,this.user.password as string)).subscribe(
       data =>{
-        this.router.navigate(['login']);
+        if(data) this.router.navigate(['login']);
+        else window.alert("Ha habido un error durante el logout")
       }
     )
   }
