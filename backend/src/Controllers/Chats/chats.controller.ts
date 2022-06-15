@@ -36,7 +36,9 @@ export class ChatsController {
   @UseInterceptors(FileInterceptor("image"))
   async createGroupChat(@UploadedFile() image, @Body() chat) {
     const valueParticipants = JSON.parse(chat.participants);
-    const chatCreated = await this.chatsService.createChat(new CreateChatDto(chat.name, chat.description, new Date(), valueParticipants, false, image.buffer, image.mimetype));
+    const chatCreated = await this.chatsService.createChat(
+      new CreateChatDto(chat.name, chat.description, new Date(), valueParticipants, false, image.buffer, image.mimetype)
+    );
 
     for (let i = 0; i < valueParticipants.length; i++) {
       const contactToAdd = await this.usersService.findOneByUsername(valueParticipants[i]);

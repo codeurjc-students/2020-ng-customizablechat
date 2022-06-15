@@ -1,41 +1,32 @@
 @import "src/styles.scss";
 
 .imagesButtons{
-  width:  100%;
-  height: 100%;
+  width:  50%;
+  height: 50%;
   @include themify($themes) {
     border: 2px solid themed('medium-color')!important;
   }
   border-radius: 50%;
 }
 
-  .mat-list--first-button--position{
-    margin-top:30%;
-  }
-
- .listButtons{
-   align-content: center;
-   height:100%;
- }
-
- .rowButtons {
-   height:10%!important;
- }
-
+.list-buttons {
+  height:100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: flex;
+  align-items:center
+}
 
  button{
    border:none;
    background: none;
-   margin-left:auto;
-   margin-right:auto;
-   margin-bottom:auto;
-   margin-top:30%;
+   margin:auto;
  }
 
  .buttonsSidebar:hover{
    border-radius: 50%;
-   height: 120%;
-   width: 120%;
+   height: 75%;
+   width: 75%;
 
    transform: scale(1);
    animation: pulse 2s infinite;

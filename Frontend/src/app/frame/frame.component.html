@@ -1,7 +1,7 @@
 <div [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 }">
   <div class="wrapper"
        [ngClass]="{'disable-background': modalIsActive || modalFeedbackActive, 'enable-background': !modalIsActive || !modalFeedbackActive}">
-    <div class="column left" id="boxSidebar">
+    <div>
       <app-options-side-bar [user]="user"
                             (modalActive)="onActivateModal($event)"
                             (colorActive)="onChangeColor($event)"
@@ -9,14 +9,18 @@
                             (modalProfile)="onChangeProfile($event)"
       ></app-options-side-bar>
     </div>
-    <div class="column middle" id="boxChatsContent">
+    <div>
       <app-chats [user]="user"></app-chats>
     </div>
-    <div class="column right" id="boxContent">
+    <div>
       <app-chatbox [user]="user"></app-chatbox>
     </div>
   </div>
 </div>
+
+
+
+
 <div class="modal form--modal-add-contact--dimensions"
      [ngClass]="{'theme-light':user.idSettings == 1, 'theme-dark':user.idSettings != 1 ,
      'modal-active': modalIsActive, 'modal-inactive': !modalIsActive,
